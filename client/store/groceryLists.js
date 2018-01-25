@@ -78,7 +78,7 @@ export default function(state = [], action) {
     }
 
     case DELETE_GROCERY_LIST: {
-      const itemToDelete = state.find(groceryList => groceryList.id === action.groceryList.id);
+      const itemToDelete = state.find(groceryList => groceryList.id === action.id);
       const indexOfItemToDelete = state.indexOf(itemToDelete);
       let newState = [...state];
       newState.splice(indexOfItemToDelete, 1);
