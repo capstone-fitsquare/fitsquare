@@ -88,7 +88,7 @@ describe('MacroGoal routes', () => {
           return MacroGoal.findById(1)
         })
         .then(res => {
-          expect(res.name).to.be.equal('new food name');
+          expect(res.name).to.be.equal('new goal name');
         })
     })
 
