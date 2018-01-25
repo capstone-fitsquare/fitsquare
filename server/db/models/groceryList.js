@@ -1,11 +1,11 @@
-const Sequelize = require('sequelize')
-const db = require('../db')
+const Sequelize = require('sequelize');
+const db = require('../db');
 
 const GroceryList = db.define('groceryList', {
   name: {
     type: Sequelize.STRING,
-    defaultValue: 'Grocery List'
-  }
-})
+    defaultValue: 'Grocery List',
+  },
+});
 
-module.exports = GroceryList
+module.exports = GroceryList;
