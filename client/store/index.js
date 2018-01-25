@@ -3,14 +3,16 @@ import createLogger from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import user from './user'
-import exercise from './exercise'
+import exercises from './exercises'
+import foodItems from './foodItems'
 import macroGoals from './macroGoals'
 import microGoals from './microGoals'
 import groceryLists from './groceryLists'
 
 const reducer = combineReducers({
   user,
-  exercise,
+  exercises,
+  foodItems,
   macroGoals,
   microGoals,
   groceryLists
@@ -23,7 +25,8 @@ const store = createStore(reducer, middleware)
 
 export default store
 export * from './user'
-export * from './exercise'
+export * from './exercises'
+export * from './foodItems'
 export * from './macroGoals'
 export * from './microGoals'
 export * from './groceryLists'
