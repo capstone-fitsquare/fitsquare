@@ -12,15 +12,69 @@ const {
 
 const foodItems = [
   {
-    name: 'tomato',
-    servingSize: 20,
-    servingUnit: 'g',
-    calories: 10,
-    protein: 0,
-    carbs: 8,
-    fat: 0,
+    name: 'chicken breast',
+    servingSize: 5,
+    servingUnit: 'oz',
+    calories: 230,
+    protein: 43,
+    carbs: 0,
+    fat: 5
   },
-];
+  {
+    name: 'mac n cheese',
+    servingSize: 160,
+    servingUnit: 'g',
+    calories: 600,
+    protein: 20,
+    carbs: 100,
+    fat: 15
+  },
+  {
+    name: 'kale',
+    servingSize: 1,
+    servingUnit: 'cup',
+    calories: 33,
+    protein: 3,
+    carbs: 6,
+    fat: 0
+  },
+  {
+    name: 'bread',
+    servingSize: 1,
+    servingUnit: 'slice',
+    calories: 80,
+    protein: 3,
+    carbs: 17,
+    fat: 1
+  },
+  {
+    name: 'egg',
+    servingSize: 1,
+    servingUnit: 'large',
+    calories: 10,
+    protein: 6,
+    carbs: 0,
+    fat: 5
+  },
+  {
+    name: 'brown rice',
+    servingSize: 1,
+    servingUnit: 'cup',
+    calories: 248,
+    protein: 5,
+    carbs: 50,
+    fat: 2
+  },
+  {
+    name: 'black beans',
+    servingSize: 1,
+    servingUnit: 'cup',
+    calories: 227,
+    protein: 15,
+    carbs: 41,
+    fat: 1
+  },
+]
 
 const supplements = [
   {
@@ -94,11 +148,21 @@ const groceryLists = [
 
 const listItems = [
   {
-    quantity: 3,
+    quantity: 8,
     foodItemId: 1,
-    groceryListId: 1,
+    groceryListId: 3,
   },
-];
+  {
+    quantity: 1,
+    foodItemId: 2,
+    groceryListId: 3,
+  },
+  {
+    quantity: 12,
+    foodItemId: 5,
+    groceryListId: 3,
+  },
+]
 
 const macroGoals = [
   {
