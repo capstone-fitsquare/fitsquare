@@ -3,13 +3,6 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {withRouter, Link} from 'react-router-dom'
 import {logout} from '../store'
-import ndb from 'nutrient-database'
-
-
-ndb.foodReport('01009','DEMO_KEY', function(err, response){
-  if (err) console.log('Error: ', err)
-  console.log(JSON.stringify(response))
-});
 
 /**
  * COMPONENT
