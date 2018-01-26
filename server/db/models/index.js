@@ -34,8 +34,18 @@ module.exports = {
   Exercise,
   FoodItem,
   GroceryList,
+  ListItem,
   MacroGoal,
   MicroGoal,
   Supplement,
   User
 }
+
+// const ndb = require('nutrient-database')
+
+
+// ndb.foodReport('01009','DEMO_KEY', function(err, response){
+//   if (err) console.log('Error: ', err)
+//   console.log(JSON.stringify(response))
+// });
+
