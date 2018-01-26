@@ -37,6 +37,7 @@ export const postMacroGoal = (formData) =>
       .then(macroGoal => {
         const action = createMacroGoal(macroGoal);
         dispatch(action);
+        console.log('created macro goal!! check database')
       })
       .catch(err => console.log(err))
 

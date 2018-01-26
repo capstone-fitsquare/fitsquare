@@ -8,6 +8,7 @@ import foodItems from './foodItems'
 import macroGoals from './macroGoals'
 import microGoals from './microGoals'
 import groceryLists from './groceryLists'
+import listItems from './listItems'
 
 const reducer = combineReducers({
   user,
@@ -15,7 +16,8 @@ const reducer = combineReducers({
   foodItems,
   macroGoals,
   microGoals,
-  groceryLists
+  groceryLists,
+  listItems
 })
 const middleware = composeWithDevTools(applyMiddleware(
   thunkMiddleware,
@@ -30,3 +32,4 @@ export * from './foodItems'
 export * from './macroGoals'
 export * from './microGoals'
 export * from './groceryLists'
+export * from './listItems'
