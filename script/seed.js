@@ -8,7 +8,7 @@ const {
   Supplement,
   User,
   Exercise,
-} = require('./db/models');
+} = require('../server/db/models');
 
 const foodItems = [
   {
