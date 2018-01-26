@@ -1,4 +1,14 @@
-const { db, FoodItem, GroceryList, ListItem, MacroGoal, MicroGoal, Supplement, User, Exercise } = require('./db/models');
+const {
+  db,
+  FoodItem,
+  GroceryList,
+  ListItem,
+  MacroGoal,
+  MicroGoal,
+  Supplement,
+  User,
+  Exercise,
+} = require('./db/models');
 
 const foodItems = [
   {
@@ -8,37 +18,87 @@ const foodItems = [
     calories: 10,
     protein: 0,
     carbs: 8,
-    fat: 0
+    fat: 0,
   },
-]
+];
 
 const supplements = [
   {
     name: 'milk thistle',
     quantity: 100,
-    unitOfMeasure: 'mg'
+    unitOfMeasure: 'mg',
   },
-]
+  {
+    name: 'magnesium',
+    quantity: 60,
+    unitOfMeasure: 'mg',
+  },
+  {
+    name: 'vegan b12',
+    quantity: 60,
+    unitOfMeasure: 'mg',
+  },
+  {
+    name: 'blueberry',
+    quantity: 60,
+    unitOfMeasure: 'mg',
+  },
+  {
+    name: 'cod liver-oil',
+    quantity: 8.4,
+    unitOfMeasure: 'mg',
+  },
+  {
+    name: 'calcium',
+    quantity: 60,
+    unitOfMeasure: 'mg',
+  },
+  {
+    name: 'zinc',
+    quantity: 60,
+    unitOfMeasure: 'mg',
+  },
+  {
+    name: 'calcium',
+    quantity: 60,
+    unitOfMeasure: 'mg',
+  },
+  {
+    name: 'selenium',
+    quantity: 60,
+    unitOfMeasure: 'mg',
+  },
+  {
+    name: 'iron',
+    quantity: 60,
+    unitOfMeasure: 'mg',
+  },
+  {
+    name: 'potassium',
+    quantity: 60,
+    unitOfMeasure: 'mg',
+  },
+];
 
 const groceryLists = [
   {
-    name: 'bulking grocery list'
+    name: 'bulking grocery list',
   },
   {
-    name: 'cutting grocery list'
+    name: 'cutting grocery list',
   },
   {
-    name: 'family grocery list'
-  }
-]
+    name: 'family grocery list',
+  },
+];
 
 const listItems = [
   {
     quantity: 3,
     foodItemId: 1,
     groceryListId: 1,
-  }
-]
+  },
+];
 
 const macroGoals = [
   {
@@ -46,9 +106,9 @@ const macroGoals = [
     calories: 2500,
     protein: 150,
     carbs: 300,
-    fat: 80
-  }
-]
+    fat: 80,
+  },
+];
 
 const microGoals = [
   {
@@ -61,19 +121,18 @@ const microGoals = [
     potassium: 100,
     sodium: 100,
     magnesium: 100,
-    zinc: 100
-  }
-]
+    zinc: 100,
+  },
+];
 
 const exercises = [
   {
-    name: 'running'
+    name: 'running',
   },
   {
-    name: 'squats'
-  }
-]
-
+    name: 'squats',
+  },
+];
 
 db
   .sync({ force: true })
