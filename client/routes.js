@@ -3,8 +3,25 @@ import {connect} from 'react-redux'
 import {Route, Switch, Router} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import {Main, Login, Signup, UserHome} from './components'
-import {me} from './store'
+
+import {
+  Main,
+  Login,
+  Signup,
+  UserHome,
+  NewGoals,
+  GroceryListForm
+} from './components'
+
+import {
+  me,
+  fetchExercises,
+  fetchFoodItems,
+  fetchGroceryLists,
+  fetchListItems,
+  fetchMacroGoals,
+  fetchMicroGoals,
+} from './store'
 
 /**
  * COMPONENT
@@ -24,6 +41,8 @@ class Routes extends Component {
             {/* Routes placed here are available to all visitors */}
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
+            <Route exact path="/new-goal" component={NewGoals} />
+            <Route exact path="/new-grocery-list" component={GroceryListForm} />
             {
               isLoggedIn &&
                 <Switch>
@@ -55,6 +74,12 @@ const mapDispatch = (dispatch) => {
   return {
     loadInitialData () {
       dispatch(me())
+      dispatch(fetchExercises())
+      dispatch(fetchFoodItems())
+      dispatch(fetchGroceryLists())
+      dispatch(fetchListItems())
+      dispatch(fetchMacroGoals())
+      dispatch(fetchMicroGoals())
     }
   }
 }

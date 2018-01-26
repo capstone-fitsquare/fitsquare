@@ -6,3 +6,14 @@
 export {default as Main} from './Main'
 export {default as UserHome} from './UserHome'
 export {Login, Signup} from './AuthForm'
+
+// newGoals folder
+export {default as NewGoals} from './newGoals/NewGoals'
+export {default as MacroGoalForm} from './newGoals/MacroGoalForm'
+export {default as MicroGoalForm} from './newGoals/MicroGoalForm'
+
+// newGroceryList folder
+export {default as GroceryListForm} from './newGroceryList/GroceryListForm'
+export {default as MacroGoalCountdown} from './newGroceryList/MacroGoalCountdown'
+export {default as MicroGoalCountdown} from './newGroceryList/MicroGoalCountdown'
+
