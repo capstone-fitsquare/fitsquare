@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
-import { MacroGoalCountdown, MicroGoalCountdown } from '../../components'
+import { DayCard, MacroGoalCountdown, MicroGoalCountdown } from '../../components'
 import { postGroceryList } from '../../store'
 
 class GroceryListForm extends Component {
@@ -10,9 +10,11 @@ class GroceryListForm extends Component {
     super()
     this.state = {
       name: 'Grocery List Name',
+      foods: [{name: 'apple'}, {name: 'banana'}]
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleAddFood = this.handleAddFood.bind(this)
   }
 
   handleChange (event) {
@@ -31,16 +33,33 @@ class GroceryListForm extends Component {
     this.props.postGroceryList(newGroceryList)
   }
 
+  handleAddFood(food) {
+    const addedFood = [...this.state.foods, food]
+    this.setState({
+      foods: addedFood
+    }, () => {
+      console.log('state', this.state)
+    })
+    console.log('trying to add ' + food.name + ' to grocery list')
+  }
+
   render() {
 
     return (
       <div>
 
         <div>
+          <DayCard handleAddFood={this.handleAddFood}/>
           <form>
             <label>Name of Grocery List</label>
             <input name="name" value={this.state.name} onChange={this.handleChange} />
-
+              {this.state.foods.length &&
+                <ul>
+                {this.state.foods.map(food =>
+                  <li key={food.name}>{food.name}</li>
+                )}
+                </ul>
+              }
           </form>
         </div>
 
