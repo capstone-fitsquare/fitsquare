@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 import { DayCard, MacroGoalCountdown, MicroGoalCountdown } from '../../components'
 import { postGroceryList } from '../../store'
+import axios from 'axios'
 
 class GroceryListForm extends Component {
 
@@ -37,10 +38,12 @@ class GroceryListForm extends Component {
     const addedFood = [...this.state.foods, food]
     this.setState({
       foods: addedFood
-    }, () => {
-      console.log('state', this.state)
     })
-    console.log('trying to add ' + food.name + ' to grocery list')
+    axios.get(`/api/usda-db/reports/${food.ndbno}`)
+    .then(res => res.data)
+    .then(data => {
+      console.log('ndbno data', data)
+    })
   }
 
   render() {
@@ -61,11 +64,6 @@ class GroceryListForm extends Component {
                 </ul>
               }
           </form>
-        </div>
-
-        <div>
-          <MacroGoalCountdown />
-          <MicroGoalCountdown />
         </div>
 
       </div>

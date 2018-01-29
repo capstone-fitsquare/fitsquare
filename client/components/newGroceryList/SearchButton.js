@@ -44,10 +44,10 @@ class SearchButton extends Component {
     event.preventDefault()
     const searchTerms = this.state.searchValue
     console.log('searchTerms ', searchTerms)
-    axios.get(`/api/food-search/${searchTerms}`)
+    axios.get(`/api/usda-db/search/${searchTerms}`)
     .then(res => res.data)
     .then(data => {
-      console.log(data)
+      console.log('search data ', data)
       this.setState({
         foodsFound: data.list.item
       })

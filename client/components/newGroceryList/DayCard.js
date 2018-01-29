@@ -48,6 +48,11 @@ class DayCard extends Component {
             </div>
           </div>
 
+          <div style={goalsContainer}>
+            <MacroGoalCountdown />
+            <MicroGoalCountdown />
+          </div>
+
         </div>
 
       </div>
