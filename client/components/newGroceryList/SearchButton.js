@@ -47,7 +47,7 @@ class SearchButton extends Component {
     axios.get(`/api/food-search/${searchTerms}`)
     .then(res => res.data)
     .then(data => {
-      console.log(data)
+      console.log('data: ', data)
     })
 
     // const foods = [...this.props.foodItems.find(foodItem => {
