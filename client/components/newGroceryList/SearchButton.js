@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 import MacroGoalCountdown from './MacroGoalCountdown';
 import MicroGoalCountdown from './MicroGoalCountdown';
+import axios from 'axios'
 
 
 class SearchButton extends Component {
@@ -16,15 +17,17 @@ class SearchButton extends Component {
     }
     this.toggleSearchBar = this.toggleSearchBar.bind(this)
     this.handleChange = this.handleChange.bind(this)
-    this.handleAddFood = this.handleAddFood.bind(this)
+    this.handleSearchFood = this.handleSearchFood.bind(this)
   }
 
+  // show or hide search bar via '+' button
   toggleSearchBar() {
     this.setState({
       showSearchBar: !this.state.showSearchBar
     })
   }
 
+  // set state to reflect user input changes
   handleChange (event) {
     const target = event.target;
     const name = target.name;
@@ -35,15 +38,24 @@ class SearchButton extends Component {
     })
   }
 
-  handleAddFood(event) {
+  // uses this.state.searchValue to search USDA db for food
+  // adds found foods to this.state.foodsFound array
+  handleSearchFood(event) {
     event.preventDefault()
-    const foodToSearch = this.state.searchValue
-    const foods = [...this.props.foodItems.find(foodItem => {
-      return foodItem === foodToSearch
-    })]
-    this.setState({
-      foodsFound: foods
+    const searchTerms = this.state.searchValue
+
+    axios.get(`/api/food-search/${searchTerms}`)
+    .then(res => res.data)
+    .then(data => {
+      console.log(data)
     })
+
+    // const foods = [...this.props.foodItems.find(foodItem => {
+    //   return foodItem === searchTerms
+    // })]
+    // this.setState({
+    //   foodsFound: foods
+    // })
   }
 
   handleSubmit (event) {
@@ -59,7 +71,7 @@ class SearchButton extends Component {
           this.state.showSearchBar &&
           <div>
             <input name="searchValue" value={this.state.searchValue} onChange={this.handleChange} />
-            <button onClick={this.handleAddFood}>Go!</button>
+            <button onClick={this.handleSearchFood}>Go!</button>
             {
               this.state.foodsFound.length &&
               this.state.foodsFound.map(food => {
