@@ -13,7 +13,11 @@ export {default as MacroGoalForm} from './newGoals/MacroGoalForm'
 export {default as MicroGoalForm} from './newGoals/MicroGoalForm'
 
 // newGroceryList folder
+export {default as AllDays} from './newGroceryList/AllDays'
+export {default as DayCard} from './newGroceryList/DayCard'
 export {default as GroceryListForm} from './newGroceryList/GroceryListForm'
 export {default as MacroGoalCountdown} from './newGroceryList/MacroGoalCountdown'
 export {default as MicroGoalCountdown} from './newGroceryList/MicroGoalCountdown'
+export {default as SearchButton} from './newGroceryList/SearchButton'
+
 
