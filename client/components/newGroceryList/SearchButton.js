@@ -46,7 +46,16 @@ class SearchButton extends Component {
     console.log('searchTerms ', searchTerms)
     axios.get(`/api/food-search/${searchTerms}`)
     .then(res => res.data)
-    .then(data => console.log(data))
+    .then(data => {
+      console.log(data)
+      this.setState({
+        foodsFound: data.list.item
+      })
+    })
+  }
+
+  handleSelectFood() {
+
   }
 
   handleSubmit (event) {
@@ -63,14 +72,16 @@ class SearchButton extends Component {
           <div>
             <input name="searchValue" value={this.state.searchValue} onChange={this.handleChange} />
             <button onClick={this.handleSearchFood}>Go!</button>
+            <div style={optionsContainer}>
             {
               this.state.foodsFound.length &&
               this.state.foodsFound.map(food => {
                 return (
-                  <div key={food.name}>{food.name}</div>
+                  <div onClick={this.handleSelectFood} style={option} key={food.name}>{food.name}</div>
                 )
               })
             }
+            </div>
           </div>
         }
       </div>
@@ -87,3 +98,15 @@ const mapState = state => {
 const mapDispatch = null
 
 export default connect(mapState, mapDispatch)(SearchButton)
+
+const styles = {
+  optionsContainer: {
+    display: 'flex',
+    flexDirection: 'column'
+  },
+  option: {
+    border: '2px solid blue',
+  }
+}
+
+const { optionsContainer, option } = styles
