@@ -10,7 +10,8 @@ import {
   Signup,
   UserHome,
   NewGoals,
-  GroceryListForm
+  GroceryListForm,
+  DayCard
 } from './components'
 
 import {
@@ -43,6 +44,7 @@ class Routes extends Component {
             <Route path="/signup" component={Signup} />
             <Route exact path="/new-goal" component={NewGoals} />
             <Route exact path="/new-grocery-list" component={GroceryListForm} />
+            <Route exact path="/day-card" component={DayCard} />
             {
               isLoggedIn &&
                 <Switch>

@@ -9,7 +9,7 @@ class GroceryListForm extends Component {
   constructor () {
     super()
     this.state = {
-      name: 'Grocery List Name'
+      name: 'Grocery List Name',
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -32,6 +32,7 @@ class GroceryListForm extends Component {
   }
 
   render() {
+
     return (
       <div>
 
