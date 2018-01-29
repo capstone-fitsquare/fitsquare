@@ -43,19 +43,10 @@ class SearchButton extends Component {
   handleSearchFood(event) {
     event.preventDefault()
     const searchTerms = this.state.searchValue
-
+    console.log('searchTerms ', searchTerms)
     axios.get(`/api/food-search/${searchTerms}`)
     .then(res => res.data)
-    .then(data => {
-      console.log('data: ', data)
-    })
-
-    // const foods = [...this.props.foodItems.find(foodItem => {
-    //   return foodItem === searchTerms
-    // })]
-    // this.setState({
-    //   foodsFound: foods
-    // })
+    .then(data => console.log(data))
   }
 
   handleSubmit (event) {
