@@ -54,8 +54,11 @@ class SearchButton extends Component {
     })
   }
 
-  handleSelectFood() {
-
+  // 1) add food to the appropriate meal
+  // 2) subtract the associated macro/micro amounts from the countdowns
+  //    - another API call using the ndbno
+  handleSelectFood(food) {
+    this.props.handleAddFood(food)
   }
 
   handleSubmit (event) {
@@ -77,7 +80,7 @@ class SearchButton extends Component {
               this.state.foodsFound.length &&
               this.state.foodsFound.map(food => {
                 return (
-                  <div onClick={this.handleSelectFood} style={option} key={food.name}>{food.name}</div>
+                  <div onClick={() => this.handleSelectFood(food)} style={option} key={food.name}>{food.name}</div>
                 )
               })
             }

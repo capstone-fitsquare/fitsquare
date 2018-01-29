@@ -18,7 +18,7 @@ class DayCard extends Component {
             <div>
               <p>Breakfast</p>
             </div>
-            <SearchButton />
+            <SearchButton handleAddFood={this.props.handleAddFood}/>
           </div>
 
           <div>
@@ -50,10 +50,6 @@ class DayCard extends Component {
 
         </div>
 
-        <div style={goalsContainer}>
-          <MacroGoalCountdown />
-          <MicroGoalCountdown />
-        </div>
       </div>
     )
   }
