@@ -33,13 +33,9 @@ export const fetchUsdaFoodReport = (ndbno, dayN, meal) =>
     axios.get(`/api/usda-db/reports/${ndbno}`)
       .then(res => res.data)
       .then(foodReport => {
-        console.log('foodReport', foodReport)
         const action1 = getUsdaFoodReport(foodReport)
-        console.log('action1')
         const action2 = addFoodToGroceryList(foodReport)
-        console.log('action2')
         const action3 = addFoodToDayN(dayN, foodReport, meal)
-        console.log('dayN axios', dayN)
         dispatch(action1)
         dispatch(action2)
         dispatch(action3)

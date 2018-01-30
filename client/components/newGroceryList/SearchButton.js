@@ -57,7 +57,6 @@ class SearchButton extends Component {
                 return (
                   <div
                     onClick={() => {
-                      console.log('food', food.ndbno)
                       fetchUsdaFoodReport(food.ndbno, dayN, meal)
                     }}
                     style={option} key={food.name}>{food.name}</div>
