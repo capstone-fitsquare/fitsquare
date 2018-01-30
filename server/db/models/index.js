@@ -1,6 +1,5 @@
 const db = require('../db')
 const Exercise = require('./exercise')
-const FoodItem = require('./foodItem')
 const GroceryList = require('./groceryList')
 const ListItem = require('./listItem')
 const MacroGoal = require('./macroGoal')
@@ -10,9 +9,6 @@ const User = require('./user')
 
 Exercise.belongsTo(User)
 User.hasMany(Exercise)
-
-ListItem.belongsTo(FoodItem)
-FoodItem.hasMany(ListItem)
 
 ListItem.belongsTo(GroceryList)
 GroceryList.hasMany(ListItem)
@@ -32,7 +28,6 @@ User.hasMany(Supplement)
 module.exports = {
   db,
   Exercise,
-  FoodItem,
   GroceryList,
   ListItem,
   MacroGoal,
@@ -40,12 +35,4 @@ module.exports = {
   Supplement,
   User
 }
-
-// const ndb = require('nutrient-database')
-
-
-// ndb.foodReport('01009','DEMO_KEY', function(err, response){
-//   if (err) console.log('Error: ', err)
-//   console.log(JSON.stringify(response))
-// });
 

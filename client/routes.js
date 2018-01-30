@@ -77,7 +77,6 @@ const mapDispatch = (dispatch) => {
     loadInitialData () {
       dispatch(me())
       dispatch(fetchExercises())
-      dispatch(fetchFoodItems())
       dispatch(fetchGroceryLists())
       dispatch(fetchListItems())
       dispatch(fetchMacroGoals())
