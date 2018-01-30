@@ -4,20 +4,26 @@ import thunkMiddleware from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import user from './user'
 import exercises from './exercises'
-import foodItems from './foodItems'
 import macroGoals from './macroGoals'
 import microGoals from './microGoals'
 import groceryLists from './groceryLists'
 import listItems from './listItems'
+import foodsSearchUSDA from './foodsSearchUSDA'
+import foodsDayN from './foodsDayN'
+import foodsGroceryList from './foodsGroceryList'
+import numOfDays from './numOfDays'
 
 const reducer = combineReducers({
   user,
   exercises,
-  foodItems,
   macroGoals,
   microGoals,
   groceryLists,
-  listItems
+  listItems,
+  foodsSearchUSDA,
+  foodsDayN,
+  foodsGroceryList,
+  numOfDays
 })
 const middleware = composeWithDevTools(applyMiddleware(
   thunkMiddleware,
@@ -28,8 +34,11 @@ const store = createStore(reducer, middleware)
 export default store
 export * from './user'
 export * from './exercises'
-export * from './foodItems'
 export * from './macroGoals'
 export * from './microGoals'
 export * from './groceryLists'
 export * from './listItems'
+export * from './foodsSearchUSDA'
+export * from './foodsDayN'
+export * from './foodsGroceryList'
+export * from './numOfDays'

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
-import { DayCard, MacroGoalCountdown, MicroGoalCountdown } from '../../components'
+import { DayCard } from '../../components'
 import { postGroceryList } from '../../store'
 import axios from 'axios'
 
