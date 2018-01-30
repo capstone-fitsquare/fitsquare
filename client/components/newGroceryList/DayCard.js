@@ -4,11 +4,15 @@ import { connect } from 'react-redux'
 import SearchButton from './SearchButton'
 import MacroGoalCountdown from './MacroGoalCountdown';
 import MicroGoalCountdown from './MicroGoalCountdown';
+import { addFoodDayN, removeFoodDayN } from '../../store'
 
 
 class DayCard extends Component {
 
   render() {
+
+    const { dayN } = this.props
+
     return (
       <div style={container}>
 
@@ -18,7 +22,7 @@ class DayCard extends Component {
             <div>
               <p>Breakfast</p>
             </div>
-            <SearchButton handleAddFood={this.props.handleAddFood}/>
+            <SearchButton meal="breakfast" dayN={dayN} />
           </div>
 
           <div>

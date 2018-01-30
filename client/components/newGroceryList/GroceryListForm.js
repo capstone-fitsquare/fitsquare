@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
-import { DayCard } from '../../components'
+import { AllDays } from '../../components'
 import { postGroceryList, addFoodToGroceryList, removeFoodFromGroceryList } from '../../store'
 import axios from 'axios'
 
@@ -34,18 +34,24 @@ class GroceryListForm extends Component {
 
   render() {
 
+    const { foodsGroceryList } = this.props
+
     return (
       <div>
 
         <div>
-          <DayCard />
+          <AllDays />
           <form>
             <label>Name of Grocery List</label>
             <input name="name" value={this.state.name} onChange={this.handleChange} />
-              {this.props.foodsGroceryList.length &&
+              {foodsGroceryList.length &&
                 <ul>
-                {this.state.foodsGroceryList.map(food =>
-                  <li key={food.name}>{food.name}</li>
+                {foodsGroceryList.map(foodObj => {
+                  const name = foodObj.report.food.name
+                  const ndbno = foodObj.report.food.ndbno
+                  return (
+                    <li key={ndbno}>{name}</li>
+                  )}
                 )}
                 </ul>
               }

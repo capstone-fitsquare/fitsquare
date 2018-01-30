@@ -31,7 +31,7 @@ export default function (state = [], action) {
       return [...state, action.food]
 
     case REMOVE_FOOD_FROM_GROCERY_LIST: {
-      const itemToEdit = state.find(food => food.id === action.foodId);
+      const itemToEdit = state.find(foodObj => foodObj.report.food.ndbno === action.foodId);
       const indexOfItemToEdit = state.indexOf(itemToEdit);
       let newState = [...state];
       newState.splice(indexOfItemToEdit, 1);

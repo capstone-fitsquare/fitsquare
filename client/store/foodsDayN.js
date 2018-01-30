@@ -44,7 +44,9 @@ export default function (state = initialState, action) {
     case ADD_FOOD_TO_DAY_N: {
       const newState = [...state]
       const { dayN, food, meal } = action
+      console.log('dayN', dayN)
       const dayNFoods = newState[dayN] // object including breakfast, lunch, dinner, snacks [for particular day]
+      console.log('newState', newState)
       const dayNMealFoods = dayNFoods[meal] // array of foods [for particular meal]
       dayNMealFoods.push(food) // add new food to particular day's meal foods array
       dayNFoods[meal].splice(dayN, 1, dayNMealFoods);

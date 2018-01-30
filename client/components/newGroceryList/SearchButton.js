@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import MacroGoalCountdown from './MacroGoalCountdown';
 import MicroGoalCountdown from './MicroGoalCountdown';
 import axios from 'axios'
+import { fetchUsdaSearchMatches, fetchUsdaFoodReport } from '../../store'
 
 
 class SearchButton extends Component {
@@ -12,12 +13,10 @@ class SearchButton extends Component {
     super()
     this.state = {
       showSearchBar: false,
-      searchValue: '',
-      foodsFound: []
+      searchValue: ''
     }
     this.toggleSearchBar = this.toggleSearchBar.bind(this)
     this.handleChange = this.handleChange.bind(this)
-    this.handleSearchFood = this.handleSearchFood.bind(this)
   }
 
   // show or hide search bar via '+' button
@@ -38,35 +37,11 @@ class SearchButton extends Component {
     })
   }
 
-  // uses this.state.searchValue to search USDA db for food
-  // adds found foods to this.state.foodsFound array
-  handleSearchFood(event) {
-    event.preventDefault()
-    const searchTerms = this.state.searchValue
-    console.log('searchTerms ', searchTerms)
-    axios.get(`/api/usda-db/search/${searchTerms}`)
-    .then(res => res.data)
-    .then(data => {
-      console.log('search data ', data)
-      this.setState({
-        foodsFound: data.list.item
-      })
-    })
-  }
-
-  // 1) add food to the appropriate meal
-  // 2) subtract the associated macro/micro amounts from the countdowns
-  //    - another API call using the ndbno
-  handleSelectFood(food) {
-    this.props.handleAddFood(food)
-  }
-
-  handleSubmit (event) {
-
-  }
-
 
   render() {
+
+    const { fetchUsdaSearchMatches, fetchUsdaFoodReport, foodMatches, foodReport, dayN, meal } = this.props
+
     return (
       <div>
         <button onClick={this.toggleSearchBar}>+</button>
@@ -74,13 +49,18 @@ class SearchButton extends Component {
           this.state.showSearchBar &&
           <div>
             <input name="searchValue" value={this.state.searchValue} onChange={this.handleChange} />
-            <button onClick={this.handleSearchFood}>Go!</button>
+            <button onClick={() => fetchUsdaSearchMatches(this.state.searchValue)}>Search!</button>
             <div style={optionsContainer}>
             {
-              this.state.foodsFound.length &&
-              this.state.foodsFound.map(food => {
+              foodMatches.length &&
+              foodMatches.map(food => {
                 return (
-                  <div onClick={() => this.handleSelectFood(food)} style={option} key={food.name}>{food.name}</div>
+                  <div
+                    onClick={() => {
+                      console.log('food', food.ndbno)
+                      fetchUsdaFoodReport(food.ndbno, dayN, meal)
+                    }}
+                    style={option} key={food.name}>{food.name}</div>
                 )
               })
             }
@@ -94,11 +74,16 @@ class SearchButton extends Component {
 
 const mapState = state => {
   return {
-    foodItems: state.foodItems
+    foodMatches: state.foodsSearchUSDA.foodMatches,
+    foodReport: state.foodsSearchUSDA.foodReport
   }
 }
 
-const mapDispatch = null
+const mapDispatch = dispatch => {
+  return bindActionCreators({
+    fetchUsdaSearchMatches, fetchUsdaFoodReport
+  }, dispatch)
+}
 
 export default connect(mapState, mapDispatch)(SearchButton)
 

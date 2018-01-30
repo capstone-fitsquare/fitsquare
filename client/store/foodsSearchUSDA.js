@@ -1,5 +1,6 @@
 import axios from 'axios'
 import history from '../history'
+import { addFoodToGroceryList, addFoodToDayN } from './index'
 
 /**
  * ACTION TYPES
@@ -18,21 +19,30 @@ export const getUsdaFoodReport = foodReport => ({type: GET_USDA_FOOD_REPORT, foo
  */
 export const fetchUsdaSearchMatches = (searchTerms) =>
   dispatch =>
-    axios.get(`/api/food-search/${searchTerms}`) // eventually, searchTerms needs to allow multiple words
+    axios.get(`/api/usda-db/search/${searchTerms}`) // eventually, searchTerms needs to allow multiple words
       .then(res => res.data)
       .then(foodMatches => {
-        const action = getUsdaSearchMatches(foodMatches);
+        const matches = foodMatches.list.item
+        const action = getUsdaSearchMatches(matches);
         dispatch(action);
       })
       .catch(err => console.log(err))
 
-export const fetchUsdaFoodReport = (ndbno) =>
+export const fetchUsdaFoodReport = (ndbno, dayN, meal) =>
   dispatch =>
-    axios.get(`/api/food-items/report/${ndbno}`)
+    axios.get(`/api/usda-db/reports/${ndbno}`)
       .then(res => res.data)
       .then(foodReport => {
-        const action = getUsdaFoodReport(foodReport);
-        dispatch(action);
+        console.log('foodReport', foodReport)
+        const action1 = getUsdaFoodReport(foodReport)
+        console.log('action1')
+        const action2 = addFoodToGroceryList(foodReport)
+        console.log('action2')
+        const action3 = addFoodToDayN(dayN, foodReport, meal)
+        console.log('dayN axios', dayN)
+        dispatch(action1)
+        dispatch(action2)
+        dispatch(action3)
       })
       .catch(err => console.log(err))
 
@@ -42,7 +52,7 @@ export const fetchUsdaFoodReport = (ndbno) =>
  */
 
 const initialState = {
-  foodMatches: [],
+  foodMatches: {},
   foodReport: {}
 }
 
