@@ -11,7 +11,11 @@ class DayCard extends Component {
 
   render() {
 
-    const { dayN } = this.props
+    const { dayN, foodsDayN } = this.props
+
+    const foods = foodsDayN.find(day => day.day === dayN)
+
+    console.log('foods', foods)
 
     return (
       <div style={container}>
@@ -21,6 +25,13 @@ class DayCard extends Component {
           <div>
             <div>
               <p>Breakfast</p>
+            </div>
+            <div>
+              <ul>
+                {foods.breakfast.map(food =>
+                  <li key={food.report.food.ndbno}>{food.report.food.name}</li>
+                )}
+              </ul>
             </div>
             <SearchButton meal="breakfast" dayN={dayN} />
           </div>
@@ -65,7 +76,15 @@ class DayCard extends Component {
 
 }
 
-export default DayCard
+const mapState = (state, ownProps) => {
+  return {
+    foodsDayN: state.foodsDayN
+  }
+}
+
+const mapDispatch = null
+
+export default connect(mapState, mapDispatch)(DayCard)
 
 const styles = {
   container: {

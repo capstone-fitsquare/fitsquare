@@ -46,8 +46,6 @@ export default function (state = initialState, action) {
       const { dayN, food, meal } = action
       const dayNFoods = newState[dayN] // object including breakfast, lunch, dinner, snacks [for particular day]
       dayNFoods[meal].push(food) // add new food to particular day's meal foods array
-      console.log('dayNFoods', dayNFoods)
-      console.log('newState', newState)
       return newState;
     }
 
