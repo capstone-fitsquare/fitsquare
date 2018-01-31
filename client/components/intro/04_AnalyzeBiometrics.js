@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 
 
-class GatherBiometrics extends Component {
+class AnalyzeBiometrics extends Component {
 
   render() {
     return (
@@ -16,7 +16,7 @@ class GatherBiometrics extends Component {
   }
 }
 
-export default GatherBiometrics
+export default AnalyzeBiometrics
 
 const styles = {
   container: {
