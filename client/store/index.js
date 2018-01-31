@@ -12,6 +12,7 @@ import foodsSearchUSDA from './foodsSearchUSDA'
 import foodsDayN from './foodsDayN'
 import foodsGroceryList from './foodsGroceryList'
 import numOfDays from './numOfDays'
+import introProfile from './introProfile'
 
 const reducer = combineReducers({
   user,
@@ -23,7 +24,8 @@ const reducer = combineReducers({
   foodsSearchUSDA,
   foodsDayN,
   foodsGroceryList,
-  numOfDays
+  numOfDays,
+  introProfile
 })
 const middleware = composeWithDevTools(applyMiddleware(
   thunkMiddleware,
@@ -42,3 +44,4 @@ export * from './foodsSearchUSDA'
 export * from './foodsDayN'
 export * from './foodsGroceryList'
 export * from './numOfDays'
+export * from './introProfile'
