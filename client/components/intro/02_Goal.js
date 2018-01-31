@@ -7,6 +7,8 @@ class Goal extends Component {
 
   render() {
 
+    const { addGoalType } = this.props
+
     return (
       <div style={container}>
 
@@ -16,15 +18,15 @@ class Goal extends Component {
 
         <div id="goalsParent">
 
-          <div style={goal}>
+          <div style={goal} onClick={() => addGoalType('Lose fat')}>
             <p>Lose fat</p>
           </div>
 
-          <div style={goal}>
+          <div style={goal} onClick={() => addGoalType('Build muscle')}>
             <p>Build muscle</p>
           </div>
 
-          <div style={goal}>
+          <div style={goal} onClick={() => addGoalType('Maintain')}>
             <p>Maintain</p>
           </div>
 
@@ -35,7 +37,14 @@ class Goal extends Component {
   }
 }
 
-export default Goal
+const mapState = null
+const mapDispatch = dispatch => {
+  return bindActionCreators({
+    addGoalType
+  }, dispatch)
+}
+
+export default connect(mapState, mapDispatch)(Goal)
 
 const styles = {
   container: {
