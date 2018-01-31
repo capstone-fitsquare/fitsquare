@@ -24,7 +24,7 @@ class BiometricsReport extends Component {
     return (
       <div style={container}>
         <div style={header}>
-          <p>Biometric Report</p>
+          <p>Biometrics Report</p>
         </div>
         <div style={reportContainer}>
           <div style={calories}>
