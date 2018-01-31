@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
-import { Button, Checkbox, Form, Input, Radio, Select, TextArea } from 'semantic-ui-react'
-import { addHeight, addWeight, addAge, addGender } from '../../store'
+import { Button, Form, Input, Radio, Select } from 'semantic-ui-react'
+import { addHeightFeet, addHeightInches, addWeight, addAge, addGender } from '../../store'
 
 
-const generateHeightOptions = (min, max) => {
-  let output = []
-  for (let i = min; i <= max; i++){
-    output.push({ key: i, text: `${i}`, value: i })
-  }
-  return output
-}
+// const generateHeightOptions = (min, max) => {
+//   let output = []
+//   for (let i = min; i <= max; i++){
+//     output.push({ key: i, text: `${i}`, value: i })
+//   }
+//   return output
+// }
 
-const ftOptions = generateHeightOptions(3, 7)
-const inOptions = generateHeightOptions(0, 12)
+// const ftOptions = generateHeightOptions(3, 7)
+// const inOptions = generateHeightOptions(0, 12)
 
 class GatherBiometrics extends Component {
 
@@ -22,27 +22,37 @@ class GatherBiometrics extends Component {
     super()
     this.state = {
       weight: '',
-      height: '',
+      heightFeet: '',
+      heightInches: '',
       gender: '',
       age: '',
     }
-    this.handleChange = this.handleChange.bind(this)
+    this.handleInput = this.handleInput.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleSelectGender = this.handleSelectGender.bind(this)
   }
 
-  handleChange (event) {
+  handleInput (event) {
     const target = event.target;
     const name = target.name;
     const value = target.value;
+
+    console.log('name', name)
+    console.log('value', value)
 
     this.setState({
       [name]: value
     })
   }
 
+  handleSelectGender (event, { value }) {
+    this.setState({ value })
+  }
+
   handleSubmit(event) {
     event.preventDefault();
-    this.props.addHeight(this.state.height)
+    this.props.addHeightFeet(this.state.heightFeet)
+    this.props.addHeightInches(this.state.heightInches)
     this.props.addWeight(this.state.weight)
     this.props.addAge(this.state.age)
     this.props.addGender(this.state.gender)
@@ -50,13 +60,7 @@ class GatherBiometrics extends Component {
 
   render() {
 
-    console.log('ftOptions', ftOptions)
-    console.log('inOptions', inOptions)
-
-    const options = [
-      { key: 'm', text: 'Male', value: 'male' },
-      { key: 'f', text: 'Female', value: 'female' },
-    ]
+    console.log('this.state', this.state)
 
     return (
       <div style={container}>
@@ -64,18 +68,23 @@ class GatherBiometrics extends Component {
           <p>...Gathering Biometrics...</p>
         </div>
         <Form onSubmit={this.handleSubmit} style={biometricsParent}>
+          {/* <Form.Group inline>
+            <label>Height</label>
+            <Form.Field fluid control={Select} name="heightFeet" value={this.state.heightFeet} options={ftOptions} placeholder='ft' onChange={this.handleSelectHeight} />
+            <Form.Field fluid control={Select} name="heightInches" value={this.state.heightInches} options={inOptions} placeholder='in' onChange={this.handleSelectHeight} />
+          </Form.Group> */}
           <Form.Group inline>
             <label>Height</label>
-            <Form.Field fluid control={Select} options={ftOptions} placeholder='ft' />
-            <Form.Field fluid control={Select} options={inOptions} placeholder='in' />
+            <Form.Field control={Input} name="heightFeet" value={this.state.heightFeet} placeholder='ft' onChange={this.handleInput} />
+            <Form.Field control={Input} name="heightInches" value={this.state.heightInches} placeholder='in' onChange={this.handleInput} />
           </Form.Group>
-          <Form.Field control={Input} name="weight" value={this.state.weight} label='Weight' placeholder='Weight' onChange={this.handleChange} />
-          <Form.Field control={Input} name="age" value={this.state.age} label='Age' placeholder='Age' onChange={this.handleChange} />
+          <Form.Field control={Input} name="weight" value={this.state.weight} label='Weight' placeholder='lbs' onChange={this.handleInput} />
+          <Form.Field control={Input} name="age" value={this.state.age} label='Age' placeholder='years' onChange={this.handleInput} />
           {/* <Form.Field control={Select} label='Age' options={options} placeholder='Age' /> */}
           <Form.Group inline>
             <label>Gender</label>
-            <Form.Field control={Radio} name="gender" label='M' value='male' checked={this.state.gender === 'male'} onChange={this.handleChange} />
-            <Form.Field control={Radio} name="gender" label='F' value='female' checked={this.state.gender === 'female'} onChange={this.handleChange} />
+            <Form.Field control={Radio} name="gender" label='M' value='male' checked={this.state.value === 'male'} onChange={this.handleSelectGender} />
+            <Form.Field control={Radio} name="gender" label='F' value='female' checked={this.state.value === 'female'} onChange={this.handleSelectGender} />
           </Form.Group>
           <Form.Field control={Button}>Submit</Form.Field>
         </Form>
@@ -87,7 +96,7 @@ class GatherBiometrics extends Component {
 const mapState = null
 const mapDispatch = dispatch => {
   return bindActionCreators({
-    addHeight, addWeight, addAge, addGender
+    addHeightFeet, addHeightInches, addWeight, addAge, addGender
   }, dispatch)
 }
 
