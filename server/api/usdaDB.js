@@ -42,9 +42,7 @@ router.get('/search/:searchTerms', (req, res, next) => {
     json: true
   })
     .then((data) => {
-      console.log('backend data', data)
       res.json(data)
-
     })
     .catch((err) => {
       console.log(err)

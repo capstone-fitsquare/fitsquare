@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
-import MacroGoalCountdown from './MacroGoalCountdown';
-import MicroGoalCountdown from './MicroGoalCountdown';
+import store, { fetchUsdaSearchMatches, fetchUsdaFoodReport, getUsdaSearchMatches, getUsdaFoodReport } from '../../store'
+import Select, { Async } from 'react-select-plus'
 import axios from 'axios'
-import { fetchUsdaSearchMatches, fetchUsdaFoodReport } from '../../store'
 
 
 class SearchButton extends Component {
@@ -13,7 +12,7 @@ class SearchButton extends Component {
     super()
     this.state = {
       showSearchBar: false,
-      searchValue: ''
+      searchValue: null
     }
     this.toggleSearchBar = this.toggleSearchBar.bind(this)
     this.handleChange = this.handleChange.bind(this)
@@ -27,43 +26,39 @@ class SearchButton extends Component {
   }
 
   // set state to reflect user input changes
-  handleChange (event) {
-    const target = event.target;
-    const name = target.name;
-    const value = target.value;
-
+  handleChange (value) {
     this.setState({
-      [name]: value
+      searchValue: value
     })
   }
 
-
   render() {
 
-    const { fetchUsdaSearchMatches, fetchUsdaFoodReport, foodMatches, foodReport, dayN, meal } = this.props
+    const { fetchUsdaSearchMatches, fetchUsdaFoodReport, dayN, meal } = this.props
+    if (this.state.searchValue) fetchUsdaSearchMatches(this.state.searchValue)
+
+    const addFoodToMealAndList = (value) => {
+      fetchUsdaFoodReport(value.ndbno, dayN, meal)
+    }
 
     return (
       <div>
         <button onClick={this.toggleSearchBar}>+</button>
         {
           this.state.showSearchBar &&
+
           <div>
-            <input name="searchValue" value={this.state.searchValue} onChange={this.handleChange} />
-            <button onClick={() => fetchUsdaSearchMatches(this.state.searchValue)}>Search!</button>
-            <div style={optionsContainer}>
-            {
-              foodMatches.length &&
-              foodMatches.map(food => {
-                return (
-                  <div
-                    onClick={() => {
-                      fetchUsdaFoodReport(food.ndbno, dayN, meal)
-                    }}
-                    style={option} key={food.name}>{food.name}</div>
-                )
-              })
-            }
-            </div>
+            <Async
+              placeholder="Search food"
+              value={this.state.searchValue}
+              onChange={this.handleChange}
+              loadOptions={loadOptions}
+              valueKey="ndbno" labelKey="name"
+              multi={false}
+              closeOnSelect={true}
+              onValueClick={addFoodToMealAndList}
+            />
+            <button onClick={addFoodToMealAndList}>Add Food</button>
           </div>
         }
       </div>
@@ -86,6 +81,26 @@ const mapDispatch = dispatch => {
 
 export default connect(mapState, mapDispatch)(SearchButton)
 
+const loadOptions = (input) => {
+  if (!input) return Promise.resolve({ options: [] });
+
+  return axios.get(`/api/usda-db/search/${input}`) // eventually, searchTerms needs to allow multiple words
+    .then(res => res.data)
+    .then(foodMatches => {
+      const matches = foodMatches.list.item.map(food => {
+        return {
+          offset: food.offset,
+          name: food.name,
+          ndbno: food.ndbno
+        }
+      })
+      const action = getUsdaSearchMatches(matches)
+      store.dispatch(action)
+      return { options: matches }
+    })
+    .catch(err => console.log(err))
+}
+
 const styles = {
   optionsContainer: {
     display: 'flex',
@@ -97,3 +112,5 @@ const styles = {
 }
 
 const { optionsContainer, option } = styles
+
+

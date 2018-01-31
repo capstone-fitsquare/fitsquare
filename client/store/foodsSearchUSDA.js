@@ -39,6 +39,7 @@ export const fetchUsdaFoodReport = (ndbno, dayN, meal) =>
         dispatch(action1)
         dispatch(action2)
         dispatch(action3)
+        console.log('fetched report')
       })
       .catch(err => console.log(err))
 
@@ -48,7 +49,7 @@ export const fetchUsdaFoodReport = (ndbno, dayN, meal) =>
  */
 
 const initialState = {
-  foodMatches: {},
+  foodMatches: [],
   foodReport: {}
 }
 

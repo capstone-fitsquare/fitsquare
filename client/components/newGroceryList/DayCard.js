@@ -15,8 +15,6 @@ class DayCard extends Component {
 
     const foods = foodsDayN.find(day => day.day === dayN)
 
-    console.log('foods', foods)
-
     return (
       <div style={container}>
 
