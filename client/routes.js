@@ -11,7 +11,7 @@ import {
   UserHome,
   NewGoals,
   GroceryListForm,
-  DayCard
+  IntroSequence
 } from './components'
 
 import {
@@ -43,6 +43,7 @@ class Routes extends Component {
             <Route path="/signup" component={Signup} />
             <Route exact path="/new-goal" component={NewGoals} />
             <Route exact path="/new-grocery-list" component={GroceryListForm} />
+            <Route exact path="/intro" component={IntroSequence} />
             {
               isLoggedIn &&
                 <Switch>

@@ -4,6 +4,7 @@ body {
 
 a {
   text-decoration: none;
+  color: darkslategray;
 }
 
 label {
@@ -18,4 +19,20 @@ nav a {
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+#goalsParent > div {
+  transition: background-color .5s;
+}
+
+#goalsParent > div:hover {
+  background: lightgreen;
+}
+
+#loginParent > div {
+  transition: background-color .5s;
+}
+
+#loginParent > div:hover {
+  background: lightgreen;
 }

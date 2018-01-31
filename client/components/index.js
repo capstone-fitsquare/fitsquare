@@ -7,6 +7,9 @@ export {default as Main} from './Main'
 export {default as UserHome} from './UserHome'
 export {Login, Signup} from './AuthForm'
 
+// intro folder
+export {default as IntroSequence} from './intro/IntroSequence'
+
 // newGoals folder
 export {default as NewGoals} from './newGoals/NewGoals'
 export {default as MacroGoalForm} from './newGoals/MacroGoalForm'
