@@ -29,6 +29,7 @@
     "express": "^4.14.1",
     "express-session": "^1.15.1",
     "history": "^4.6.3",
+    "iifym.js": "^1.0.0",
     "isomorphic-fetch": "^2.2.1",
     "morgan": "^1.8.1",
     "nutrient-database": "^1.1.8",

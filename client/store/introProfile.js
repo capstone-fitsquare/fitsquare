@@ -9,8 +9,11 @@ import history from '../history'
 export const ADD_GOAL_TYPE = 'ADD_GOAL_TYPE'
 export const CHANGE_GOAL_TYPE = 'CHANGE_GOAL_TYPE'
 
-export const ADD_HEIGHT = 'ADD_HEIGHT'
-export const EDIT_HEIGHT = 'EDIT_HEIGHT'
+export const ADD_HEIGHT_FEET = 'ADD_HEIGHT_FEET'
+export const EDIT_HEIGHT_FEET = 'EDIT_HEIGHT_FEET'
+
+export const ADD_HEIGHT_INCHES = 'ADD_HEIGHT_INCHES'
+export const EDIT_HEIGHT_INCHES = 'EDIT_HEIGHT_INCHES'
 
 export const ADD_WEIGHT = 'ADD_WEIGHT'
 export const EDIT_WEIGHT = 'EDIT_WEIGHT'
@@ -25,7 +28,10 @@ export const EDIT_CALORIES = 'EDIT_CALORIES'
 export const EDIT_PROTEIN = 'EDIT_PROTEIN'
 export const EDIT_CARBS = 'EDIT_CARBS'
 export const EDIT_FAT = 'EDIT_FAT'
+
+export const ADD_VEGETARIAN_OPTION = 'ADD_VEGETARIAN_OPTION'
 export const EDIT_VEGETARIAN_OPTION = 'EDIT_VEGETARIAN_OPTION'
+
 // CUSTOM PREFERENCES??
 
 
@@ -33,11 +39,15 @@ export const EDIT_VEGETARIAN_OPTION = 'EDIT_VEGETARIAN_OPTION'
  * ACTION CREATORS
  */
 
+// (frontend changes : 'add') as (backend/db changes : 'change'/'edit')
 export const addGoalType = goalType => ({type: ADD_GOAL_TYPE, goalType})
 export const changeGoalType = goalType => ({type: CHANGE_GOAL_TYPE, goalType})
 
-export const addHeight = height => ({type: ADD_HEIGHT, height})
-export const editHeight = height => ({type: EDIT_HEIGHT, height})
+export const addHeightFeet = heightFeet => ({type: ADD_HEIGHT_FEET, heightFeet})
+export const editHeightFeet = heightFeet => ({type: EDIT_HEIGHT_FEET, heightFeet})
+
+export const addHeightInches = heightInches => ({type: ADD_HEIGHT_INCHES, heightInches})
+export const editHeightInches = heightInches => ({type: EDIT_HEIGHT_INCHES, heightInches})
 
 export const addWeight = weight => ({type: ADD_WEIGHT, weight})
 export const editWeight = weight => ({type: EDIT_WEIGHT, weight})
@@ -52,7 +62,9 @@ export const editCalories = calories => ({type: EDIT_CALORIES, calories})
 export const editProtein = protein => ({type: EDIT_PROTEIN, protein})
 export const editCarbs = carbs => ({type: EDIT_CARBS, carbs})
 export const editFat = fat => ({type: EDIT_FAT, fat})
-export const editVegetarianOption = vegOption => ({type: EDIT_VEGETARIAN_OPTION, vegOption})
+
+export const addVegOption = vegOption => ({type: ADD_VEGETARIAN_OPTION, vegOption})
+export const editVegOption = vegOption => ({type: EDIT_VEGETARIAN_OPTION, vegOption})
 
 
 /**
@@ -61,7 +73,8 @@ export const editVegetarianOption = vegOption => ({type: EDIT_VEGETARIAN_OPTION,
 
 const initialState = {
   goalType: '',
-  height: '',
+  heightFeet: '',
+  heightInches: '',
   weight: '',
   age: '',
   gender: '',
@@ -87,13 +100,25 @@ export default function (state = initialState, action) {
         goalType: action.goalType
       }
 
-    case ADD_HEIGHT:
+    case ADD_HEIGHT_FEET:
       return {
         ...state,
-        height: action.height
+        height: action.heightFeet
       }
 
-    case EDIT_HEIGHT:
+    case EDIT_HEIGHT_FEET:
+      return {
+        ...state,
+        height: action.heightFeet
+      }
+
+    case ADD_HEIGHT_INCHES:
+      return {
+        ...state,
+        height: action.heightInches
+      }
+
+    case EDIT_HEIGHT_INCHES:
       return {
         ...state,
         height: action.height
@@ -157,6 +182,12 @@ export default function (state = initialState, action) {
       return {
         ...state,
         fat: action.fat
+      }
+
+    case ADD_VEGETARIAN_OPTION:
+      return {
+        ...state,
+        vegOption: action.vegOption
       }
 
     case EDIT_VEGETARIAN_OPTION:

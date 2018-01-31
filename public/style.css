@@ -22,7 +22,7 @@ form div {
 }
 
 #goalsParent > div {
-  transition: background-color .5s;
+  transition: all .5s;
 }
 
 #goalsParent > div:hover {
