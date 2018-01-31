@@ -3,7 +3,6 @@ module.exports = router
 
 router.use('/usda-db', require('./usdaDB'))
 router.use('/exercises', require('./exercises'))
-router.use('/food-items', require('./foodItems'))
 router.use('/grocery-lists', require('./groceryLists'))
 router.use('/list-items', require('./listItems'))
 router.use('/macro-goals', require('./macroGoals'))

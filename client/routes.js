@@ -11,13 +11,12 @@ import {
   UserHome,
   NewGoals,
   GroceryListForm,
-  DayCard
+  IntroSequence
 } from './components'
 
 import {
   me,
   fetchExercises,
-  fetchFoodItems,
   fetchGroceryLists,
   fetchListItems,
   fetchMacroGoals,
@@ -44,7 +43,7 @@ class Routes extends Component {
             <Route path="/signup" component={Signup} />
             <Route exact path="/new-goal" component={NewGoals} />
             <Route exact path="/new-grocery-list" component={GroceryListForm} />
-            <Route exact path="/day-card" component={DayCard} />
+            <Route exact path="/intro" component={IntroSequence} />
             {
               isLoggedIn &&
                 <Switch>
@@ -77,7 +76,6 @@ const mapDispatch = (dispatch) => {
     loadInitialData () {
       dispatch(me())
       dispatch(fetchExercises())
-      dispatch(fetchFoodItems())
       dispatch(fetchGroceryLists())
       dispatch(fetchListItems())
       dispatch(fetchMacroGoals())

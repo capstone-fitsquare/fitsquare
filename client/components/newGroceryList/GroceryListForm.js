@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
-import { DayCard, MacroGoalCountdown, MicroGoalCountdown } from '../../components'
-import { postGroceryList } from '../../store'
+import { AllDays } from '../../components'
+import { postGroceryList, addFoodToGroceryList, removeFoodFromGroceryList } from '../../store'
 import axios from 'axios'
 
 class GroceryListForm extends Component {
@@ -11,11 +11,9 @@ class GroceryListForm extends Component {
     super()
     this.state = {
       name: 'Grocery List Name',
-      foods: [{name: 'apple'}, {name: 'banana'}]
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleAddFood = this.handleAddFood.bind(this)
   }
 
   handleChange (event) {
@@ -34,32 +32,26 @@ class GroceryListForm extends Component {
     this.props.postGroceryList(newGroceryList)
   }
 
-  handleAddFood(food) {
-    const addedFood = [...this.state.foods, food]
-    this.setState({
-      foods: addedFood
-    })
-    axios.get(`/api/usda-db/reports/${food.ndbno}`)
-    .then(res => res.data)
-    .then(data => {
-      console.log('ndbno data', data)
-    })
-  }
-
   render() {
+
+    const { foodsGroceryList } = this.props
 
     return (
       <div>
 
         <div>
-          <DayCard handleAddFood={this.handleAddFood}/>
+          <AllDays />
           <form>
             <label>Name of Grocery List</label>
             <input name="name" value={this.state.name} onChange={this.handleChange} />
-              {this.state.foods.length &&
+              {foodsGroceryList.length &&
                 <ul>
-                {this.state.foods.map(food =>
-                  <li key={food.name}>{food.name}</li>
+                {foodsGroceryList.map(foodObj => {
+                  const name = foodObj.report.food.name
+                  const ndbno = foodObj.report.food.ndbno
+                  return (
+                    <li key={ndbno}>{name}</li>
+                  )}
                 )}
                 </ul>
               }
@@ -71,11 +63,15 @@ class GroceryListForm extends Component {
   }
 }
 
-const mapState = null
+const mapState = state => {
+  return {
+    foodsGroceryList: state.foodsGroceryList
+  }
+}
 
 const mapDispatch = dispatch => {
   return bindActionCreators({
-    postGroceryList
+    addFoodToGroceryList, removeFoodFromGroceryList, postGroceryList
   },
   dispatch)
 }
