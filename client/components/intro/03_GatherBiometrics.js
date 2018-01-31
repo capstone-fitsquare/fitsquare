@@ -4,6 +4,18 @@ import { connect } from 'react-redux'
 import { Button, Checkbox, Form, Input, Radio, Select, TextArea } from 'semantic-ui-react'
 import { addHeight, addWeight, addAge, addGender } from '../../store'
 
+
+const generateHeightOptions = (min, max) => {
+  let output = []
+  for (let i = min; i <= max; i++){
+    output.push({ key: i, text: `${i}`, value: i })
+  }
+  return output
+}
+
+const ftOptions = generateHeightOptions(3, 7)
+const inOptions = generateHeightOptions(0, 12)
+
 class GatherBiometrics extends Component {
 
   constructor () {
@@ -38,21 +50,33 @@ class GatherBiometrics extends Component {
 
   render() {
 
+    console.log('ftOptions', ftOptions)
+    console.log('inOptions', inOptions)
+
+    const options = [
+      { key: 'm', text: 'Male', value: 'male' },
+      { key: 'f', text: 'Female', value: 'female' },
+    ]
+
     return (
       <div style={container}>
         <div style={header}>
           <p>...Gathering Biometrics...</p>
         </div>
         <Form onSubmit={this.handleSubmit} style={biometricsParent}>
-            <Form.Field control={Input} name="height" value={this.state.height} label='Height' placeholder='Height' onChange={this.handleChange} />
-            <Form.Field control={Input} name="weight" value={this.state.weight} label='Weight' placeholder='Weight' onChange={this.handleChange} />
-            <Form.Field control={Input} name="age" value={this.state.age} label='Age' placeholder='Age' onChange={this.handleChange} />
-            {/* <Form.Field control={Select} label='Age' options={options} placeholder='Age' /> */}
-            <Form.Group inline>
-              <label>Gender</label>
-              <Form.Field control={Radio} name="gender" label='M' value='male' checked={this.state.gender === 'male'} onChange={this.handleChange} />
-              <Form.Field control={Radio} name="gender" label='F' value='female' checked={this.state.gender === 'female'} onChange={this.handleChange} />
-            </Form.Group>
+          <Form.Group inline>
+            <label>Height</label>
+            <Form.Field fluid control={Select} options={ftOptions} placeholder='ft' />
+            <Form.Field fluid control={Select} options={inOptions} placeholder='in' />
+          </Form.Group>
+          <Form.Field control={Input} name="weight" value={this.state.weight} label='Weight' placeholder='Weight' onChange={this.handleChange} />
+          <Form.Field control={Input} name="age" value={this.state.age} label='Age' placeholder='Age' onChange={this.handleChange} />
+          {/* <Form.Field control={Select} label='Age' options={options} placeholder='Age' /> */}
+          <Form.Group inline>
+            <label>Gender</label>
+            <Form.Field control={Radio} name="gender" label='M' value='male' checked={this.state.gender === 'male'} onChange={this.handleChange} />
+            <Form.Field control={Radio} name="gender" label='F' value='female' checked={this.state.gender === 'female'} onChange={this.handleChange} />
+          </Form.Group>
           <Form.Field control={Button}>Submit</Form.Field>
         </Form>
       </div>

@@ -25,7 +25,10 @@ export const EDIT_CALORIES = 'EDIT_CALORIES'
 export const EDIT_PROTEIN = 'EDIT_PROTEIN'
 export const EDIT_CARBS = 'EDIT_CARBS'
 export const EDIT_FAT = 'EDIT_FAT'
+
+export const ADD_VEGETARIAN_OPTION = 'ADD_VEGETARIAN_OPTION'
 export const EDIT_VEGETARIAN_OPTION = 'EDIT_VEGETARIAN_OPTION'
+
 // CUSTOM PREFERENCES??
 
 
@@ -33,6 +36,7 @@ export const EDIT_VEGETARIAN_OPTION = 'EDIT_VEGETARIAN_OPTION'
  * ACTION CREATORS
  */
 
+// (frontend changes : 'add') as (backend/db changes : 'change'/'edit')
 export const addGoalType = goalType => ({type: ADD_GOAL_TYPE, goalType})
 export const changeGoalType = goalType => ({type: CHANGE_GOAL_TYPE, goalType})
 
@@ -52,7 +56,9 @@ export const editCalories = calories => ({type: EDIT_CALORIES, calories})
 export const editProtein = protein => ({type: EDIT_PROTEIN, protein})
 export const editCarbs = carbs => ({type: EDIT_CARBS, carbs})
 export const editFat = fat => ({type: EDIT_FAT, fat})
-export const editVegetarianOption = vegOption => ({type: EDIT_VEGETARIAN_OPTION, vegOption})
+
+export const addVegOption = vegOption => ({type: ADD_VEGETARIAN_OPTION, vegOption})
+export const editVegOption = vegOption => ({type: EDIT_VEGETARIAN_OPTION, vegOption})
 
 
 /**
@@ -157,6 +163,12 @@ export default function (state = initialState, action) {
       return {
         ...state,
         fat: action.fat
+      }
+
+    case ADD_VEGETARIAN_OPTION:
+      return {
+        ...state,
+        vegOption: action.vegOption
       }
 
     case EDIT_VEGETARIAN_OPTION:

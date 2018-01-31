@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 import { Button, Checkbox, Form, Input, Radio, Select, TextArea } from 'semantic-ui-react'
+import { addVegOption } from '../../store'
 
 class GatherPreferences extends Component {
 
   constructor () {
     super()
     this.state = {
-      vegetarian: '',
+      vegOption: '',
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -26,8 +27,7 @@ class GatherPreferences extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const vegetarian = this.state.vegetarian
-    // this.props.postBiometrics(biometrics)
+    this.props.addVegOption(this.state.vegOption)
   }
 
   render() {
@@ -37,11 +37,11 @@ class GatherPreferences extends Component {
         <div style={header}>
           <p>...Gathering Preferences...</p>
         </div>
-        <Form style={preferencesParent}>
+        <Form onSubmit={this.handleSubmit} style={preferencesParent}>
           <Form.Group inline>
             <label>Vegetarian?</label>
-            <Form.Field control={Radio} label='Yes' value='yes' checked={this.state.vegetarian === 'yes'} onChange={this.handleChange} />
-            <Form.Field control={Radio} label='No' value='no' checked={this.state.vegetarian === 'yes'} onChange={this.handleChange} />
+            <Form.Field control={Radio} name="vegOption" label='Yes' value='yes' checked={this.state.vegOption === 'yes'} onChange={this.handleChange} />
+            <Form.Field control={Radio} name="vegOption" label='No' value='no' checked={this.state.vegOption === 'no'} onChange={this.handleChange} />
           </Form.Group>
           <Form.Field control={Input} label='Custom Preferences' placeholder='Custom Preferences' />
           <Form.Field control={Button}>Submit</Form.Field>
@@ -51,7 +51,14 @@ class GatherPreferences extends Component {
   }
 }
 
-export default GatherPreferences
+const mapState = null
+const mapDispatch = dispatch => {
+  return bindActionCreators({
+    addVegOption
+  }, dispatch)
+}
+
+export default connect(mapState, mapDispatch)(GatherPreferences)
 
 const styles = {
   container: {
