@@ -32,10 +32,8 @@ class GatherBiometrics extends Component {
     this.handleSelectGender = this.handleSelectGender.bind(this)
   }
 
-  handleInput (event) {
-    const target = event.target;
-    const name = target.name;
-    const value = target.value;
+  handleInput (e) {
+    const { name, value } = e.target
 
     console.log('name', name)
     console.log('value', value)
@@ -45,8 +43,18 @@ class GatherBiometrics extends Component {
     })
   }
 
-  handleSelectGender (event, { value }) {
-    this.setState({ value })
+
+  // <Checkbox checked={terms.value} onCheck={(e, checked) => terms.onChange(checked)} />
+
+  handleSelectGender (e, result) {
+    const { name, value } = result
+
+    console.log('name', name)
+    console.log('value', value)
+
+    this.setState({
+      [name]: value
+    })
   }
 
   handleSubmit(event) {
@@ -83,8 +91,8 @@ class GatherBiometrics extends Component {
           {/* <Form.Field control={Select} label='Age' options={options} placeholder='Age' /> */}
           <Form.Group inline>
             <label>Gender</label>
-            <Form.Field control={Radio} name="gender" label='M' value='male' checked={this.state.value === 'male'} onChange={this.handleSelectGender} />
-            <Form.Field control={Radio} name="gender" label='F' value='female' checked={this.state.value === 'female'} onChange={this.handleSelectGender} />
+            <Form.Field control={Radio} name="gender" label='M' value='male' checked={this.state.gender === 'male'} onChange={this.handleSelectGender} />
+            <Form.Field control={Radio} name="gender" label='F' value='female' checked={this.state.gender === 'female'} onChange={this.handleSelectGender} />
           </Form.Group>
           <Form.Field control={Button}>Submit</Form.Field>
         </Form>
