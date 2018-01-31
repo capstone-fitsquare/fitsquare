@@ -30,8 +30,10 @@ class GatherBiometrics extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const biometrics = {...this.state}
-    // this.props.postBiometrics(biometrics)
+    this.props.addHeight(this.state.height)
+    this.props.addWeight(this.state.weight)
+    this.props.addAge(this.state.age)
+    this.props.addGender(this.state.gender)
   }
 
   render() {
@@ -41,15 +43,15 @@ class GatherBiometrics extends Component {
         <div style={header}>
           <p>...Gathering Biometrics...</p>
         </div>
-        <Form style={biometricsParent}>
-            <Form.Field control={Input} label='Height' placeholder='Height' />
-            <Form.Field control={Input} label='Weight' placeholder='Weight' />
-            <Form.Field control={Input} label='Age' placeholder='Age' />
+        <Form onSubmit={this.handleSubmit} style={biometricsParent}>
+            <Form.Field control={Input} name="height" value={this.state.height} label='Height' placeholder='Height' onChange={this.handleChange} />
+            <Form.Field control={Input} name="weight" value={this.state.weight} label='Weight' placeholder='Weight' onChange={this.handleChange} />
+            <Form.Field control={Input} name="age" value={this.state.age} label='Age' placeholder='Age' onChange={this.handleChange} />
             {/* <Form.Field control={Select} label='Age' options={options} placeholder='Age' /> */}
             <Form.Group inline>
               <label>Gender</label>
-              <Form.Field control={Radio} label='M' value='male' checked={this.state.gender === 'male'} onChange={this.handleChange} />
-              <Form.Field control={Radio} label='F' value='female' checked={this.state.gender === 'female'} onChange={this.handleChange} />
+              <Form.Field control={Radio} name="gender" label='M' value='male' checked={this.state.gender === 'male'} onChange={this.handleChange} />
+              <Form.Field control={Radio} name="gender" label='F' value='female' checked={this.state.gender === 'female'} onChange={this.handleChange} />
             </Form.Group>
           <Form.Field control={Button}>Submit</Form.Field>
         </Form>
@@ -58,7 +60,14 @@ class GatherBiometrics extends Component {
   }
 }
 
-export default GatherBiometrics
+const mapState = null
+const mapDispatch = dispatch => {
+  return bindActionCreators({
+    addHeight, addWeight, addAge, addGender
+  }, dispatch)
+}
+
+export default connect(mapState, mapDispatch)(GatherBiometrics)
 
 const styles = {
   container: {

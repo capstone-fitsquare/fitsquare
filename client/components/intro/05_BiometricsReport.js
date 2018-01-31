@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
+import iifym from 'iifym.js'
 
-const calculateCalories = () => {
-  return 2500
-}
+// data = {
+//   'gender': 'male',           // Required if using Mifflin-St Jeor
+//   'age': 22,                  // Required if using Mifflin-St Jeor
+//   'isMetric': false,          // Provide metric inputs? (cm, kg)
+//   'ft': 5,                    // Required if using Mifflin-St Jeor and isMetric == false
+//   'in': 10,                   // Required if using Mifflin-St Jeor and isMetric == false
+//   'cm': null,                 // Required if using Mifflin-St Jeor and isMetric == true
+//   'lbs': 170,                 // Required if isMetric == false
+//   'kg': null,                 // Required if isMetric == true
+//   'mifflinStJeor': true,      // True for lean individuals, false for overweight
+//   'bodyFatPercentage': null,  // Required if not using Mifflin-St Jeor
+// }
 
-const calculateProtein = () => {
-  return 200
-}
 
-const calculateCarbs = () => {
-  return 300
-}
-
-const calculateFat = () => {
-  return 80
-}
 
 class BiometricsReport extends Component {
 
@@ -28,20 +28,20 @@ class BiometricsReport extends Component {
         </div>
         <div style={reportContainer}>
           <div style={calories}>
-            <p>Calories: {calculateCalories()}</p>
+            <p>Calories: 2500</p>
           </div>
           <div style={macrosContainer}>
             <div style={macros}>
               <label>Protein</label>
-              <p>{calculateProtein()}</p>
+              <p>200</p>
             </div>
             <div style={macros}>
               <label>Carbs</label>
-              <p>{calculateCarbs()}</p>
+              <p>300</p>
             </div>
             <div style={macros}>
               <label>Fat</label>
-              <p>{calculateFat()}</p>
+              <p>80</p>
             </div>
           </div>
         </div>
