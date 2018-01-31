@@ -27,6 +27,7 @@ class GatherBiometrics extends Component {
       gender: '',
       age: '',
     }
+
     this.handleInput = this.handleInput.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleSelectGender = this.handleSelectGender.bind(this)
