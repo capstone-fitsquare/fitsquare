@@ -19,7 +19,8 @@ import {
   AnalyzeBiometrics,
   BiometricsReport,
   GatherPreferences,
-  GenerateFoodPlan
+  GenerateFoodPlan,
+  AllDays
 } from './components'
 
 import {
@@ -52,6 +53,7 @@ class Routes extends Component {
             <Route exact path="/new-goal" component={NewGoals} />
             <Route exact path="/new-grocery-list" component={GroceryListForm} />
             <Route exact path="/intro" component={IntroSequence} />
+            <Route exact path="/all-days" component={AllDays} />
 
             <Route exact path="/" component={Welcome} />
             <Route exact path="/goal" component={Goal} />

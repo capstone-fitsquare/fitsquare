@@ -20,7 +20,7 @@ class DayCard extends Component {
 
         <div>
 
-          <div>
+          <div style={meal}>
             <div>
               <p>Breakfast</p>
             </div>
@@ -34,7 +34,7 @@ class DayCard extends Component {
             <SearchButton meal="breakfast" dayN={dayN} />
           </div>
 
-          <div>
+          <div style={meal}>
             <div>
               <p>Lunch</p>
             </div>
@@ -43,7 +43,7 @@ class DayCard extends Component {
             </div>
           </div>
 
-          <div>
+          <div style={meal}>
             <div>
               <p>Dinner</p>
             </div>
@@ -52,18 +52,13 @@ class DayCard extends Component {
             </div>
           </div>
 
-          <div>
+          <div style={meal}>
             <div>
               <p>Snacks</p>
             </div>
             <div>
               <button>+</button>
             </div>
-          </div>
-
-          <div style={goalsContainer}>
-            <MacroGoalCountdown />
-            <MicroGoalCountdown />
           </div>
 
         </div>
@@ -86,13 +81,16 @@ export default connect(mapState, mapDispatch)(DayCard)
 
 const styles = {
   container: {
-    display: 'flex'
+    display: 'flex',
+    margin: '1em',
+    padding: '1em'
   },
-  goalsContainer: {
+  meal: {
     padding: '1em',
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    border: '1px solid black'
   }
 }
 
-const { container, goalsContainer } = styles
+const { container, meal } = styles
