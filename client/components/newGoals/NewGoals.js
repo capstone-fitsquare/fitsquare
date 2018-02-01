@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
-import { MacroGoalForm, MicroGoalForm } from '../../components'
+import { MacroGoalForm, MicroGoalForm }
+ from '../../components'
+import Piechart from '../visualizations/PieChart'
 
 class NewGoals extends Component {
 
   render() {
     return (
-      <div style={formContainer}>
-        <div style={macro}>
-          <MacroGoalForm />
-        </div>
-        {/* <div style={micro}>
-          <MicroGoalForm />
-        </div> */}
-      </div>
+      <svg height='1000px' width='1000px'>
+      <Piechart x={200} y={200} outerRadius={100} innerRadius={50}
+      data={[{value: 150, label: 'Fat'},
+              {value: 100, label: 'Protein'},
+              {value: 200, label: 'Carbs'}]} />
+      </svg>
     )
   }
 }
