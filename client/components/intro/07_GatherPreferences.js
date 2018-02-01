@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 import { Button, Checkbox, Form, Input, Radio, Select, TextArea } from 'semantic-ui-react'
 import { addVegOption } from '../../store'
+import {withRouter, Link} from 'react-router-dom'
 
 class GatherPreferences extends Component {
 
@@ -28,7 +29,10 @@ class GatherPreferences extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.addVegOption(this.state.vegOption)
+    const { addVegOption, history, transition } = this.props
+    addVegOption(this.state.vegOption)
+    // history.push('/generate-food-plan')
+    transition('gatherPreferences', 'generateFoodPlan')
   }
 
   render() {
@@ -61,7 +65,7 @@ const mapDispatch = dispatch => {
   }, dispatch)
 }
 
-export default connect(mapState, mapDispatch)(GatherPreferences)
+export default withRouter(connect(mapState, mapDispatch)(GatherPreferences))
 
 const styles = {
   container: {

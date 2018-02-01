@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 import { Button, Checkbox, Form, Input, Radio, Select, TextArea } from 'semantic-ui-react'
 import { addActivityLevel } from '../../store'
+import {withRouter, Link} from 'react-router-dom'
 
 // 0 => BMR
 // 1 => No exercise (desk job/sedentary)
@@ -46,8 +47,11 @@ class ActivityLevel extends Component {
   }
 
   handleSubmit (e) {
+    const { addActivityLevel, history, transition } = this.props
     e.preventDefault()
-    this.props.addActivityLevel(this.state.activityLevel)
+    addActivityLevel(this.state.activityLevel)
+    // history.push('/analyze-biometrics')
+    transition('activityLevel', 'analyzeBiometrics')
   }
 
   render() {
@@ -79,7 +83,7 @@ const mapDispatch = dispatch => {
   }, dispatch)
 }
 
-export default connect(mapState, mapDispatch)(ActivityLevel)
+export default withRouter(connect(mapState, mapDispatch)(ActivityLevel))
 
 const styles = {
   container: {

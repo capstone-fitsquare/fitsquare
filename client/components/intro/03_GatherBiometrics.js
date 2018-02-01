@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 import { Button, Form, Input, Radio, Select } from 'semantic-ui-react'
 import { addHeightFeet, addHeightInches, addWeight, addAge, addGender } from '../../store'
+import {withRouter, Link} from 'react-router-dom'
 
 
 // const generateHeightOptions = (min, max) => {
@@ -51,11 +52,15 @@ class GatherBiometrics extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.addHeightFeet(+this.state.heightFeet)
-    this.props.addHeightInches(+this.state.heightInches)
-    this.props.addWeight(+this.state.weight)
-    this.props.addAge(+this.state.age)
-    this.props.addGender(this.state.gender)
+    const { addHeightFeet, addHeightInches, addWeight, addAge, addGender, history, transition } = this.props
+    const { heightFeet, heightInches, weight, age, gender } = this.state
+    addHeightFeet(+heightFeet)
+    addHeightInches(+heightInches)
+    addWeight(+weight)
+    addAge(+age)
+    addGender(gender)
+    // history.push('/activity-level')
+    transition('gatherBiometrics', 'activityLevel')
   }
 
   render() {
@@ -68,11 +73,6 @@ class GatherBiometrics extends Component {
           <p>...Gathering Biometrics...</p>
         </div>
         <Form onSubmit={this.handleSubmit} style={biometricsParent}>
-          {/* <Form.Group inline>
-            <label>Height</label>
-            <Form.Field fluid control={Select} name="heightFeet" value={this.state.heightFeet} options={ftOptions} placeholder='ft' onChange={this.handleSelectHeight} />
-            <Form.Field fluid control={Select} name="heightInches" value={this.state.heightInches} options={inOptions} placeholder='in' onChange={this.handleSelectHeight} />
-          </Form.Group> */}
           <Form.Group inline>
             <label>Height</label>
             <Form.Field control={Input} name="heightFeet" value={this.state.heightFeet} placeholder='ft' onChange={this.handleInput} />
@@ -100,7 +100,7 @@ const mapDispatch = dispatch => {
   }, dispatch)
 }
 
-export default connect(mapState, mapDispatch)(GatherBiometrics)
+export default withRouter(connect(mapState, mapDispatch)(GatherBiometrics))
 
 const styles = {
   container: {

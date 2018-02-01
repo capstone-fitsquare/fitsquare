@@ -3,10 +3,11 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 import { addCalories, addProtein, addCarbs, addFat } from '../../store'
 import iifym from 'iifym.js'
+import {withRouter, Link} from 'react-router-dom'
 
 class AnalyzeBiometrics extends Component {
 
-  componentWillMount() {
+  componentDidMount() {
     console.log('introProfile', this.props.introProfile)
 
     const { gender, age, heightFeet, heightInches, weight, activityLevel, goalType } = this.props.introProfile
@@ -55,6 +56,12 @@ class AnalyzeBiometrics extends Component {
       addFat(fat)
       console.log('got here')
     }
+
+    setTimeout(() => {
+      // this.props.history.push('/biometrics-report')
+      this.props.transition('analyzeBiometrics', 'biometricsReport')
+      console.log('go to bio report')
+    }, 1000);
   }
 
   render() {
@@ -79,7 +86,7 @@ const mapDispatch = dispatch => {
   }, dispatch)
 }
 
-export default connect(mapState, mapDispatch)(AnalyzeBiometrics)
+export default withRouter(connect(mapState, mapDispatch)(AnalyzeBiometrics))
 
 const styles = {
   container: {

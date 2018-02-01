@@ -3,12 +3,13 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 import { addGoalType } from '../../store'
 import { Button } from 'semantic-ui-react'
+import {withRouter, Link} from 'react-router-dom'
 
 class Goal extends Component {
 
   render() {
 
-    const { addGoalType } = this.props
+    const { addGoalType, history, transition } = this.props
 
     return (
       <div style={container}>
@@ -40,7 +41,7 @@ const mapDispatch = dispatch => {
   }, dispatch)
 }
 
-export default connect(mapState, mapDispatch)(Goal)
+export default withRouter(connect(mapState, mapDispatch)(Goal))
 
 const styles = {
   container: {

@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 import { Button } from 'semantic-ui-react'
-
+import {withRouter, Link} from 'react-router-dom'
 
 class BiometricsReport extends Component {
 
   render() {
 
-    const { calories, protein, carbs, fat } = this.props
+    const { calories, protein, carbs, fat } = this.props.introProfile
 
     return (
       <div style={container}>
@@ -16,7 +16,7 @@ class BiometricsReport extends Component {
           <p>Biometrics Report</p>
         </div>
         <div style={reportContainer}>
-          <div style={calories}>
+          <div style={caloriesStyle}>
             <p>Calories: {calories}</p>
           </div>
           <div style={macrosContainer}>
@@ -34,13 +34,21 @@ class BiometricsReport extends Component {
             </div>
           </div>
         </div>
-        <button style={button}>Accept</button>
+        <Button onClick={() => this.props.transition('biometricsReport', 'gatherPreferences')} style={button}>Accept</Button>
       </div>
     )
   }
 }
 
-export default BiometricsReport
+const mapState = state => {
+  return {
+    introProfile: state.introProfile
+  }
+}
+
+const mapDispatch = null
+
+export default withRouter(connect(mapState, mapDispatch)(BiometricsReport))
 
 const styles = {
   container: {
@@ -63,7 +71,7 @@ const styles = {
     padding: '1em',
     margin: '1em'
   },
-  calories: {
+  caloriesStyle: {
     padding: '1em 2em',
     background: 'lightyellow',
     border: '1px solid black',
@@ -88,4 +96,4 @@ const styles = {
   }
 }
 
-const { container, header, reportContainer, calories, macros, macrosContainer, button } = styles
+const { container, header, reportContainer, caloriesStyle, macros, macrosContainer, button } = styles

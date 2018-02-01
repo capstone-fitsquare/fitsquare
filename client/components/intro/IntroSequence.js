@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
+import {withRouter, Link} from 'react-router-dom'
 import Welcome from './01_Welcome'
 import Goal from './02_Goal'
 import GatherBiometrics from './03_GatherBiometrics'
@@ -20,7 +21,7 @@ class IntroSequence extends Component {
       gatherBiometrics: false,
       activityLevel: false,
       analyzeBiometrics: false,
-      biometricReport: false,
+      biometricsReport: false,
       gatherPreferences: false,
       generateFoodPlan: false
     }
@@ -28,6 +29,8 @@ class IntroSequence extends Component {
   }
 
   transition(currentComponent, nextComponent) {
+    console.log('currentComponent', currentComponent)
+    console.log('nextComponent', nextComponent)
     this.setState({
       [currentComponent]: false,
       [nextComponent]: true
@@ -37,8 +40,9 @@ class IntroSequence extends Component {
   render() {
 
     const { calories, protein, carbs, fat } = this.props.introProfile
-    const { welcome, goal, gatherBiometrics, activityLevel, analyzeBiometrics, biometricReport, gatherPreferences, generateFoodPlan } = this.state
-
+    const { welcome, goal, gatherBiometrics, activityLevel, analyzeBiometrics, biometricsReport, gatherPreferences, generateFoodPlan } = this.state
+    console.log('seq state', this.state)
+    console.log('seq introProfile', this.props.introProfile)
     return (
       <div style={container}>
         {welcome &&
@@ -47,19 +51,24 @@ class IntroSequence extends Component {
         {goal &&
           <Goal transition={this.transition} />
         }
-        <GatherBiometrics />
-        <hr style={hr}/>
-        <ActivityLevel />
-        <hr style={hr}/>
-        <AnalyzeBiometrics />
-        {calories && protein && carbs && fat &&
-          <BiometricsReport calories={calories} protein={protein} carbs={carbs} fat={fat} />
+        {gatherBiometrics &&
+          <GatherBiometrics transition={this.transition} />
         }
-        <hr style={hr}/>
-        <GatherPreferences />
-        <hr style={hr}/>
-        <GenerateFoodPlan />
-        <hr style={hr}/>
+        {activityLevel &&
+          <ActivityLevel transition={this.transition} />
+        }
+        {analyzeBiometrics &&
+          <AnalyzeBiometrics transition={this.transition} />
+        }
+        {biometricsReport &&
+          <BiometricsReport transition={this.transition} />
+        }
+        {gatherPreferences &&
+          <GatherPreferences transition={this.transition} />
+        }
+        {generateFoodPlan &&
+          <GenerateFoodPlan transition={this.transition} />
+        }
       </div>
     )
   }
