@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 import { Button, Form, Input, Radio, Select } from 'semantic-ui-react'
 import { addHeightFeet, addHeightInches, addWeight, addAge, addGender } from '../../store'
+import {withRouter, Link} from 'react-router-dom'
 
 
 // const generateHeightOptions = (min, max) => {
@@ -30,28 +31,19 @@ class GatherBiometrics extends Component {
 
     this.handleInput = this.handleInput.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleSelectGender = this.handleSelectGender.bind(this)
+    this.handleOption = this.handleOption.bind(this)
   }
 
   handleInput (e) {
     const { name, value } = e.target
-
-    console.log('name', name)
-    console.log('value', value)
 
     this.setState({
       [name]: value
     })
   }
 
-
-  // <Checkbox checked={terms.value} onCheck={(e, checked) => terms.onChange(checked)} />
-
-  handleSelectGender (e, result) {
+  handleOption (e, result) {
     const { name, value } = result
-
-    console.log('name', name)
-    console.log('value', value)
 
     this.setState({
       [name]: value
@@ -60,11 +52,15 @@ class GatherBiometrics extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.addHeightFeet(this.state.heightFeet)
-    this.props.addHeightInches(this.state.heightInches)
-    this.props.addWeight(this.state.weight)
-    this.props.addAge(this.state.age)
-    this.props.addGender(this.state.gender)
+    const { addHeightFeet, addHeightInches, addWeight, addAge, addGender, history, transition } = this.props
+    const { heightFeet, heightInches, weight, age, gender } = this.state
+    addHeightFeet(+heightFeet)
+    addHeightInches(+heightInches)
+    addWeight(+weight)
+    addAge(+age)
+    addGender(gender)
+    // history.push('/activity-level')
+    transition('gatherBiometrics', 'activityLevel')
   }
 
   render() {
@@ -77,23 +73,18 @@ class GatherBiometrics extends Component {
           <p>...Gathering Biometrics...</p>
         </div>
         <Form onSubmit={this.handleSubmit} style={biometricsParent}>
-          {/* <Form.Group inline>
-            <label>Height</label>
-            <Form.Field fluid control={Select} name="heightFeet" value={this.state.heightFeet} options={ftOptions} placeholder='ft' onChange={this.handleSelectHeight} />
-            <Form.Field fluid control={Select} name="heightInches" value={this.state.heightInches} options={inOptions} placeholder='in' onChange={this.handleSelectHeight} />
-          </Form.Group> */}
           <Form.Group inline>
             <label>Height</label>
             <Form.Field control={Input} name="heightFeet" value={this.state.heightFeet} placeholder='ft' onChange={this.handleInput} />
             <Form.Field control={Input} name="heightInches" value={this.state.heightInches} placeholder='in' onChange={this.handleInput} />
           </Form.Group>
           <Form.Field control={Input} name="weight" value={this.state.weight} label='Weight' placeholder='lbs' onChange={this.handleInput} />
-          <Form.Field control={Input} name="age" value={this.state.age} label='Age' placeholder='years' onChange={this.handleInput} />
+          <Form.Field control={Input} name="age" value={this.state.age} label='Age' placeholder='yrs' onChange={this.handleInput} />
           {/* <Form.Field control={Select} label='Age' options={options} placeholder='Age' /> */}
           <Form.Group inline>
             <label>Gender</label>
-            <Form.Field control={Radio} name="gender" label='M' value='male' checked={this.state.gender === 'male'} onChange={this.handleSelectGender} />
-            <Form.Field control={Radio} name="gender" label='F' value='female' checked={this.state.gender === 'female'} onChange={this.handleSelectGender} />
+            <Form.Field control={Radio} name="gender" label='M' value='male' checked={this.state.gender === 'male'} onChange={this.handleOption} />
+            <Form.Field control={Radio} name="gender" label='F' value='female' checked={this.state.gender === 'female'} onChange={this.handleOption} />
           </Form.Group>
           <Form.Field control={Button}>Submit</Form.Field>
         </Form>
@@ -109,7 +100,7 @@ const mapDispatch = dispatch => {
   }, dispatch)
 }
 
-export default connect(mapState, mapDispatch)(GatherBiometrics)
+export default withRouter(connect(mapState, mapDispatch)(GatherBiometrics))
 
 const styles = {
   container: {

@@ -7,6 +7,8 @@ class Welcome extends Component {
 
   render() {
 
+    const { history, transition } = this.props
+
     return (
       <div style={container}>
 
@@ -16,10 +18,10 @@ class Welcome extends Component {
 
         <div id="loginParent" style={loginContainer}>
           <div style={login}>
-            <Link to="/login">Log In</Link>
+            <div onClick={() => history.push('/login')}>Log In</div>
           </div>
           <div style={login}>
-            <Link to="#">Continue As Guest</Link>
+            <div onClick={() => transition('welcome', 'goal')}>Continue As Guest</div>
           </div>
         </div>
 
@@ -29,7 +31,7 @@ class Welcome extends Component {
   }
 }
 
-export default Welcome
+export default withRouter(Welcome)
 
 const styles = {
   container: {

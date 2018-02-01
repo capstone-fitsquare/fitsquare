@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
+import {withRouter, Link} from 'react-router-dom'
 
-
-class AnalyzeBiometrics extends Component {
+class GenerateFoodPlan extends Component {
 
   render() {
     return (
       <div style={container}>
         <div style={header}>
-          <p>...Analyzing Biometrics...</p>
+          <p>...Generating Food Plan...</p>
         </div>
       </div>
     )
   }
 }
 
-export default AnalyzeBiometrics
+export default GenerateFoodPlan
 
 const styles = {
   container: {

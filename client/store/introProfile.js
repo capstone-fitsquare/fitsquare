@@ -24,10 +24,13 @@ export const EDIT_AGE = 'EDIT_AGE'
 export const ADD_GENDER = 'ADD_GENDER'
 export const EDIT_GENDER = 'EDIT_GENDER'
 
-export const EDIT_CALORIES = 'EDIT_CALORIES'
-export const EDIT_PROTEIN = 'EDIT_PROTEIN'
-export const EDIT_CARBS = 'EDIT_CARBS'
-export const EDIT_FAT = 'EDIT_FAT'
+export const ADD_ACTIVITY_LEVEL = 'ADD_ACTIVITY_LEVEL'
+export const EDIT_ACTIVITY_LEVEL = 'EDIT_ACTIVITY_LEVEL'
+
+export const ADD_CALORIES = 'ADD_CALORIES'
+export const ADD_PROTEIN = 'ADD_PROTEIN'
+export const ADD_CARBS = 'ADD_CARBS'
+export const ADD_FAT = 'ADD_FAT'
 
 export const ADD_VEGETARIAN_OPTION = 'ADD_VEGETARIAN_OPTION'
 export const EDIT_VEGETARIAN_OPTION = 'EDIT_VEGETARIAN_OPTION'
@@ -58,10 +61,13 @@ export const editAge = age => ({type: EDIT_AGE, age})
 export const addGender = gender => ({type: ADD_GENDER, gender})
 export const editGender = gender => ({type: EDIT_GENDER, gender})
 
-export const editCalories = calories => ({type: EDIT_CALORIES, calories})
-export const editProtein = protein => ({type: EDIT_PROTEIN, protein})
-export const editCarbs = carbs => ({type: EDIT_CARBS, carbs})
-export const editFat = fat => ({type: EDIT_FAT, fat})
+export const addActivityLevel = activityLevel => ({type: ADD_ACTIVITY_LEVEL, activityLevel})
+export const editActivityLevel = activityLevel => ({type: EDIT_ACTIVITY_LEVEL, activityLevel})
+
+export const addCalories = calories => ({type: ADD_CALORIES, calories})
+export const addProtein = protein => ({type: ADD_PROTEIN, protein})
+export const addCarbs = carbs => ({type: ADD_CARBS, carbs})
+export const addFat = fat => ({type: ADD_FAT, fat})
 
 export const addVegOption = vegOption => ({type: ADD_VEGETARIAN_OPTION, vegOption})
 export const editVegOption = vegOption => ({type: EDIT_VEGETARIAN_OPTION, vegOption})
@@ -78,10 +84,11 @@ const initialState = {
   weight: '',
   age: '',
   gender: '',
-  calories: '',
-  protein: '',
-  carbs: '',
-  fat: '',
+  activityLevel: '',
+  calories: 0,
+  protein: 0,
+  carbs: 0,
+  fat: 0,
   vegOption: ''
 }
 
@@ -103,25 +110,25 @@ export default function (state = initialState, action) {
     case ADD_HEIGHT_FEET:
       return {
         ...state,
-        height: action.heightFeet
+        heightFeet: action.heightFeet
       }
 
     case EDIT_HEIGHT_FEET:
       return {
         ...state,
-        height: action.heightFeet
+        heightFeet: action.heightFeet
       }
 
     case ADD_HEIGHT_INCHES:
       return {
         ...state,
-        height: action.heightInches
+        heightInches: action.heightInches
       }
 
     case EDIT_HEIGHT_INCHES:
       return {
         ...state,
-        height: action.height
+        heightInches: action.heightInches
       }
 
     case ADD_WEIGHT:
@@ -160,25 +167,37 @@ export default function (state = initialState, action) {
         gender: action.gender
       }
 
-    case EDIT_CALORIES:
+      case ADD_ACTIVITY_LEVEL:
+      return {
+        ...state,
+        activityLevel: action.activityLevel
+      }
+
+    case EDIT_ACTIVITY_LEVEL:
+      return {
+        ...state,
+        activityLevel: action.activityLevel
+      }
+
+    case ADD_CALORIES:
       return {
         ...state,
         calories: action.calories
       }
 
-    case EDIT_PROTEIN:
+    case ADD_PROTEIN:
       return {
         ...state,
         protein: action.protein
       }
 
-    case EDIT_CARBS:
+    case ADD_CARBS:
       return {
         ...state,
         carbs: action.carbs
       }
 
-    case EDIT_FAT:
+    case ADD_FAT:
       return {
         ...state,
         fat: action.fat
