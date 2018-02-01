@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import SearchButton from './SearchButton'
 import MacroGoalCountdown from './MacroGoalCountdown';
 import MicroGoalCountdown from './MicroGoalCountdown';
+import Piechart from '../visualizations/PieChart'
 import { addFoodDayN, removeFoodDayN } from '../../store'
 
 
