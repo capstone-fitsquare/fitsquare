@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 import { Button, Checkbox, Form, Input, Radio, Select, TextArea } from 'semantic-ui-react'
 import { addVegOption } from '../../store'
+import {withRouter, Link} from 'react-router-dom'
 
 class GatherPreferences extends Component {
 
@@ -11,14 +12,15 @@ class GatherPreferences extends Component {
     this.state = {
       vegOption: '',
     }
-    this.handleChange = this.handleChange.bind(this)
+    this.handleOption = this.handleOption.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleChange (event) {
-    const target = event.target;
-    const name = target.name;
-    const value = target.value;
+  handleOption (e, result) {
+    const { name, value } = result
+
+    console.log('name', name)
+    console.log('value', value)
 
     this.setState({
       [name]: value
@@ -27,10 +29,15 @@ class GatherPreferences extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.addVegOption(this.state.vegOption)
+    const { addVegOption, history, transition } = this.props
+    addVegOption(this.state.vegOption)
+    // history.push('/generate-food-plan')
+    transition('gatherPreferences', 'generateFoodPlan')
   }
 
   render() {
+
+    console.log('this.state', this.state)
 
     return (
       <div style={container}>
@@ -40,8 +47,8 @@ class GatherPreferences extends Component {
         <Form onSubmit={this.handleSubmit} style={preferencesParent}>
           <Form.Group inline>
             <label>Vegetarian?</label>
-            <Form.Field control={Radio} name="vegOption" label='Yes' value='yes' checked={this.state.vegOption === 'yes'} onChange={this.handleChange} />
-            <Form.Field control={Radio} name="vegOption" label='No' value='no' checked={this.state.vegOption === 'no'} onChange={this.handleChange} />
+            <Form.Field control={Radio} name="vegOption" label='Yes' value='yes' checked={this.state.vegOption === 'yes'} onChange={this.handleOption} />
+            <Form.Field control={Radio} name="vegOption" label='No' value='no' checked={this.state.vegOption === 'no'} onChange={this.handleOption} />
           </Form.Group>
           <Form.Field control={Input} label='Custom Preferences' placeholder='Custom Preferences' />
           <Form.Field control={Button}>Submit</Form.Field>
@@ -58,7 +65,7 @@ const mapDispatch = dispatch => {
   }, dispatch)
 }
 
-export default connect(mapState, mapDispatch)(GatherPreferences)
+export default withRouter(connect(mapState, mapDispatch)(GatherPreferences))
 
 const styles = {
   container: {

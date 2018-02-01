@@ -11,7 +11,16 @@ import {
   UserHome,
   NewGoals,
   GroceryListForm,
-  IntroSequence
+  IntroSequence,
+  Welcome,
+  Goal,
+  GatherBiometrics,
+  ActivityLevel,
+  AnalyzeBiometrics,
+  BiometricsReport,
+  GatherPreferences,
+  GenerateFoodPlan,
+  AllDays
 } from './components'
 
 import {
@@ -44,6 +53,17 @@ class Routes extends Component {
             <Route exact path="/new-goal" component={NewGoals} />
             <Route exact path="/new-grocery-list" component={GroceryListForm} />
             <Route exact path="/intro" component={IntroSequence} />
+            <Route exact path="/all-days" component={AllDays} />
+
+            <Route exact path="/" component={Welcome} />
+            <Route exact path="/goal" component={Goal} />
+            <Route exact path="/gather-biometrics" component={GatherBiometrics} />
+            <Route exact path="/activity-level" component={ActivityLevel} />
+            <Route exact path="/analyze-biometrics" component={AnalyzeBiometrics} />
+            <Route exact path="/biometrics-report" component={BiometricsReport} />
+            <Route exact path="/gather-preferences" component={GatherPreferences} />
+            <Route exact path="/generate-food-plan" component={GenerateFoodPlan} />
+
             {
               isLoggedIn &&
                 <Switch>

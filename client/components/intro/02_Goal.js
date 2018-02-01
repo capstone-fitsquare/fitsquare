@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 import { addGoalType } from '../../store'
+import { Button } from 'semantic-ui-react'
+import {withRouter, Link} from 'react-router-dom'
 
 class Goal extends Component {
 
   render() {
 
-    const { addGoalType } = this.props
+    const { addGoalType, history, transition } = this.props
 
     return (
       <div style={container}>
@@ -15,23 +17,18 @@ class Goal extends Component {
         <div style={header}>
           <p>What do you hope to achieve...</p>
         </div>
-
         <div id="goalsParent">
-
           <div style={goal} onClick={() => addGoalType('Lose fat')}>
             <p>Lose fat</p>
           </div>
-
           <div style={goal} onClick={() => addGoalType('Build muscle')}>
             <p>Build muscle</p>
           </div>
-
           <div style={goal} onClick={() => addGoalType('Maintain')}>
             <p>Maintain</p>
           </div>
-
         </div>
-
+        <Button onClick={() => transition('goal', 'gatherBiometrics')}>Confirm</Button>
       </div>
     )
   }
@@ -44,7 +41,7 @@ const mapDispatch = dispatch => {
   }, dispatch)
 }
 
-export default connect(mapState, mapDispatch)(Goal)
+export default withRouter(connect(mapState, mapDispatch)(Goal))
 
 const styles = {
   container: {

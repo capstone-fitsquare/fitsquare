@@ -9,6 +9,14 @@ export {Login, Signup} from './AuthForm'
 
 // intro folder
 export {default as IntroSequence} from './intro/IntroSequence'
+export {default as Welcome} from './intro/01_Welcome'
+export {default as Goal} from './intro/02_Goal'
+export {default as GatherBiometrics} from './intro/03_GatherBiometrics'
+export {default as ActivityLevel} from './intro/04_ActivityLevel'
+export {default as AnalyzeBiometrics} from './intro/05_AnalyzeBiometrics'
+export {default as BiometricsReport} from './intro/06_BiometricsReport'
+export {default as GatherPreferences} from './intro/07_GatherPreferences'
+export {default as GenerateFoodPlan} from './intro/08_GenerateFoodPlan'
 
 // newGoals folder
 export {default as NewGoals} from './newGoals/NewGoals'
