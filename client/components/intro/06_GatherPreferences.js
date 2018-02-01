@@ -11,14 +11,15 @@ class GatherPreferences extends Component {
     this.state = {
       vegOption: '',
     }
-    this.handleChange = this.handleChange.bind(this)
+    this.handleOption = this.handleOption.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleChange (event) {
-    const target = event.target;
-    const name = target.name;
-    const value = target.value;
+  handleOption (e, result) {
+    const { name, value } = result
+
+    console.log('name', name)
+    console.log('value', value)
 
     this.setState({
       [name]: value
@@ -40,8 +41,8 @@ class GatherPreferences extends Component {
         <Form onSubmit={this.handleSubmit} style={preferencesParent}>
           <Form.Group inline>
             <label>Vegetarian?</label>
-            <Form.Field control={Radio} name="vegOption" label='Yes' value='yes' checked={this.state.vegOption === 'yes'} onChange={this.handleChange} />
-            <Form.Field control={Radio} name="vegOption" label='No' value='no' checked={this.state.vegOption === 'no'} onChange={this.handleChange} />
+            <Form.Field control={Radio} name="vegOption" label='Yes' value='yes' checked={this.state.vegOption === 'yes'} onChange={this.handleOption} />
+            <Form.Field control={Radio} name="vegOption" label='No' value='no' checked={this.state.vegOption === 'no'} onChange={this.handleOption} />
           </Form.Group>
           <Form.Field control={Input} label='Custom Preferences' placeholder='Custom Preferences' />
           <Form.Field control={Button}>Submit</Form.Field>
