@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 import { addGoalType } from '../../store'
+import { Button } from 'semantic-ui-react'
 
 class Goal extends Component {
 
@@ -15,23 +16,18 @@ class Goal extends Component {
         <div style={header}>
           <p>What do you hope to achieve...</p>
         </div>
-
         <div id="goalsParent">
-
           <div style={goal} onClick={() => addGoalType('Lose fat')}>
             <p>Lose fat</p>
           </div>
-
           <div style={goal} onClick={() => addGoalType('Build muscle')}>
             <p>Build muscle</p>
           </div>
-
           <div style={goal} onClick={() => addGoalType('Maintain')}>
             <p>Maintain</p>
           </div>
-
         </div>
-
+        <Button onClick={() => transition('goal', 'gatherBiometrics')}>Confirm</Button>
       </div>
     )
   }

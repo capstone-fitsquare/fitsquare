@@ -33,6 +33,8 @@ class GatherPreferences extends Component {
 
   render() {
 
+    console.log('this.state', this.state)
+
     return (
       <div style={container}>
         <div style={header}>
