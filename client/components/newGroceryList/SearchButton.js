@@ -52,6 +52,7 @@ class SearchButton extends Component {
 
           <div style={search}>
             <Async
+              style={searchBar}
               placeholder="Search food"
               value={this.state.searchValue}
               onChange={this.handleChange}
@@ -60,9 +61,8 @@ class SearchButton extends Component {
               multi={false}
               closeOnSelect={true}
               onValueClick={addFoodToMealAndList}
-              width='300px'
             />
-            <Button icon onClick={addFoodToMealAndList} size='tiny' circular={true} >
+            <Button icon onClick={addFoodToMealAndList} size='tiny' circular={true} style={searchButton}>
               <Icon name='search' />
             </Button>
           </div>
@@ -124,9 +124,15 @@ const styles = {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center'
+  },
+  searchBar: {
+    // marginRight: '1em'
+  },
+  searchButton: {
+    marginLeft: '0.5em'
   }
 }
 
-const { plus, optionsContainer, option, search } = styles
+const { plus, optionsContainer, option, search, searchBar, searchButton } = styles
 
 

@@ -19,6 +19,10 @@ class DayCard extends Component {
     this.toggleDetails = this.toggleDetails.bind(this)
   }
 
+  componentWillMount() {
+    if (this.props.dayN === 0) this.setState({ showDetails: true })
+  }
+
   toggleDetails() {
     this.setState({
       showDetails: !this.state.showDetails
@@ -30,8 +34,6 @@ class DayCard extends Component {
     const { dayN, foodsDayN } = this.props
 
     const foods = foodsDayN.find(day => day.day === dayN)
-
-    if (dayN === 0) this.setState({ showDetails: true })
 
     return this.state.showDetails ?
     (
@@ -47,8 +49,9 @@ class DayCard extends Component {
             </div>
             <div>
               <ul>
-                {foods.breakfast.map(food =>
-                  <li key={food.report.food.ndbno}>{food.report.food.name}</li>
+                {foods.breakfast.length && foods.breakfast.map(food =>
+                  <li key={food.name}>{food.name}</li>
+                  // <li key={food.report.food.ndbno}>{food.report.food.name}</li>
                 )}
               </ul>
             </div>
@@ -61,8 +64,8 @@ class DayCard extends Component {
             </div>
             <div>
               <ul>
-                {foods.lunch.map(food =>
-                  <li key={food.report.food.ndbno}>{food.report.food.name}</li>
+                {foods.lunch.length && foods.lunch.map(food =>
+                  <li key={food.name}>{food.name}</li>
                 )}
               </ul>
             </div>
@@ -75,8 +78,8 @@ class DayCard extends Component {
             </div>
             <div>
               <ul>
-                {foods.dinner.map(food =>
-                  <li key={food.report.food.ndbno}>{food.report.food.name}</li>
+                {foods.dinner.length && foods.dinner.map(food =>
+                  <li key={food.name}>{food.name}</li>
                 )}
               </ul>
             </div>
@@ -90,7 +93,7 @@ class DayCard extends Component {
             <div>
               <ul>
                 {foods.snacks.map(food =>
-                  <li key={food.report.food.ndbno}>{food.report.food.name}</li>
+                  <li key={food.name}>{food.name}</li>
                 )}
               </ul>
             </div>
@@ -108,7 +111,7 @@ class DayCard extends Component {
 
 }
 
-const mapState = (state, ownProps) => {
+const mapState = state => {
   return {
     foodsDayN: state.foodsDayN
   }
