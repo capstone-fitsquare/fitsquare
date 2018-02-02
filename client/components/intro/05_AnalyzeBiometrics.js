@@ -15,7 +15,7 @@ class AnalyzeBiometrics extends Component {
     let goal
 
     if (goalType === 'Lose fat') goal = 0.8
-    else if (goalType === 'Gain muscle') goal = 1.1
+    else if (goalType === 'Build muscle') goal = 1.1
     else if (goalType === 'Maintain') goal = 1.0
 
     console.log('goal', goal)

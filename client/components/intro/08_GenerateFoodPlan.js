@@ -5,6 +5,12 @@ import {withRouter, Link} from 'react-router-dom'
 
 class GenerateFoodPlan extends Component {
 
+  componentDidMount() {
+    setTimeout(() => {
+      this.props.history.push('/all-days')
+    }, 1000);
+  }
+
   render() {
     return (
       <div style={container}>
@@ -16,7 +22,7 @@ class GenerateFoodPlan extends Component {
   }
 }
 
-export default GenerateFoodPlan
+export default withRouter(GenerateFoodPlan)
 
 const styles = {
   container: {

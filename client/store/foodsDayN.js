@@ -37,6 +37,13 @@ const generateDays = n => {
 }
 
 const initialState = generateDays(7)  // can change later
+initialState[0] = {
+  day: 0,
+  breakfast: [{name: 'eggs'}],
+  lunch: [{name: 'sandwich'}],
+  dinner: [{name: 'pasta'}],
+  snacks: [{name: 'cookies'}]
+}
 
 export default function (state = initialState, action) {
   switch (action.type) {

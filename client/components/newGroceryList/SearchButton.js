@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import store, { fetchUsdaSearchMatches, fetchUsdaFoodReport, getUsdaSearchMatches, getUsdaFoodReport } from '../../store'
 import Select, { Async } from 'react-select-plus'
 import axios from 'axios'
+import { Button, Icon } from 'semantic-ui-react'
 
 
 class SearchButton extends Component {
@@ -42,13 +43,16 @@ class SearchButton extends Component {
     }
 
     return (
-      <div>
-        <button onClick={this.toggleSearchBar}>+</button>
+      <div style={search}>
+        <Button icon onClick={this.toggleSearchBar} style={plus} circular={true} size='tiny'>
+          <Icon name='add' />
+        </Button>
         {
           this.state.showSearchBar &&
 
-          <div>
+          <div style={search}>
             <Async
+              style={searchBar}
               placeholder="Search food"
               value={this.state.searchValue}
               onChange={this.handleChange}
@@ -58,7 +62,9 @@ class SearchButton extends Component {
               closeOnSelect={true}
               onValueClick={addFoodToMealAndList}
             />
-            <button onClick={addFoodToMealAndList}>Add Food</button>
+            <Button icon onClick={addFoodToMealAndList} size='tiny' circular={true} style={searchButton}>
+              <Icon name='search' />
+            </Button>
           </div>
         }
       </div>
@@ -102,15 +108,31 @@ const loadOptions = (input) => {
 }
 
 const styles = {
+  plus: {
+    borderRadius: '50%',
+    background: 'lightcyan',
+    margin: '1em'
+  },
   optionsContainer: {
     display: 'flex',
     flexDirection: 'column'
   },
   option: {
     border: '2px solid blue',
+  },
+  search: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+  searchBar: {
+    // marginRight: '1em'
+  },
+  searchButton: {
+    marginLeft: '0.5em'
   }
 }
 
-const { optionsContainer, option } = styles
+const { plus, optionsContainer, option, search, searchBar, searchButton } = styles
 
 
