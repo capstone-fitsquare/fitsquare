@@ -6,9 +6,24 @@ import MacroGoalCountdown from './MacroGoalCountdown';
 import MicroGoalCountdown from './MicroGoalCountdown';
 import Piechart from '../visualizations/PieChart'
 import { addFoodDayN, removeFoodDayN } from '../../store'
+import { Button, Icon } from 'semantic-ui-react'
 
 
 class DayCard extends Component {
+
+  constructor() {
+    super()
+    this.state = {
+      showDetails: false
+    }
+    this.toggleDetails = this.toggleDetails.bind(this)
+  }
+
+  toggleDetails() {
+    this.setState({
+      showDetails: !this.state.showDetails
+    })
+  }
 
   render() {
 
@@ -16,14 +31,19 @@ class DayCard extends Component {
 
     const foods = foodsDayN.find(day => day.day === dayN)
 
-    return (
+    if (dayN === 0) this.setState({ showDetails: true })
+
+    return this.state.showDetails ?
+    (
       <div style={container}>
 
-        <div>
-
+        <div style={width}>
           <div style={meal}>
-            <div>
+            <div style={breakfast}>
               <p>Breakfast</p>
+              <Button icon size='mini' onClick={this.toggleDetails} circular={true} style={minus}>
+                <Icon name='window minimize' />
+              </Button>
             </div>
             <div>
               <ul>
@@ -40,8 +60,13 @@ class DayCard extends Component {
               <p>Lunch</p>
             </div>
             <div>
-              <button>+</button>
+              <ul>
+                {foods.lunch.map(food =>
+                  <li key={food.report.food.ndbno}>{food.report.food.name}</li>
+                )}
+              </ul>
             </div>
+            <SearchButton meal="lunch" dayN={dayN} />
           </div>
 
           <div style={meal}>
@@ -49,8 +74,13 @@ class DayCard extends Component {
               <p>Dinner</p>
             </div>
             <div>
-              <button>+</button>
+              <ul>
+                {foods.dinner.map(food =>
+                  <li key={food.report.food.ndbno}>{food.report.food.name}</li>
+                )}
+              </ul>
             </div>
+            <SearchButton meal="dinner" dayN={dayN} />
           </div>
 
           <div style={meal}>
@@ -58,11 +88,19 @@ class DayCard extends Component {
               <p>Snacks</p>
             </div>
             <div>
-              <button>+</button>
+              <ul>
+                {foods.snacks.map(food =>
+                  <li key={food.report.food.ndbno}>{food.report.food.name}</li>
+                )}
+              </ul>
             </div>
+            <SearchButton meal="snacks" dayN={dayN} />
           </div>
-
         </div>
+
+      </div>
+    ) : (
+      <div style={square} onClick={this.toggleDetails}>
 
       </div>
     )
@@ -90,8 +128,28 @@ const styles = {
     padding: '1em',
     display: 'flex',
     flexDirection: 'column',
-    border: '1px solid black'
+    borderRadius: '3px',
+    background: 'lightyellow'
+  },
+  square: {
+    background: 'lightgreen',
+    height: '100px',
+    width: '100px',
+    borderRadius: '3px',
+    margin: '1em',
+    padding: '1em'
+  },
+  minus: {
+    marginLeft: '3em',
+  },
+  breakfast: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between'
+  },
+  width: {
+    width: '400px'
   }
 }
 
-const { container, meal } = styles
+const { container, meal, square, minus, breakfast, width } = styles
