@@ -48,6 +48,7 @@
     "querystring": "^0.2.0",
     "react": "^16.0.0",
     "react-addons-css-transition-group": "^15.6.2",
+    "react-circular-progressbar": "^0.7.0",
     "react-dom": "^16.0.0",
     "react-motion": "^0.5.2",
     "react-redux": "^5.0.2",

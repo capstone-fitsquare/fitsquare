@@ -4,17 +4,31 @@ import { connect } from 'react-redux'
 import { MacroGoalForm, MicroGoalForm }
  from '../../components'
 import Piechart from '../visualizations/PieChart'
+import CircularProgressbar from 'react-circular-progressbar';
 
 class NewGoals extends Component {
 
   render() {
     return (
-      <svg height='1000px' width='1000px'>
-      <Piechart x={200} y={200} outerRadius={100} innerRadius={50}
-      data={[{value: 150, label: 'Fat'},
-              {value: 100, label: 'Protein'},
-              {value: 200, label: 'Carbs'}]} />
-      </svg>
+      <div>
+        <svg height='1000px' width='1000px'>
+          <Piechart x={200} y={200} outerRadius={100} innerRadius={50}
+          data={[{value: 150, label: 'Fat'},
+                  {value: 100, label: 'Protein'},
+                  {value: 200, label: 'Carbs'}]} />
+        </svg>
+        {
+        <CircularProgressbar
+          percentage={50}
+          textForPercentage={(pct) => `${pct}% complete`}
+          styles={{
+            path: { stroke: `rgba(62, 152, 199, ${40 / 100})`} ,
+          text: {fontSize: `10px`},
+          }}
+
+        />
+        }
+      </div>
     )
   }
 }
