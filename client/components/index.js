@@ -6,6 +6,7 @@
 export { default as Main } from './Main';
 export { default as UserHome } from './UserHome';
 export { Login, Signup } from './AuthForm';
+export { default as Animations } from './Animations'
 
 // intro folder
 export { default as IntroSequence } from './intro/IntroSequence';
@@ -33,3 +34,8 @@ export { default as SearchButton } from './newGroceryList/SearchButton';
 
 // test folder
 export { default as Test } from './test/Test';
+
+// visualizations folder
+export { default as Arc } from './visualizations/Arc';
+export { default as LabeledArc } from './visualizations/LabeledArc';
+export { default as PieChart } from './visualizations/PieChart';

@@ -22,6 +22,7 @@ import {
   GenerateFoodPlan,
   AllDays,
   Test,
+  Animations
 } from './components';
 
 import { me, fetchExercises, fetchGroceryLists, fetchListItems, fetchMacroGoals, fetchMicroGoals } from './store';
@@ -48,6 +49,7 @@ class Routes extends Component {
             <Route exact path="/new-grocery-list" component={GroceryListForm} />
             <Route exact path="/intro" component={IntroSequence} />
             <Route exact path="/all-days" component={AllDays} />
+            <Route exact path="/animations" component={Animations} />
 
             <Route exact path="/" component={Welcome} />
             <Route exact path="/goal" component={Goal} />

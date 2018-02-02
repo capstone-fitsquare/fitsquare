@@ -39,7 +39,6 @@ class IntroSequence extends Component {
 
   render() {
 
-    const { calories, protein, carbs, fat } = this.props.introProfile
     const { welcome, goal, gatherBiometrics, activityLevel, analyzeBiometrics, biometricsReport, gatherPreferences, generateFoodPlan } = this.state
     console.log('seq state', this.state)
     console.log('seq introProfile', this.props.introProfile)
