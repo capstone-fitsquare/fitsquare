@@ -50,39 +50,29 @@ const example = {
 }
 
 const initialState = {
-    q: '',
-    allowedAllergy: [],
-    allowedCourse: [],
-    allowedCuisine: [],
-    allowedDiet: [],
-    maxTotalTimeInSeconds: null,
-    calories: {
-      min: null,
-      max: null
-    },
-    protein: {
-      min: null,
-      max: null
-    },
-    carbs: {
-      min: null,
-      max: null
-    },
-    fat: {
-      min: null,
-      max: null
-    }
+  q: '',
+  allowedAllergy: [],
+  allowedCourse: [],
+  allowedCuisine: [],
+  allowedDiet: [],
+  maxTotalTimeInSeconds: null,
+  calories: {
+    min: null,
+    max: null
+  },
+  protein: {
+    min: null,
+    max: null
+  },
+  carbs: {
+    min: null,
+    max: null
+  },
+  fat: {
+    min: null,
+    max: null
   }
-  export const ADD_SEARCH_TERMS = 'ADD_SEARCH_TERMS'
-  export const SEARCH_BY_ALLERGY = 'SEARCH_BY_ALLERGY'
-  export const SEARCH_BY_COURSE = 'SEARCH_BY_COURSE'
-  export const SEARCH_BY_CUISINE = 'SEARCH_BY_CUISINE'
-  export const SEARCH_BY_DIET = 'SEARCH_BY_DIET'
-  export const SEARCH_BY_TIME = 'SEARCH_BY_TIME'
-  export const SEARCH_BY_CALORIES = 'SEARCH_BY_CALORIES'
-  export const SEARCH_BY_PROTEIN = 'SEARCH_BY_PROTEIN'
-  export const SEARCH_BY_CARBS = 'SEARCH_BY_CARBS'
-  export const SEARCH_BY_FAT = 'SEARCH_BY_FAT'
+}
 
 export default function (state = initialState, action) {
   switch (action.type) {

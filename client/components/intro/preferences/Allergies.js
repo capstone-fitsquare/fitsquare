@@ -2,14 +2,40 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 import { Button, Form, Input, Radio, Select } from 'semantic-ui-react'
-import store, { addAllergy, syncLocalStorage } from '../../../store'
-import {withRouter, Link} from 'react-router-dom'
+import store, { addAllergy, syncLocalStorage, fetchYummlySearchMatches } from '../../../store'
+import { withRouter, Link } from 'react-router-dom'
+import { Checkbox } from '../../../components'
+
+const allergies =
+['Dairy-Free', 'Egg-Free', 'Gluten-Free', 'Peanut-Free', 'Seafood-Free', 'Sesame-Free', 'Soy-Free', 'Sulfite-Free', 'Tree Nut-Free', 'Wheat-Free']
 
 class Allergies extends Component {
 
+  componentDidMount() {
+    const example = {
+      q: 'onion soup',
+      requirePictures: true,
+      allowedAllergy: ['Egg-Free', 'Gluten-Free'],
+      allowedCourse: ['Main Dishes'],
+      allowedCuisine: ['American', 'Chinese'],
+      allowedDiet: ['Lacto vegetarian', 'Ovo vegetarian'],
+      maxTotalTimeInSeconds: 5400,
+      calories: { min: null, max: 1000 }, // nutrition.ENERC_KCAL.max: 1000
+      protein: { min: 100, max: null },  // nutrition.PROCNT.min: 100
+      carbs: { min: null, max: 10 },  // nutrition.CHOCDF.max: 10
+      fat: { min: null, max: 10 }  // nutrition.FAT.max: 10
+    }
+    // this.props.fetchYummlySearchMatches(example)
+    // console.log('attempting to fetch...')
+  }
+
   handleChecked(e, result) {
-    const { name, value } = result
-    if (value) this.props.addAllergy(name)
+    console.log('e', event)
+    console.log('result', result)
+    const { name, checked } = result
+    if (checked) {
+      this.props.addAllergy(name)
+    }
   }
 
   handleSubmit(e) {
@@ -21,22 +47,14 @@ class Allergies extends Component {
 
     return (
       <div style={container}>
-        <Form onSubmit={this.handleSubmit} style={formParent}>
-          <Form.Group grouped>
-            <label>Do you have any food allergies?</label>
-            <Form.Field label='Dairy-Free' name='Dairy-Free' control='input' type='checkbox' onChange={this.handleChecked} />
-            <Form.Field label='Egg-Free' name='Egg-Free' control='input' type='checkbox' onChange={this.handleChecked} />
-            <Form.Field label='Gluten-Free'name='Gluten-Free' control='input' type='checkbox' onChange={this.handleChecked} />
-            <Form.Field label='Peanut-Free' name='Peanut-Free' control='input' type='checkbox' onChange={this.handleChecked} />
-            <Form.Field label='Seafood-Free' name='Seafood-Free' control='input' type='checkbox' onChange={this.handleChecked} />
-            <Form.Field label='Sesame-Free' name='Sesame-Free' control='input' type='checkbox' onChange={this.handleChecked} />
-            <Form.Field label='Soy-Free' name='Soy-Free' control='input' type='checkbox' onChange={this.handleChecked} />
-            <Form.Field label='Sulfite-Free' name='Sulfite-Free' control='input' type='checkbox' onChange={this.handleChecked} />
-            <Form.Field label='Tree Nut-Free' name='Tree Nut-Free' control='input' type='checkbox' onChange={this.handleChecked} />
-            <Form.Field label='Wheat-Free' name='Wheat-Free' control='input' type='checkbox' onChange={this.handleChecked} />
-          </Form.Group>
-          <Form.Field control={Button}>Submit</Form.Field>
-        </Form>
+       <div style={header}>
+          <p>Indicate any food allergies</p>
+        </div>
+        <div>
+          {allergies.map(allergy =>
+            <Checkbox key={allergy} name={allergy} />
+          )}
+        </div>
       </div>
     )
   }
@@ -45,7 +63,7 @@ class Allergies extends Component {
 const mapState = null
 const mapDispatch = dispatch => {
   return bindActionCreators({
-    addAllergy,
+    addAllergy, fetchYummlySearchMatches
   }, dispatch)
 }
 
@@ -56,13 +74,11 @@ const styles = {
     display: 'flex',
     flexDirection: 'column'
   },
-  formParent: {
+  header: {
+    margin: '2em 8em 0em 8em',
     display: 'flex',
-    flexDirection: 'column',
-    padding: '1em',
-    margin: '1em',
-    alignItems: 'center'
+    justifyContent: 'center'
   },
 }
 
-const { container, formParent } = styles
+const { container, header } = styles

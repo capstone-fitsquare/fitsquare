@@ -40,6 +40,18 @@ form div {
   background: lightgreen;
 }
 
+.checkbox {
+  cursor: 'pointer';
+}
+
+.checkbox:hover {
+  color: lightseagreen;
+}
+
+.checkbox.selected {
+  color: lightseagreen;
+}
+
 /*
  * react-circular-progressbar styles
  *

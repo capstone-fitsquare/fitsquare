@@ -7,6 +7,7 @@ export { default as Main } from './Main';
 export { default as UserHome } from './UserHome';
 export { Login, Signup } from './AuthForm';
 export { default as Animations } from './Animations'
+export { default as Checkbox } from './Checkbox'
 
 // intro folder
 export { default as IntroSequence } from './intro/IntroSequence';
