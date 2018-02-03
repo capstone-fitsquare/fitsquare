@@ -20,7 +20,7 @@ export const getYummlyRecipeDetails = recipeDetails => ({type: GET_YUMMLY_RECIPE
 export const fetchYummlySearchMatches = (searchParameters) => {
   const searchTerms = stringifyQuery(searchParameters)
   return dispatch =>
-    axios.get(`/api/yummly/search/?${searchTerms}`)
+    axios.get(`/api/yummly/search/${searchTerms}`)
       .then(res => res.data)
       .then(matches => {
         console.log('matches: ', matches)
@@ -89,10 +89,10 @@ const example = {
   allowedCuisine: ['American', 'Chinese'],
   allowedDiet: ['Lacto vegetarian', 'Ovo vegetarian'],
   maxTotalTimeInSeconds: 5400,
-  calories: [null, 1000], // nutrition.ENERC_KCAL.max: 1000
-  protein: [100, null],  // nutrition.PROCNT.min: 100
-  carbs: [null, 10],  // nutrition.CHOCDF.max: 10
-  fat: [null, 10]  // nutrition.FAT.max: 10
+  calories: { min: null, max: 1000 }, // nutrition.ENERC_KCAL.max: 1000
+  protein: { min: 100, max: null },  // nutrition.PROCNT.min: 100
+  carbs: { min: null, max: 10 },  // nutrition.CHOCDF.max: 10
+  fat: { min: null, max: 10 }  // nutrition.FAT.max: 10
 }
 
 const stringifyQuery = (searchParameters) => {
@@ -105,23 +105,25 @@ const stringifyQuery = (searchParameters) => {
 
   if (q) params.push(`q=${q.split(' ').join('+')}`)
   if (requirePictures) params.push('requirePictures=true')
+
   if (allowedAllergy.length) allowedAllergy.forEach(allergy => params.push(`allowedAllergy[]=${generateSearchValue('allergies', allergy)}`))
   if (allowedCourse.length) allowedCourse.forEach(course => params.push(`allowedCourse[]=${generateSearchValue('courses', course)}`))
   if (allowedCuisine.length) allowedCuisine.forEach(cuisine => params.push(`allowedCuisine[]=${generateSearchValue('cuisines', cuisine)}`))
   if (allowedDiet.length) allowedDiet.forEach(diet => params.push(`allowedDiet[]=${generateSearchValue('diets', diet)}`))
+
   if (maxTotalTimeInSeconds) params.push(`maxTotalTimeInSeconds=${maxTotalTimeInSeconds}`)
 
-  if (calories[0]) params.push(`nutrition.ENERC_KCAL.min=${calories[0]}`)
-  if (calories[1]) params.push(`nutrition.ENERC_KCAL.max=${calories[1]}`)
+  if (calories.min) params.push(`nutrition.ENERC_KCAL.min=${calories.min}`)
+  if (calories.max) params.push(`nutrition.ENERC_KCAL.max=${calories.max}`)
 
-  if (protein[0]) params.push(`nutrition.PROCNT.max=${protein[0]}`)
-  if (protein[1]) params.push(`nutrition.PROCNT.max=${protein[1]}`)
+  if (protein.min) params.push(`nutrition.PROCNT.min=${protein.min}`)
+  if (protein.max) params.push(`nutrition.PROCNT.max=${protein.max}`)
 
-  if (carbs[0]) params.push(`nutrition.CHOCDF.max=${carbs[0]}`)
-  if (carbs[1]) params.push(`nutrition.CHOCDF.max=${carbs[1]}`)
+  if (carbs.min) params.push(`nutrition.CHOCDF.min=${carbs.min}`)
+  if (carbs.max) params.push(`nutrition.CHOCDF.max=${carbs.max}`)
 
-  if (fat[0]) params.push(`nutrition.FAT.max=${fat[0]}`)
-  if (fat[1]) params.push(`nutrition.FAT.max=${fat[1]}`)
+  if (fat.min) params.push(`nutrition.FAT.min=${fat.min}`)
+  if (fat.max) params.push(`nutrition.FAT.max=${fat.max}`)
 
   console.log('params array: ', params)
   params.join('&')

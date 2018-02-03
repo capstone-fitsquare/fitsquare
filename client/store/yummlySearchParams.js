@@ -1,21 +1,6 @@
 import axios from 'axios'
 import history from '../history'
 
-
-const example = {
-  q: 'onion soup',
-  requirePictures: true,
-  allowedAllergy: ['Egg-Free', 'Gluten-Free'],
-  allowedCourse: ['Main Dishes'],
-  allowedCuisine: ['American', 'Chinese'],
-  allowedDiet: ['Lacto vegetarian', 'Ovo vegetarian'],
-  maxTotalTimeInSeconds: 5400,
-  calories: [null, 1000], // nutrition.ENERC_KCAL.max: 1000
-  protein: [100, null],  // nutrition.PROCNT.min: 100
-  carbs: [null, 10],  // nutrition.CHOCDF.max: 10
-  fat: [null, 10]  // nutrition.FAT.max: 10
-}
-
 /**
  * ACTION TYPES
  */
@@ -49,14 +34,44 @@ export const searchByFat = fat => ({type: SEARCH_BY_FAT, fat})
  * REDUCER
  */
 
+
+const example = {
+  q: 'onion soup',
+  requirePictures: true,
+  allowedAllergy: ['Egg-Free', 'Gluten-Free'],
+  allowedCourse: ['Main Dishes'],
+  allowedCuisine: ['American', 'Chinese'],
+  allowedDiet: ['Lacto vegetarian', 'Ovo vegetarian'],
+  maxTotalTimeInSeconds: 5400,
+  calories: { min: null, max: 1000 }, // nutrition.ENERC_KCAL.max: 1000
+  protein: { min: 100, max: null },  // nutrition.PROCNT.min: 100
+  carbs: { min: null, max: 10 },  // nutrition.CHOCDF.max: 10
+  fat: { min: null, max: 10 }  // nutrition.FAT.max: 10
+}
+
 const initialState = {
-    allergies: [],
-    cuisines: [],
-    diets: [],
-    nutrition: [],
-    tastes: [],
-    techniques: [],
-    times: []
+    q: '',
+    allowedAllergy: [],
+    allowedCourse: [],
+    allowedCuisine: [],
+    allowedDiet: [],
+    maxTotalTimeInSeconds: null,
+    calories: {
+      min: null,
+      max: null
+    },
+    protein: {
+      min: null,
+      max: null
+    },
+    carbs: {
+      min: null,
+      max: null
+    },
+    fat: {
+      min: null,
+      max: null
+    }
   }
 
 
