@@ -47,11 +47,10 @@ class Routes extends Component {
             <Route path="/signup" component={Signup} />
             <Route exact path="/new-goal" component={NewGoals} />
             <Route exact path="/new-grocery-list" component={GroceryListForm} />
-            <Route exact path="/intro" component={IntroSequence} />
             <Route exact path="/all-days" component={AllDays} />
             <Route exact path="/animations" component={Animations} />
 
-            <Route exact path="/" component={Welcome} />
+            <Route exact path="/" component={IntroSequence} />
             <Route exact path="/goal" component={Goal} />
             <Route exact path="/gather-biometrics" component={GatherBiometrics} />
             <Route exact path="/activity-level" component={ActivityLevel} />

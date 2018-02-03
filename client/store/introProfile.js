@@ -69,9 +69,6 @@ export const addProtein = protein => ({type: ADD_PROTEIN, protein})
 export const addCarbs = carbs => ({type: ADD_CARBS, carbs})
 export const addFat = fat => ({type: ADD_FAT, fat})
 
-export const addVegOption = vegOption => ({type: ADD_VEGETARIAN_OPTION, vegOption})
-export const editVegOption = vegOption => ({type: EDIT_VEGETARIAN_OPTION, vegOption})
-
 
 /**
  * REDUCER
@@ -89,7 +86,6 @@ const initialState = {
   protein: 0,
   carbs: 0,
   fat: 0,
-  vegOption: ''
 }
 
 export default function (state = initialState, action) {
@@ -201,18 +197,6 @@ export default function (state = initialState, action) {
       return {
         ...state,
         fat: action.fat
-      }
-
-    case ADD_VEGETARIAN_OPTION:
-      return {
-        ...state,
-        vegOption: action.vegOption
-      }
-
-    case EDIT_VEGETARIAN_OPTION:
-      return {
-        ...state,
-        vegOption: action.vegOption
       }
 
     default:

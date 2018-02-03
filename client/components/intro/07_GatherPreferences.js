@@ -4,34 +4,27 @@ import { connect } from 'react-redux'
 import { Button, Checkbox, Form, Input, Radio, Select, TextArea } from 'semantic-ui-react'
 import { addVegOption } from '../../store'
 import {withRouter, Link} from 'react-router-dom'
+import { Allergies } from './preferences'
 
 class GatherPreferences extends Component {
 
   constructor () {
     super()
     this.state = {
-      vegOption: '',
+      allergies: false,
     }
-    this.handleOption = this.handleOption.bind(this)
+    this.togglePreference = this.togglePreference.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleOption (e, result) {
-    const { name, value } = result
-
-    console.log('name', name)
-    console.log('value', value)
-
+  togglePreference (preference) {
     this.setState({
-      [name]: value
+      [preference]: !this.state[preference]
     })
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
-    const { addVegOption, history, transition } = this.props
-    addVegOption(this.state.vegOption)
-    // history.push('/generate-food-plan')
+  handleSubmit(e) {
+    e.preventDefault();
     transition('gatherPreferences', 'generateFoodPlan')
   }
 
@@ -44,15 +37,7 @@ class GatherPreferences extends Component {
         <div style={header}>
           <p>...Gathering Preferences...</p>
         </div>
-        <Form onSubmit={this.handleSubmit} style={preferencesParent}>
-          <Form.Group inline>
-            <label>Vegetarian?</label>
-            <Form.Field control={Radio} name="vegOption" label='Yes' value='yes' checked={this.state.vegOption === 'yes'} onChange={this.handleOption} />
-            <Form.Field control={Radio} name="vegOption" label='No' value='no' checked={this.state.vegOption === 'no'} onChange={this.handleOption} />
-          </Form.Group>
-          <Form.Field control={Input} label='Custom Preferences' placeholder='Custom Preferences' />
-          <Form.Field control={Button}>Submit</Form.Field>
-        </Form>
+        <Allergies />
       </div>
     )
   }

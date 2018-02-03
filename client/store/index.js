@@ -13,6 +13,9 @@ import foodsDayN from './foodsDayN'
 import foodsGroceryList from './foodsGroceryList'
 import numOfDays from './numOfDays'
 import introProfile from './introProfile'
+import userPreferences from './userPreferences'
+import yummlySearchParams from './yummlySearchParams'
+import yummlySearch from './yummlySearch'
 
 const reducer = combineReducers({
   user,
@@ -25,7 +28,10 @@ const reducer = combineReducers({
   foodsDayN,
   foodsGroceryList,
   numOfDays,
-  introProfile
+  introProfile,
+  userPreferences,
+  yummlySearchParams,
+  yummlySearch,
 })
 const middleware = composeWithDevTools(applyMiddleware(
   thunkMiddleware,
@@ -45,3 +51,7 @@ export * from './foodsDayN'
 export * from './foodsGroceryList'
 export * from './numOfDays'
 export * from './introProfile'
+export * from './userPreferences'
+export * from './yummlySearchParams'
+export * from './yummlySearch'
+
