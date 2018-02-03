@@ -24,12 +24,16 @@ class Allergies extends Component {
         <Form onSubmit={this.handleSubmit} style={formParent}>
           <Form.Group grouped>
             <label>Do you have any food allergies?</label>
-            <Form.Field label='Salty' control='input' type='checkbox' />
-            <Form.Field label='Sweet' control='input' type='checkbox' />
-            <Form.Field label='Bitter' control='input' type='checkbox' />
-            <Form.Field label='Savory' control='input' type='checkbox' />
-            <Form.Field label='Sour' control='input' type='checkbox' />
-            <Form.Field label='Spicy' control='input' type='checkbox' />
+            <Form.Field label='Dairy-Free' name='Dairy-Free' control='input' type='checkbox' onChange={this.handleChecked} />
+            <Form.Field label='Egg-Free' name='Egg-Free' control='input' type='checkbox' onChange={this.handleChecked} />
+            <Form.Field label='Gluten-Free'name='Gluten-Free' control='input' type='checkbox' onChange={this.handleChecked} />
+            <Form.Field label='Peanut-Free' name='Peanut-Free' control='input' type='checkbox' onChange={this.handleChecked} />
+            <Form.Field label='Seafood-Free' name='Seafood-Free' control='input' type='checkbox' onChange={this.handleChecked} />
+            <Form.Field label='Sesame-Free' name='Sesame-Free' control='input' type='checkbox' onChange={this.handleChecked} />
+            <Form.Field label='Soy-Free' name='Soy-Free' control='input' type='checkbox' onChange={this.handleChecked} />
+            <Form.Field label='Sulfite-Free' name='Sulfite-Free' control='input' type='checkbox' onChange={this.handleChecked} />
+            <Form.Field label='Tree Nut-Free' name='Tree Nut-Free' control='input' type='checkbox' onChange={this.handleChecked} />
+            <Form.Field label='Wheat-Free' name='Wheat-Free' control='input' type='checkbox' onChange={this.handleChecked} />
           </Form.Group>
           <Form.Field control={Button}>Submit</Form.Field>
         </Form>

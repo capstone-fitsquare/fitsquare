@@ -25,10 +25,10 @@ export const searchByCourse = course => ({type: SEARCH_BY_COURSE, course})
 export const searchByCuisine = cuisine => ({type: SEARCH_BY_CUISINE, cuisine})
 export const searchByDiet = diet => ({type: SEARCH_BY_DIET, diet})
 export const searchByTime = time => ({type: SEARCH_BY_TIME, time})
-export const searchByCalories = calories => ({type: SEARCH_BY_CALORIES, calories})
-export const searchByProtein = protein => ({type: SEARCH_BY_PROTEIN, protein})
-export const searchByCarbs = carbs => ({type: SEARCH_BY_CARBS, carbs})
-export const searchByFat = fat => ({type: SEARCH_BY_FAT, fat})
+export const searchByCalories = (minCalories, maxCalories) => ({type: SEARCH_BY_CALORIES, minCalories, maxCalories})
+export const searchByProtein = (minProtein, maxProtein) => ({type: SEARCH_BY_PROTEIN, minProtein, maxProtein})
+export const searchByCarbs = (minCarbs, maxCarbs) => ({type: SEARCH_BY_CARBS, minCarbs, maxCarbs})
+export const searchByFat = (minFat, maxFat) => ({type: SEARCH_BY_FAT, minFat, maxFat})
 
 /**
  * REDUCER
@@ -73,51 +73,78 @@ const initialState = {
       max: null
     }
   }
-
+  export const ADD_SEARCH_TERMS = 'ADD_SEARCH_TERMS'
+  export const SEARCH_BY_ALLERGY = 'SEARCH_BY_ALLERGY'
+  export const SEARCH_BY_COURSE = 'SEARCH_BY_COURSE'
+  export const SEARCH_BY_CUISINE = 'SEARCH_BY_CUISINE'
+  export const SEARCH_BY_DIET = 'SEARCH_BY_DIET'
+  export const SEARCH_BY_TIME = 'SEARCH_BY_TIME'
+  export const SEARCH_BY_CALORIES = 'SEARCH_BY_CALORIES'
+  export const SEARCH_BY_PROTEIN = 'SEARCH_BY_PROTEIN'
+  export const SEARCH_BY_CARBS = 'SEARCH_BY_CARBS'
+  export const SEARCH_BY_FAT = 'SEARCH_BY_FAT'
 
 export default function (state = initialState, action) {
   switch (action.type) {
 
-    case SEARCH_ALLERGY:
+    case ADD_SEARCH_TERMS:
       return {
         ...state,
-        allergies: [...state.allergies, action.allergy]
+        q: action.searchTerms
       }
 
-    case SEARCH_CUISINE:
+    case SEARCH_BY_ALLERGY:
       return {
         ...state,
-        cuisines: [...state.cuisines, action.cuisine]
+        allowedDiet: [...state.allowedAllergy, action.allergy]
       }
 
-    case SEARCH_DIET:
+    case SEARCH_BY_COURSE:
       return {
         ...state,
-        diets: [...state.diets, action.diet]
+        allowedCourse: [...state.allowedCourse, action.course]
       }
 
-    case SEARCH_NUTRITION:
+    case SEARCH_BY_CUISINE:
       return {
         ...state,
-        nutrition: [...state.nutrition, action.nutrition]
+        allowedCuisine: [...state.allowedCuisine, action.cuisine]
       }
 
-    case SEARCH_TASTE:
+    case SEARCH_BY_DIET:
       return {
         ...state,
-        tastes: [...state.tastes, action.taste]
+        allowedDiet: [...state.allowedDiet, action.diet]
       }
 
-    case SEARCH_TECHNIQUE:
+    case SEARCH_BY_TIME:
       return {
         ...state,
-        techniques: [...state.techniques, action.technique]
+        maxTotalTimeInSeconds: action.time
       }
 
-    case SEARCH_TIME:
+    case SEARCH_BY_CALORIES:
       return {
         ...state,
-        times: [...state.times, action.time]
+        calories: {...state.calories, min: action.minCalories, max: action.maxCalories}
+      }
+
+    case SEARCH_BY_PROTEIN:
+      return {
+        ...state,
+        protein: {...state.protein, min: action.minProtein, max: action.maxProtein}
+      }
+
+    case SEARCH_BY_CARBS:
+      return {
+        ...state,
+        carbs: {...state.carbs, min: action.minCarbs, max: action.maxCarbs}
+      }
+
+    case SEARCH_BY_FAT:
+      return {
+        ...state,
+        fat: {...state.fat, min: action.minFat, max: action.maxFat}
       }
 
     default:
