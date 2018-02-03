@@ -1,61 +1,72 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
-import { Button, Form, Input, Radio, Select } from 'semantic-ui-react'
-import store, { addAllergy, syncLocalStorage, fetchYummlySearchMatches } from '../../../store'
+import { Button, Form, Input, Radio, Select, Checkbox } from 'semantic-ui-react'
+import store, { addAllergies, syncLocalStorage } from '../../../store'
 import { withRouter, Link } from 'react-router-dom'
-import { Checkbox } from '../../../components'
+import { MyCheckbox } from '../../../components'
 
-const allergies =
-['Dairy-Free', 'Egg-Free', 'Gluten-Free', 'Peanut-Free', 'Seafood-Free', 'Sesame-Free', 'Soy-Free', 'Sulfite-Free', 'Tree Nut-Free', 'Wheat-Free']
+const allergies = [
+  { label: 'Dairy-Free', name: 'dairyFree' },
+  { label: 'Egg-Free', name: 'eggFree' },
+  { label: 'Gluten-Free', name: 'glutenFree' },
+  { label: 'Peanut-Free', name: 'peanutFree' },
+  { label: 'Seafood-Free', name: 'seafoodFree' },
+  { label: 'Sesame-Free', name: 'sesameFree' },
+  { label: 'Soy-Free', name: 'soyFree' },
+  { label: 'Sulfite-Free', name: 'sulfiteFree' },
+  { label: 'Tree Nut-Free', name: 'treeNutFree' },
+  { label: 'Wheat-Free', name: 'wheatFree' }
+]
 
 class Allergies extends Component {
 
-  componentDidMount() {
-    const example = {
-      q: 'onion soup',
-      requirePictures: true,
-      allowedAllergy: ['Egg-Free', 'Gluten-Free'],
-      allowedCourse: ['Main Dishes'],
-      allowedCuisine: ['American', 'Chinese'],
-      allowedDiet: ['Lacto vegetarian', 'Ovo vegetarian'],
-      maxTotalTimeInSeconds: 5400,
-      calories: { min: null, max: 1000 }, // nutrition.ENERC_KCAL.max: 1000
-      protein: { min: 100, max: null },  // nutrition.PROCNT.min: 100
-      carbs: { min: null, max: 10 },  // nutrition.CHOCDF.max: 10
-      fat: { min: null, max: 10 }  // nutrition.FAT.max: 10
+  constructor() {
+    super()
+    this.state = {
+      dairyFree: false,
+      eggFree: false,
+      glutenFree: false,
+      peanutFree: false,
+      seafoodFree: false,
+      sesameFree: false,
+      soyFree: false,
+      sulfiteFree: false,
+      treeNutFree: false,
+      wheatFree: false
     }
-    // this.props.fetchYummlySearchMatches(example)
-    // console.log('attempting to fetch...')
+    this.handleChecked = this.handleChecked.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleChecked(e, result) {
-    console.log('e', event)
-    console.log('result', result)
     const { name, checked } = result
-    if (checked) {
-      this.props.addAllergy(name)
-    }
+    this.setState({
+      [name]: checked
+    })
   }
 
-  handleSubmit(e) {
-    e.preventDefault()
-    syncLocalStorage(store.getState())
+  handleSubmit(event) {
+    event.preventDefault();
+    this.props.addAllergies({...this.state})
   }
 
   render() {
 
+    console.log('this.state', this.state)
+
     return (
-      <div style={container}>
-       <div style={header}>
+      <Form onSubmit={this.handleSubmit} style={container}>
+        <div style={header}>
           <p>Indicate any food allergies</p>
         </div>
         <div>
-          {allergies.map(allergy =>
-            <Checkbox key={allergy} name={allergy} />
+          {allergies.map(item =>
+            <Checkbox key={item.name} label={item.label} name={item.name} checked={this.state[name]} onChange={this.handleChecked} />
           )}
         </div>
-      </div>
+        <Button type="submit">Submit</Button>
+      </Form>
     )
   }
 }
@@ -63,7 +74,7 @@ class Allergies extends Component {
 const mapState = null
 const mapDispatch = dispatch => {
   return bindActionCreators({
-    addAllergy, fetchYummlySearchMatches
+    addAllergies
   }, dispatch)
 }
 

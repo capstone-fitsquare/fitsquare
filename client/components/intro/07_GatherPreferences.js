@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { Button, Checkbox, Form, Input, Radio, Select, TextArea } from 'semantic-ui-react'
 import { fetchYummlySearchMatches, fetchYummlyRecipeDetails } from '../../store'
 import { withRouter, Link } from 'react-router-dom'
-import { Allergies } from './preferences'
+import { Allergies, Diets } from './preferences'
 
 class GatherPreferences extends Component {
 
@@ -38,6 +38,7 @@ class GatherPreferences extends Component {
           <p>...Gathering Preferences...</p>
         </div>
         <Allergies />
+        <Diets />
       </div>
     )
   }

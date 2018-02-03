@@ -4,25 +4,25 @@ import history from '../history'
 /**
  * ACTION TYPES
  */
-export const ADD_ALLERGY = 'ADD_ALLERGY'
-export const ADD_CUISINE = 'ADD_CUISINE'
-export const ADD_DIET = 'ADD_DIET'
+export const ADD_ALLERGIES = 'ADD_ALLERGIES'
+export const ADD_CUISINES = 'ADD_CUISINES'
+export const ADD_DIETS = 'ADD_DIETS'
 export const ADD_NUTRITION = 'ADD_NUTRITION'
-export const ADD_TASTE = 'ADD_TASTE'
-export const ADD_TECHNIQUE = 'ADD_TECHNIQUE'
-export const ADD_TIME = 'ADD_TIME'
+export const ADD_TASTES = 'ADD_TASTES'
+export const ADD_TECHNIQUES = 'ADD_TECHNIQUES'
+export const ADD_TIMES = 'ADD_TIMES'
 
 
 /**
  * ACTION CREATORS
  */
-export const addAllergy = (allergy) => ({type: ADD_ALLERGY, allergy})
-export const addCuisine = (cuisine) => ({type: ADD_CUISINE, cuisine})
-export const addDiet = (diet) => ({type: ADD_DIET, diet})
+export const addAllergies = (allergies) => ({type: ADD_ALLERGIES, allergies})
+export const addCuisines = (cuisines) => ({type: ADD_CUISINES, cuisines})
+export const addDiets = (diets) => ({type: ADD_DIETS, diets})
 export const addNutrition = (nutrition) => ({type: ADD_NUTRITION, nutrition})
-export const addTaste = (taste) => ({type: ADD_TASTE, taste})
-export const addTechnique = (technique) => ({type: ADD_TECHNIQUE, technique})
-export const addTime = (time) => ({type: ADD_TIME, time})
+export const addTastes = (tastes) => ({type: ADD_TASTES, tastes})
+export const addTechniques = (techniques) => ({type: ADD_TECHNIQUES, techniques})
+export const addTimes = (times) => ({type: ADD_TIMES, times})
 
 
 export const syncLocalStorage = state => {
@@ -62,11 +62,11 @@ const initialState = JSON.parse(localStorage.getItem('userPreferences'))
       thai: false
     },
     diets: {
+      lactoVegetarian: false,
+      ovoVegetarian: false,
+      pescetarian: false,
       vegan: false,
       vegetarian: false,
-      lactoVegetarian: false,
-      ovoVegetarina: false,
-      pescetarian: false,
       paleo: false,
     },
     nutrition: {
@@ -106,46 +106,46 @@ const initialState = JSON.parse(localStorage.getItem('userPreferences'))
 export default function (state = initialState, action) {
   switch (action.type) {
 
-    case ADD_ALLERGY:
+    case ADD_ALLERGIES:
       return {
         ...state,
-        allergies: {...state.allergies, [action.allergy]: true}
+        allergies: action.allergies
       }
 
-    case ADD_CUISINE:
+    case ADD_CUISINES:
       return {
         ...state,
-        cuisines: [...state.cuisines, action.cuisine]
+        cuisines: action.cuisines
       }
 
-    case ADD_DIET:
+    case ADD_DIETS:
       return {
         ...state,
-        diets: [...state.diets, action.diet]
+        diets: action.diets
       }
 
     case ADD_NUTRITION:
       return {
         ...state,
-        nutrition: [...state.nutrition, action.nutrition]
+        nutrition: action.nutrition
       }
 
-    case ADD_TASTE:
+    case ADD_TASTES:
       return {
         ...state,
-        tastes: [...state.tastes, action.taste]
+        tastes: action.tastes
       }
 
-    case ADD_TECHNIQUE:
+    case ADD_TECHNIQUES:
       return {
         ...state,
-        techniques: [...state.techniques, action.technique]
+        techniques: action.techniques
       }
 
-    case ADD_TIME:
+    case ADD_TIMES:
       return {
         ...state,
-        times: [...state.times, action.time]
+        times: action.times
       }
 
     default:
