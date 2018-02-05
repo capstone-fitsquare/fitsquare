@@ -20,9 +20,17 @@ router.get('/:id', (req, res, next) => {
     .catch(next);
 });
 
-router.post('/', (req, res, next) => {
-  Recipe.create(req.body)
-  .then(recipe => res.status(202).json(recipe))
+router.post('/:yummlyId', (req, res, next) => {
+  Recipe.findOrCreate({
+    where: {
+      yummlyId: req.params.yummlyId
+    },
+    defaults: req.body
+  })
+  .spread((recipe, created) => {
+    if (created) res.status(202).json(recipe)
+    else res.end()
+  })
   .catch(next);
 });
 
