@@ -23,10 +23,12 @@ import {
   AllDays,
   Test,
   Animations,
-  Checkbox
+  Checkbox,
+  FoodPlanWrapper
 } from './components';
 
 import { me, fetchExercises, fetchGroceryLists, fetchListItems, fetchMacroGoals, fetchMicroGoals } from './store';
+import RecipesContainer from './components/foodPlan/recipes/RecipesContainer';
 
 /**
  * COMPONENT
@@ -51,6 +53,8 @@ class Routes extends Component {
             <Route exact path="/all-days" component={AllDays} />
             <Route exact path="/animations" component={Animations} />
             <Route exact path="/checkbox" component={Checkbox} />
+            <Route exact path="/recipes-box" component={RecipesContainer} />
+            <Route exact path="/food-plan" component={FoodPlanWrapper} />
 
             <Route exact path="/" component={IntroSequence} />
             <Route exact path="/goal" component={Goal} />

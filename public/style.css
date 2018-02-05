@@ -11,6 +11,11 @@ a {
   color: darkslategray;
 }
 
+hr {
+  color: #ccc;
+  width: 90%;
+}
+
 label {
   display: block;
 }

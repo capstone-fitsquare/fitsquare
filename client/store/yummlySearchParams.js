@@ -86,7 +86,7 @@ export default function (state = initialState, action) {
     case SEARCH_BY_ALLERGY:
       return {
         ...state,
-        allowedDiet: [...state.allowedAllergy, action.allergy]
+        allowedAllergy: [...state.allowedAllergy, action.allergy]
       }
 
     case SEARCH_BY_COURSE:

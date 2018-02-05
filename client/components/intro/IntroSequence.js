@@ -29,8 +29,6 @@ class IntroSequence extends Component {
   }
 
   transition(currentComponent, nextComponent) {
-    console.log('currentComponent', currentComponent)
-    console.log('nextComponent', nextComponent)
     this.setState({
       [currentComponent]: false,
       [nextComponent]: true

@@ -8,24 +8,52 @@ import { addFoodToGroceryList, addFoodToDayN } from './index'
 export const GET_YUMMLY_SEARCH_MATCHES = 'GET_YUMMLY_SEARCH_MATCHES'
 export const GET_YUMMLY_RECIPE_DETAILS = 'GET_YUMMLY_RECIPE_DETAILS'
 
+export const GET_YUMMLY_BREAKFAST_MATCHES = 'GET_YUMMLY_BREAKFAST_MATCHES'
+export const GET_YUMMLY_LUNCH_MATCHES = 'GET_YUMMLY_LUNCH_MATCHES'
+export const GET_YUMMLY_DINNER_MATCHES = 'GET_YUMMLY_DINNER_MATCHES'
+export const GET_YUMMLY_SNACK_MATCHES = 'GET_YUMMLY_SNACK_MATCHES'
+
 /**
  * ACTION CREATORS
  */
 export const getYummlySearchMatches = recipeMatches => ({type: GET_YUMMLY_SEARCH_MATCHES, recipeMatches})
 export const getYummlyRecipeDetails = recipeDetails => ({type: GET_YUMMLY_RECIPE_DETAILS, recipeDetails})
 
+export const getYummlyBreakfastMatches = breakfastMatches => ({type: GET_YUMMLY_BREAKFAST_MATCHES, breakfastMatches})
+export const getYummlyLunchMatches = lunchMatches => ({type: GET_YUMMLY_LUNCH_MATCHES, lunchMatches})
+export const getYummlyDinnerMatches = dinnerMatches => ({type: GET_YUMMLY_DINNER_MATCHES, dinnerMatches})
+export const getYummlySnackMatches = snackMatches => ({type: GET_YUMMLY_SNACK_MATCHES, snackMatches})
+
 /**
  * THUNK CREATORS
  */
-export const fetchYummlySearchMatches = (searchParameters) => {
-  const searchTerms = stringifyQuery(searchParameters)
+export const fetchYummlySearchMatches = (searchParameters, meal) => {
+  const searchTerms = stringifyQuery(searchParameters, meal)
   return dispatch =>
     axios.get(`/api/yummly/search/${searchTerms}`)
       .then(res => res.data)
       .then(matches => {
         console.log('fetched!!')
+        console.log('meal: ', meal)
         console.log('matches: ', matches)
-        const action = getYummlySearchMatches(matches);
+        let action
+        switch (meal) {
+          case 'breakfast':
+            action = getYummlyBreakfastMatches(matches)
+            break;
+          case 'lunch':
+            action = getYummlyLunchMatches(matches)
+            break;
+          case 'dinner':
+            action = getYummlyDinnerMatches(matches)
+            break;
+          case 'snack':
+            action = getYummlySnackMatches(matches)
+            break;
+          // default:
+          //   action = getYummlySearchMatches(matches)
+          //   break;
+        }
         dispatch(action);
       })
       .catch(err => console.log(err))
@@ -49,8 +77,12 @@ export const fetchYummlyRecipeDetails = (recipeId) =>
  */
 
 const initialState = {
-  recipeMatches: [],
-  recipeDetails: {}
+  recipeMatches: {},
+  recipeDetails: {},
+  breakfastMatches: {},
+  lunchMatches: {},
+  dinnerMatches: {},
+  snackMatches: {}
 }
 
 export default function (state = initialState, action) {
@@ -66,13 +98,35 @@ export default function (state = initialState, action) {
         ...state,
         recipeDetails: action.recipeDetails }
 
+    case GET_YUMMLY_BREAKFAST_MATCHES:
+      return {
+        ...state,
+        breakfastMatches: action.breakfastMatches }
+
+    case GET_YUMMLY_LUNCH_MATCHES:
+      return {
+        ...state,
+        lunchMatches: action.lunchMatches }
+
+    case GET_YUMMLY_DINNER_MATCHES:
+      return {
+        ...state,
+        dinnerMatches: action.dinnerMatches }
+
+    case GET_YUMMLY_SNACK_MATCHES:
+      return {
+        ...state,
+        snackMatches: action.snackMatches }
+
     default:
       return state
   }
 }
 
 const generateSearchValue = (category, givenName) => {
-  let dataArr;
+  let dataArr
+  console.log('category: ', category)
+  console.log('givenName: ', givenName)
   switch (category) {
 
     case 'allergies':
@@ -91,7 +145,10 @@ const generateSearchValue = (category, givenName) => {
       dataArr = diets
       break;
   }
-  return dataArr.find(x => x.name === givenName).searchValue
+  console.log('dataArr', dataArr)
+  const output = dataArr.find(x => x.name === givenName).searchValue
+  console.log('searchValue', output)
+  return output
 }
 
 const example = {
@@ -108,7 +165,7 @@ const example = {
   fat: { min: null, max: 10 }  // nutrition.FAT.max: 10
 }
 
-const stringifyQuery = (searchParameters) => {
+const stringifyQuery = (searchParameters, meal) => {
   let params = []
   let {
     q, requirePictures,
@@ -116,13 +173,29 @@ const stringifyQuery = (searchParameters) => {
     maxTotalTimeInSeconds,
     calories, protein, carbs, fat } = searchParameters
 
-  if (q) params.push(`q=${q.split(' ').join('+')}`)
-  if (requirePictures) params.push('requirePictures=true')
+  let mealQuery = ''
+  switch (meal) {
+    case 'breakfast':
+      mealQuery = 'course^course-Breakfast and Brunch'
+      break;
+    case 'lunch':
+      mealQuery = 'course^course-Lunch'
+      break;
+    case 'dinner':
+      mealQuery = 'course^course-Main Dishes'
+      break;
+    case 'snacks':
+      mealQuery = 'course^course-Snacks'
+      break;
+  }
 
+  params.push(mealQuery)
+  params.push('requirePictures=true&maxResult=10')
+
+  if (q) params.push(`q=${q.split(' ').join('+')}`)
   if (allowedAllergy.length) allowedAllergy.forEach(allergy => params.push(`allowedAllergy[]=${generateSearchValue('allergies', allergy)}`))
-  if (allowedCourse.length) allowedCourse.forEach(course => params.push(`allowedCourse[]=${generateSearchValue('courses', course)}`))
-  if (allowedCuisine.length) allowedCuisine.forEach(cuisine => params.push(`allowedCuisine[]=${generateSearchValue('cuisines', cuisine)}`))
   if (allowedDiet.length) allowedDiet.forEach(diet => params.push(`allowedDiet[]=${generateSearchValue('diets', diet)}`))
+  if (allowedCuisine.length) allowedCuisine.forEach(cuisine => params.push(`allowedCuisine[]=${generateSearchValue('cuisines', cuisine)}`))
 
   if (maxTotalTimeInSeconds) params.push(`maxTotalTimeInSeconds=${maxTotalTimeInSeconds}`)
 
@@ -138,9 +211,8 @@ const stringifyQuery = (searchParameters) => {
   if (fat.min) params.push(`nutrition.FAT.min=${fat.min}`)
   if (fat.max) params.push(`nutrition.FAT.max=${fat.max}`)
 
-  console.log('params array: ', params)
   params.join('&')
-  console.log('final params: ', params)
+  return params.join('&')
 }
 
 const allergies = [{"id":"393","name":"Gluten-Free","longDescription":"Gluten-Free","searchValue":"393^Gluten-Free","type":"allergy","localesAvailableIn":["en-US"]},{"id":"394","name":"Peanut-Free","longDescription":"Peanut-Free","searchValue":"394^Peanut-Free","type":"allergy","localesAvailableIn":["en-US"]},{"id":"398","name":"Seafood-Free","longDescription":"Seafood-Free","searchValue":"398^Seafood-Free","type":"allergy","localesAvailableIn":["en-US"]},{"id":"399","name":"Sesame-Free","longDescription":"Sesame-Free","searchValue":"399^Sesame-Free","type":"allergy","localesAvailableIn":["en-US"]},{"id":"400","name":"Soy-Free","longDescription":"Soy-Free","searchValue":"400^Soy-Free","type":"allergy","localesAvailableIn":["en-US"]},{"id":"396","name":"Dairy-Free","longDescription":"Dairy-Free","searchValue":"396^Dairy-Free","type":"allergy","localesAvailableIn":["en-US"]},{"id":"397","name":"Egg-Free","longDescription":"Egg-Free","searchValue":"397^Egg-Free","type":"allergy","localesAvailableIn":["en-US"]},{"id":"401","name":"Sulfite-Free","longDescription":"Sulfite-Free","searchValue":"401^Sulfite-Free","type":"allergy","localesAvailableIn":["en-US"]},{"id":"395","name":"Tree Nut-Free","longDescription":"Tree Nut-Free","searchValue":"395^Tree Nut-Free","type":"allergy","localesAvailableIn":["en-US"]},{"id":"392","name":"Wheat-Free","longDescription":"Wheat-Free","searchValue":"392^Wheat-Free","type":"allergy","localesAvailableIn":["en-US"]}]

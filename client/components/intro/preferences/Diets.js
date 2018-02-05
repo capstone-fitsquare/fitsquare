@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 import { Button, Form, Input, Radio, Select, Checkbox } from 'semantic-ui-react'
-import store, { addDiets, syncLocalStorage } from '../../../store'
+import store, { addDiets, searchByDiet, syncLocalStorage } from '../../../store'
 import { withRouter, Link } from 'react-router-dom'
 import { MyCheckbox } from '../../../components'
 
@@ -40,7 +40,11 @@ class Diets extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.addDiets({...this.state})
+    const { addDiets, searchByDiet, togglePreference } = this.props
+    addDiets({...this.state})
+    const stringArr = stateToStringArr(diets, {...this.state})
+    stringArr.forEach(diet => searchByDiet(diet))
+    togglePreference('diets', 'cuisines')
   }
 
   render() {
@@ -50,14 +54,16 @@ class Diets extends Component {
     return (
       <Form onSubmit={this.handleSubmit} style={container}>
         <div style={header}>
-          <p>Indicate any diet preferences</p>
+          <h4>Special diet restrictions?</h4>
         </div>
-        <div>
-          {diets.map(item =>
-            <Checkbox key={item.name} label={item.label} name={item.name} checked={this.state[name]} onChange={this.handleChecked} />
-          )}
+        <div style={prefContainer}>
+          <div style={preferences}>
+            {diets.map(item =>
+              <Checkbox key={item.name} label={item.label} name={item.name} checked={this.state[name]} onChange={this.handleChecked} />
+            )}
+          </div>
         </div>
-        <Button type="submit">Submit</Button>
+        <Form.Field control={Button}>Submit</Form.Field>
       </Form>
     )
   }
@@ -66,7 +72,7 @@ class Diets extends Component {
 const mapState = null
 const mapDispatch = dispatch => {
   return bindActionCreators({
-    addDiets,
+    addDiets, searchByDiet
   }, dispatch)
 }
 
@@ -75,13 +81,36 @@ export default connect(mapState, mapDispatch)(Diets)
 const styles = {
   container: {
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    alignItems: 'center'
   },
   header: {
     margin: '2em 8em 0em 8em',
     display: 'flex',
     justifyContent: 'center'
   },
+  prefContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    margin: '1em',
+    padding: '1em'
+  },
+  preferences: {
+    display: 'flex',
+    flexDirection: 'column'
+  }
 }
 
-const { container, header } = styles
+const { container, header, prefContainer, preferences } = styles
+
+const stateToStringArr = (arr, state) => {
+  const names = Object.keys(state).filter(item => state[item])
+  let strings = []
+  names.map(name => {
+    for (var i = 0; i < arr.length; i++){
+      if (arr[i].name === name) strings.push(arr[i].label)
+    }
+  })
+  return strings
+}
