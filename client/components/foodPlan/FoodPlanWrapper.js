@@ -5,6 +5,8 @@ import { Sidebar, Segment, Button, Menu, Image, Icon, Header } from 'semantic-ui
 import { withRouter, Link } from 'react-router-dom'
 import AllDays from './AllDays'
 import RecipesContainer from './recipes/RecipesContainer'
+import { addFoodToGroceryList } from '../../store'
+
 
 class FoodPlanWrapper extends Component {
 
@@ -40,7 +42,11 @@ class FoodPlanWrapper extends Component {
   }
 }
 
-const mapState = null
+const mapState = state => {
+  return {
+    groceryList: state.foodsGroceryList
+  }
+}
 const mapDispatch = dispatch => {
   return bindActionCreators({
 

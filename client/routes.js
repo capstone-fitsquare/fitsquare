@@ -10,21 +10,12 @@ import {
   Signup,
   UserHome,
   NewGoals,
-  GroceryListForm,
   IntroSequence,
-  Welcome,
-  Goal,
-  GatherBiometrics,
-  ActivityLevel,
-  AnalyzeBiometrics,
-  BiometricsReport,
-  GatherPreferences,
-  GenerateFoodPlan,
   AllDays,
-  Test,
   Animations,
   Checkbox,
-  FoodPlanWrapper
+  FoodPlanWrapper,
+  GroceryList
 } from './components';
 
 import { me, fetchExercises, fetchGroceryLists, fetchListItems, fetchMacroGoals, fetchMicroGoals, fetchRecipes } from './store';
@@ -46,25 +37,15 @@ class Routes extends Component {
         <Main>
           <Switch>
             {/* Routes placed here are available to all visitors */}
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={Signup} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/signup" component={Signup} />
             <Route exact path="/new-goal" component={NewGoals} />
-            <Route exact path="/new-grocery-list" component={GroceryListForm} />
             <Route exact path="/all-days" component={AllDays} />
             <Route exact path="/animations" component={Animations} />
             <Route exact path="/checkbox" component={Checkbox} />
             <Route exact path="/recipes-box" component={RecipesContainer} />
             <Route exact path="/food-plan" component={FoodPlanWrapper} />
-
             <Route exact path="/" component={IntroSequence} />
-            <Route exact path="/goal" component={Goal} />
-            <Route exact path="/gather-biometrics" component={GatherBiometrics} />
-            <Route exact path="/activity-level" component={ActivityLevel} />
-            <Route exact path="/analyze-biometrics" component={AnalyzeBiometrics} />
-            <Route exact path="/biometrics-report" component={BiometricsReport} />
-            <Route exact path="/gather-preferences" component={GatherPreferences} />
-            <Route exact path="/generate-food-plan" component={GenerateFoodPlan} />
-            <Route exact path="/yummly-api" component={Test} />
 
             {isLoggedIn && (
               <Switch>

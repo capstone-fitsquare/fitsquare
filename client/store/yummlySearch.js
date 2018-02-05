@@ -33,41 +33,41 @@ export const fetchYummlySearchMatches = (searchParameters, meal) => {
   return dispatch =>
     axios.get(`/api/yummly/search/${searchTerms}`)
       .then(res => res.data)
-      .then(matches => {
+      .then(recipes => {
         console.log('fetched!!')
         console.log('meal: ', meal)
-        console.log('matches: ', matches)
+        console.log('matches: ', recipes)
         let action
         switch (meal) {
           case 'breakfast':
-            action = getYummlyBreakfastMatches(matches)
+            action = getYummlyBreakfastMatches(recipes)
             break;
           case 'lunch':
-            action = getYummlyLunchMatches(matches)
+            action = getYummlyLunchMatches(recipes)
             break;
           case 'dinner':
-            action = getYummlyDinnerMatches(matches)
+            action = getYummlyDinnerMatches(recipes)
             break;
           case 'snack':
-            action = getYummlySnackMatches(matches)
+            action = getYummlySnackMatches(recipes)
             break;
           default:
-            action = getYummlySearchMatches(matches)
+            action = getYummlySearchMatches(recipes)
             break;
         }
-        dispatch(action);
+        dispatch(action)
 
-        const matchesArr = matches.matches
-        return Promise.all(matchesArr.map(match => {
-          return axios.post('/api/recipes', {
-            yummlyId: match.id,
-            recipeName: match.recipeName,
-            smallImageUrls: match.smallImageUrls,
-            meal: meal,
-            rating: match.rating,
-            ingredients: match.ingredients
-          })
-        }))
+        // const matchesArr = matches.matches
+        // return Promise.all(matchesArr.map(match => {
+        //   return axios.post('/api/recipes', {
+        //     yummlyId: match.id,
+        //     recipeName: match.recipeName,
+        //     smallImageUrls: match.smallImageUrls,
+        //     meal: meal,
+        //     rating: match.rating,
+        //     ingredients: match.ingredients
+        //   })
+        // }))
 
       })
       .catch(err => console.log(err))

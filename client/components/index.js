@@ -28,7 +28,7 @@ export { default as MicroGoalForm } from './newGoals/MicroGoalForm';
 export { default as AllDays } from './foodPlan/AllDays';
 export { default as DayCard } from './foodPlan/DayCard';
 export { default as FoodPlanWrapper } from './foodPlan/FoodPlanWrapper';
-export { default as GroceryListForm } from './foodPlan/GroceryListForm';
+export { default as GroceryList } from './foodPlan/GroceryList';
 export { default as MacroGoalCountdown } from './foodPlan/MacroGoalCountdown';
 export { default as MicroGoalCountdown } from './foodPlan/MicroGoalCountdown';
 export { default as SearchButton } from './foodPlan/SearchButton';

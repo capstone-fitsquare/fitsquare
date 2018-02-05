@@ -4,8 +4,18 @@ import { connect } from 'react-redux'
 import { Button, Checkbox, Form, Input, Radio, Select, TextArea } from 'semantic-ui-react'
 import { withRouter, Link } from 'react-router-dom'
 import axios from 'axios'
+import { addFoodToGroceryList } from '../../../store'
 
 class Recipes extends Component {
+
+  constructor(){
+    super()
+    this.addRecipe = this.addRecipe.bind(this)
+  }
+
+  addRecipe(recipe) {
+    recipe.ingredients.forEach(ingredient => this.props.addFoodToGroceryList(ingredient))
+  }
 
   render() {
 
@@ -16,10 +26,9 @@ class Recipes extends Component {
         {recipes && recipes.map(recipe => {
           return (
             <div key={recipe.id}>
-              {/* <div key={recipe}>{recipe.recipeName}</div>
-              <img src={recipe.smallImageUrls[0]} /> */}
-              <div key={recipe}>{recipe.recipeName}</div>
+              <div key={recipe.id}>{recipe.recipeName}</div>
               <img src={recipe.smallImageUrls[0]} />
+              <Button onClick={() => this.addRecipe(recipe)}>Add to plan</Button>
             </div>
           )
         })}
@@ -28,7 +37,17 @@ class Recipes extends Component {
   }
 }
 
-export default Recipes
+const mapState = (state, ownProps) => {
+  if (ownProps.recipes) return { recipes: ownProps.recipes}
+  else return { recipes: state.recipes }
+}
+const mapDispatch = dispatch => {
+  return bindActionCreators({
+    addFoodToGroceryList
+  }, dispatch)
+}
+
+export default connect(mapState, mapDispatch)(Recipes)
 
 const styles = {
   container: {
