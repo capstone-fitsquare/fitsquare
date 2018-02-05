@@ -1,21 +1,23 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
-import { DayCard, PieChart } from '../index'
+import { DayCard, GroceryList } from './index'
 
 const AllDays = (props) => {
 
-
   return (
-    <div style={container}>
-      <div style={daysContainer}>
-      {[...Array(5)].map( (x, i) =>
-        <DayCard key={i} dayN={i} />
-      )}
+    <div>
+      <div style={container}>
+        <div style={daysContainer}>
+        {[...Array(5)].map( (x, i) =>
+          <DayCard key={i} dayN={i} />
+        )}
+        </div>
+        <div style={imgContainer}>
+          <img src="/images/pie-chart.png" style={img} />
+        </div>
       </div>
-      <div style={imgContainer}>
-        <img src="/images/pie-chart.png" style={img} />
-      </div>
+      <GroceryList />
     </div>
   )
 }

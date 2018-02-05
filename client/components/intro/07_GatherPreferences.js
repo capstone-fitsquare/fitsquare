@@ -2,57 +2,67 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 import { Button, Checkbox, Form, Input, Radio, Select, TextArea } from 'semantic-ui-react'
-import { addVegOption } from '../../store'
-import {withRouter, Link} from 'react-router-dom'
+import { fetchYummlySearchMatches, fetchYummlyRecipeDetails } from '../../store'
+import { withRouter, Link } from 'react-router-dom'
+import { Allergies, Diets, Cuisines } from './preferences'
 
 class GatherPreferences extends Component {
 
   constructor () {
     super()
     this.state = {
-      vegOption: '',
+      allergies: true,
+      diets: false,
+      cuisines: false,
+      generatePlan: false,
     }
-    this.handleOption = this.handleOption.bind(this)
+    this.togglePreference = this.togglePreference.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleOption (e, result) {
-    const { name, value } = result
-
-    console.log('name', name)
-    console.log('value', value)
-
+  togglePreference (currentPref, nextPref) {
     this.setState({
-      [name]: value
+      [currentPref]: false,
+      [nextPref]: true
     })
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
-    const { addVegOption, history, transition } = this.props
-    addVegOption(this.state.vegOption)
-    // history.push('/generate-food-plan')
-    transition('gatherPreferences', 'generateFoodPlan')
+  handleSubmit(e) {
+    e.preventDefault();
+    this.props.transition('gatherPreferences', 'generateFoodPlan')
   }
 
   render() {
 
     console.log('this.state', this.state)
+    console.log('this.props', this.props)
 
     return (
       <div style={container}>
-        <div style={header}>
-          <p>...Gathering Preferences...</p>
-        </div>
-        <Form onSubmit={this.handleSubmit} style={preferencesParent}>
-          <Form.Group inline>
-            <label>Vegetarian?</label>
-            <Form.Field control={Radio} name="vegOption" label='Yes' value='yes' checked={this.state.vegOption === 'yes'} onChange={this.handleOption} />
-            <Form.Field control={Radio} name="vegOption" label='No' value='no' checked={this.state.vegOption === 'no'} onChange={this.handleOption} />
-          </Form.Group>
-          <Form.Field control={Input} label='Custom Preferences' placeholder='Custom Preferences' />
-          <Form.Field control={Button}>Submit</Form.Field>
-        </Form>
+        {(this.state.allergies || this.state.diets) &&
+          <div style={header}>
+            <h3>Do you have any food restrictions?</h3>
+          </div>
+        }
+        {this.state.allergies &&
+          <Allergies togglePreference={this.togglePreference} />
+        }
+        {this.state.diets &&
+          <Diets togglePreference={this.togglePreference} />
+        }
+
+        {this.state.cuisines &&
+          <div>
+            <div style={header}>
+              <h3>Food preferences?</h3>
+            </div>
+            <Cuisines togglePreference={this.togglePreference} />
+          </div>
+        }
+
+        {this.state.generatePlan &&
+          <Button onClick={() => this.props.transition('gatherPreferences', 'generateFoodPlan')}>Generate Food Plan</Button>
+        }
       </div>
     )
   }
@@ -61,7 +71,7 @@ class GatherPreferences extends Component {
 const mapState = null
 const mapDispatch = dispatch => {
   return bindActionCreators({
-    addVegOption
+    fetchYummlySearchMatches, fetchYummlyRecipeDetails
   }, dispatch)
 }
 

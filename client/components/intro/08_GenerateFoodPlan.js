@@ -2,13 +2,21 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 import {withRouter, Link} from 'react-router-dom'
+import { fetchYummlySearchMatches, fetchYummlyRecipeDetails } from '../../store'
 
 class GenerateFoodPlan extends Component {
 
   componentDidMount() {
     setTimeout(() => {
-      this.props.history.push('/all-days')
+      this.props.history.push('/food-plan')
     }, 1000);
+
+    const { yummlySearchParams, fetchYummlySearchMatches } = this.props
+    console.log('yummlySearchParams', yummlySearchParams)
+    fetchYummlySearchMatches(yummlySearchParams, 'breakfast')
+    fetchYummlySearchMatches(yummlySearchParams, 'lunch')
+    fetchYummlySearchMatches(yummlySearchParams, 'dinner')
+    fetchYummlySearchMatches(yummlySearchParams, 'snack')
   }
 
   render() {
@@ -22,7 +30,19 @@ class GenerateFoodPlan extends Component {
   }
 }
 
-export default withRouter(GenerateFoodPlan)
+const mapState = state => {
+  return {
+    yummlySearchParams: state.yummlySearchParams
+  }
+}
+const mapDispatch = dispatch => {
+  return bindActionCreators({
+    fetchYummlySearchMatches,
+    fetchYummlyRecipeDetails
+  }, dispatch)
+}
+
+export default withRouter(connect(mapState, mapDispatch)(GenerateFoodPlan))
 
 const styles = {
   container: {

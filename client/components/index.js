@@ -24,13 +24,14 @@ export { default as NewGoals } from './newGoals/NewGoals';
 export { default as MacroGoalForm } from './newGoals/MacroGoalForm';
 export { default as MicroGoalForm } from './newGoals/MicroGoalForm';
 
-// newGroceryList folder
-export { default as AllDays } from './newGroceryList/AllDays';
-export { default as DayCard } from './newGroceryList/DayCard';
-export { default as GroceryListForm } from './newGroceryList/GroceryListForm';
-export { default as MacroGoalCountdown } from './newGroceryList/MacroGoalCountdown';
-export { default as MicroGoalCountdown } from './newGroceryList/MicroGoalCountdown';
-export { default as SearchButton } from './newGroceryList/SearchButton';
+// foodPlan folder
+export { default as AllDays } from './foodPlan/AllDays';
+export { default as DayCard } from './foodPlan/DayCard';
+export { default as FoodPlanWrapper } from './foodPlan/FoodPlanWrapper';
+export { default as GroceryList } from './foodPlan/GroceryList';
+export { default as MacroGoalCountdown } from './foodPlan/MacroGoalCountdown';
+export { default as MicroGoalCountdown } from './foodPlan/MicroGoalCountdown';
+export { default as SearchButton } from './foodPlan/SearchButton';
 
 // test folder
 export { default as Test } from './test/Test';

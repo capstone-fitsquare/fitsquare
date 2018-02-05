@@ -80,7 +80,6 @@ class GatherBiometrics extends Component {
           </Form.Group>
           <Form.Field control={Input} name="weight" value={this.state.weight} label='Weight' placeholder='lbs' onChange={this.handleInput} />
           <Form.Field control={Input} name="age" value={this.state.age} label='Age' placeholder='yrs' onChange={this.handleInput} />
-          {/* <Form.Field control={Select} label='Age' options={options} placeholder='Age' /> */}
           <Form.Group inline>
             <label>Gender</label>
             <Form.Field control={Radio} name="gender" label='M' value='male' checked={this.state.gender === 'male'} onChange={this.handleOption} />

@@ -31,9 +31,9 @@ class DayCard extends Component {
 
   render() {
 
-    const { dayN, foodsDayN } = this.props
+    const { breakfast, lunch, dinner, snack, dayN } = this.props
 
-    const foods = foodsDayN.find(day => day.day === dayN)
+    // const foods = foodsDayN.find(day => day.day === dayN)
 
     return this.state.showDetails ?
     (
@@ -48,12 +48,12 @@ class DayCard extends Component {
               </Button>
             </div>
             <div>
-              <ul>
-                {foods.breakfast.length && foods.breakfast.map(food =>
-                  <li key={food.name}>{food.name}</li>
-                  // <li key={food.report.food.ndbno}>{food.report.food.name}</li>
-                )}
-              </ul>
+                {breakfast &&
+                  <div>
+                    <div>{breakfast.name}</div>
+                    <img src={breakfast.imgUrl} />
+                  </div>
+                }
             </div>
             <SearchButton meal="breakfast" dayN={dayN} />
           </div>
@@ -63,11 +63,12 @@ class DayCard extends Component {
               <p>Lunch</p>
             </div>
             <div>
-              <ul>
-                {foods.lunch.length && foods.lunch.map(food =>
-                  <li key={food.name}>{food.name}</li>
-                )}
-              </ul>
+                {lunch &&
+                  <div>
+                    <div>{lunch.name}</div>
+                    <img src={lunch.imgUrl} />
+                  </div>
+                }
             </div>
             <SearchButton meal="lunch" dayN={dayN} />
           </div>
@@ -77,11 +78,12 @@ class DayCard extends Component {
               <p>Dinner</p>
             </div>
             <div>
-              <ul>
-                {foods.dinner.length && foods.dinner.map(food =>
-                  <li key={food.name}>{food.name}</li>
-                )}
-              </ul>
+                {dinner &&
+                  <div>
+                    <div>{dinner.name}</div>
+                    <img src={dinner.imgUrl} />
+                  </div>
+                }
             </div>
             <SearchButton meal="dinner" dayN={dayN} />
           </div>
@@ -91,11 +93,12 @@ class DayCard extends Component {
               <p>Snacks</p>
             </div>
             <div>
-              <ul>
-                {foods.snacks.map(food =>
-                  <li key={food.name}>{food.name}</li>
-                )}
-              </ul>
+                {snack &&
+                  <div>
+                    <div>{snack.name}</div>
+                    <img src={snack.imgUrl} />
+                  </div>
+                }
             </div>
             <SearchButton meal="snacks" dayN={dayN} />
           </div>
@@ -111,9 +114,16 @@ class DayCard extends Component {
 
 }
 
-const mapState = state => {
+const mapState = (state, ownProps) => {
+  // return {
+  //   foodsDayN: state.foodsDayN
+  // }
+  const { dayN } = ownProps
   return {
-    foodsDayN: state.foodsDayN
+    breakfast: state.recipes.filter(recipe => recipe.meal === 'breakfast')[dayN],
+    lunch: state.recipes.filter(recipe => recipe.meal === 'lunch')[dayN],
+    dinner: state.recipes.filter(recipe => recipe.meal === 'dinner')[dayN],
+    snack: state.recipes.filter(recipe => recipe.meal === 'snack')[dayN]
   }
 }
 
