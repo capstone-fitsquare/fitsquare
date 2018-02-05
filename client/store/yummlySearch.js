@@ -1,6 +1,7 @@
 import axios from 'axios'
 import history from '../history'
 import { addFoodToGroceryList, addFoodToDayN } from './index'
+import { postRecipe } from './recipes'
 
 /**
  * ACTION TYPES
@@ -17,7 +18,7 @@ export const GET_YUMMLY_SNACK_MATCHES = 'GET_YUMMLY_SNACK_MATCHES'
  * ACTION CREATORS
  */
 export const getYummlySearchMatches = recipeMatches => ({type: GET_YUMMLY_SEARCH_MATCHES, recipeMatches})
-export const getYummlyRecipeDetails = recipeDetails => ({type: GET_YUMMLY_RECIPE_DETAILS, recipeDetails})
+export const getYummlyRecipeDetails = recipeDetails => ({type: GET_YUMMLY_SEARCH_MATCHES, recipeDetails})
 
 export const getYummlyBreakfastMatches = breakfastMatches => ({type: GET_YUMMLY_BREAKFAST_MATCHES, breakfastMatches})
 export const getYummlyLunchMatches = lunchMatches => ({type: GET_YUMMLY_LUNCH_MATCHES, lunchMatches})
@@ -50,11 +51,24 @@ export const fetchYummlySearchMatches = (searchParameters, meal) => {
           case 'snack':
             action = getYummlySnackMatches(matches)
             break;
-          // default:
-          //   action = getYummlySearchMatches(matches)
-          //   break;
+          default:
+            action = getYummlySearchMatches(matches)
+            break;
         }
         dispatch(action);
+
+        const matchesArr = matches.matches
+        return Promise.all(matchesArr.map(match => {
+          return axios.post('/api/recipes', {
+            yummlyId: match.id,
+            recipeName: match.recipeName,
+            smallImageUrls: match.smallImageUrls,
+            meal: meal,
+            rating: match.rating,
+            ingredients: match.ingredients
+          })
+        }))
+
       })
       .catch(err => console.log(err))
 }
@@ -95,8 +109,8 @@ export default function (state = initialState, action) {
 
     case GET_YUMMLY_RECIPE_DETAILS:
       return {
-        ...state,
-        recipeDetails: action.recipeDetails }
+      ...state,
+      recipeDetails: action.recipeDetails }
 
     case GET_YUMMLY_BREAKFAST_MATCHES:
       return {

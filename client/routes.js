@@ -27,7 +27,7 @@ import {
   FoodPlanWrapper
 } from './components';
 
-import { me, fetchExercises, fetchGroceryLists, fetchListItems, fetchMacroGoals, fetchMicroGoals } from './store';
+import { me, fetchExercises, fetchGroceryLists, fetchListItems, fetchMacroGoals, fetchMicroGoals, fetchRecipes } from './store';
 import RecipesContainer from './components/foodPlan/recipes/RecipesContainer';
 
 /**
@@ -101,6 +101,7 @@ const mapDispatch = dispatch => {
       dispatch(fetchListItems());
       dispatch(fetchMacroGoals());
       dispatch(fetchMicroGoals());
+      dispatch(fetchRecipes())
     },
   };
 };

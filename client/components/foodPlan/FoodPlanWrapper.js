@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
-import { Button, Checkbox, Form, Input, Radio, Select, TextArea } from 'semantic-ui-react'
+import { Sidebar, Segment, Button, Menu, Image, Icon, Header } from 'semantic-ui-react'
 import { withRouter, Link } from 'react-router-dom'
 import AllDays from './AllDays'
 import RecipesContainer from './recipes/RecipesContainer'
@@ -11,33 +11,30 @@ class FoodPlanWrapper extends Component {
   constructor () {
     super()
     this.state = {
-      // allergies: true,
-      // diets: false,
-      // cuisines: false,
-      // generatePlan: false,
+      visible: false
     }
-    // this.togglePreference = this.togglePreference.bind(this)
-    // this.handleSubmit = this.handleSubmit.bind(this)
+    this.toggleVisibility = this.toggleVisibility.bind(this)
   }
 
-  // togglePreference (currentPref, nextPref) {
-  //   this.setState({
-  //     [currentPref]: false,
-  //     [nextPref]: true
-  //   })
-  // }
-
-  // handleSubmit(e) {
-  //   e.preventDefault();
-  //   this.props.transition('FoodPlanWrapper', 'generateFoodPlan')
-  // }
+  toggleVisibility = () => this.setState({ visible: !this.state.visible })
 
   render() {
 
+    const { visible } = this.state
+
     return (
       <div>
-        <RecipesContainer />
-        <AllDays />
+        <Button onClick={this.toggleVisibility}>Recipes</Button>
+        <Sidebar.Pushable as={Segment}>
+          <Sidebar animation='push' visible={visible}>
+            <RecipesContainer />
+          </Sidebar>
+          <Sidebar.Pusher>
+            <Segment basic>
+              <AllDays />
+            </Segment>
+          </Sidebar.Pusher>
+        </Sidebar.Pushable>
       </div>
     )
   }

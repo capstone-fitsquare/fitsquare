@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 import { Button, Checkbox, Form, Input, Radio, Select, TextArea } from 'semantic-ui-react'
 import { withRouter, Link } from 'react-router-dom'
-import fetchYummlySearchMatches from '../../../store'
+import axios from 'axios'
 
 class Recipes extends Component {
 
@@ -13,9 +13,11 @@ class Recipes extends Component {
 
     return (
       <div>
-        {recipes.length && recipes.map(recipe => {
+        {recipes && recipes.map(recipe => {
           return (
             <div key={recipe.id}>
+              {/* <div key={recipe}>{recipe.recipeName}</div>
+              <img src={recipe.smallImageUrls[0]} /> */}
               <div key={recipe}>{recipe.recipeName}</div>
               <img src={recipe.smallImageUrls[0]} />
             </div>
@@ -25,7 +27,6 @@ class Recipes extends Component {
     )
   }
 }
-
 
 export default Recipes
 

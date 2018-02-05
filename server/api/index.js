@@ -9,6 +9,7 @@ router.use('/list-items', require('./listItems'));
 router.use('/macro-goals', require('./macroGoals'));
 router.use('/micro-goals', require('./microGoals'));
 router.use('/users', require('./users'));
+router.use('/recipes', require('./recipes'))
 
 router.use((req, res, next) => {
   const error = new Error('Not Found');

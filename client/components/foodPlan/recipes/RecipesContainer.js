@@ -1,42 +1,73 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
-import { Button, Checkbox, Form, Input, Radio, Select, TextArea } from 'semantic-ui-react'
+import { Tab } from 'semantic-ui-react'
 import { withRouter, Link } from 'react-router-dom'
-import RecipeNav from './RecipeNav';
 import Recipes from './Recipes'
 
-class RecipesContainer extends Component {
+class RecipeNav extends Component {
+
+  constructor () {
+    super()
+    this.state = {
+      activeIndex: 0
+    }
+    this.handleTabChange = this.handleTabChange.bind(this)
+  }
+
+  handleTabChange = (e, { activeIndex }) => this.setState({ activeIndex })
 
   render() {
 
+    const { activeIndex } = this.state
+    console.log('activeIndex', activeIndex)
+
+    const { breakfastRecipes, lunchRecipes, dinnerRecipes, snackRecipes } = this.props
+
+    const panes = [
+      // { menuItem: 'All', render: () => <Tab.Pane loading={false}><Recipes /></Tab.Pane> },
+      { menuItem: 'Breakfast', render: () => <Tab.Pane><Recipes recipes={breakfastRecipes} /></Tab.Pane> },
+      { menuItem: 'Lunch', render: () => <Tab.Pane><Recipes recipes={lunchRecipes} /></Tab.Pane> },
+      { menuItem: 'Dinner', render: () => <Tab.Pane><Recipes recipes={dinnerRecipes} /></Tab.Pane> },
+      { menuItem: 'Snacks', render: () => <Tab.Pane><Recipes recipes={snackRecipes} /></Tab.Pane> },
+      // { menuItem: 'Favorites', render: () => <Tab.Pane><Recipes meal="breakfast" /></Tab.Pane> },
+    ]
+
     return (
-      <div>
-        <RecipeNav />
-      </div>
+      <Tab panes={panes} activeIndex={activeIndex} onTabChange={this.handleTabChange} />
     )
   }
 }
 
-export default RecipesContainer
+const mapState = state => {
+  return {
+    breakfastRecipes: state.yummlySearch.breakfastMatches.matches,
+    lunchRecipes: state.yummlySearch.lunchMatches.matches,
+    dinnerRecipes: state.yummlySearch.dinnerMatches.matches,
+    snackRecipes: state.yummlySearch.snackMatches.matches
+  }
+  // return {
+  //   breakfastRecipes: state.recipes.filter(recipe => recipe.meal === 'breakfast'),
+  //   lunchRecipes: state.recipes.filter(recipe => recipe.meal === 'lunch'),
+  //   dinnerRecipes: state.recipes.filter(recipe => recipe.meal === 'dinner'),
+  //   snackRecipes: state.recipes.filter(recipe => recipe.meal === 'snack'),
+  // }
+}
+const mapDispatch = dispatch => {
+  return bindActionCreators({
+
+  }, dispatch)
+}
+
+export default withRouter(connect(mapState, mapDispatch)(RecipeNav))
 
 const styles = {
   container: {
     display: 'flex',
-    flexDirection: 'column'
   },
-  header: {
-    margin: '2em 8em 0em 8em',
+  tabStyle: {
     display: 'flex',
-    justifyContent: 'center'
-  },
-  preferencesParent: {
-    display: 'flex',
-    flexDirection: 'column',
-    padding: '1em',
-    margin: '1em',
-    alignItems: 'center'
-  },
+  }
 }
 
-const { container, header, preferencesParent } = styles
+const { container, tabStyle } = styles

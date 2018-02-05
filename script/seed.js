@@ -1,6 +1,5 @@
 const {
   db,
-  FoodItem,
   GroceryList,
   ListItem,
   MacroGoal,
@@ -9,72 +8,6 @@ const {
   User,
   Exercise,
 } = require('../server/db/models');
-
-const foodItems = [
-  {
-    name: 'chicken breast',
-    servingSize: 5,
-    servingUnit: 'oz',
-    calories: 230,
-    protein: 43,
-    carbs: 0,
-    fat: 5
-  },
-  {
-    name: 'mac n cheese',
-    servingSize: 160,
-    servingUnit: 'g',
-    calories: 600,
-    protein: 20,
-    carbs: 100,
-    fat: 15
-  },
-  {
-    name: 'kale',
-    servingSize: 1,
-    servingUnit: 'cup',
-    calories: 33,
-    protein: 3,
-    carbs: 6,
-    fat: 0
-  },
-  {
-    name: 'bread',
-    servingSize: 1,
-    servingUnit: 'slice',
-    calories: 80,
-    protein: 3,
-    carbs: 17,
-    fat: 1
-  },
-  {
-    name: 'egg',
-    servingSize: 1,
-    servingUnit: 'large',
-    calories: 10,
-    protein: 6,
-    carbs: 0,
-    fat: 5
-  },
-  {
-    name: 'brown rice',
-    servingSize: 1,
-    servingUnit: 'cup',
-    calories: 248,
-    protein: 5,
-    carbs: 50,
-    fat: 2
-  },
-  {
-    name: 'black beans',
-    servingSize: 1,
-    servingUnit: 'cup',
-    calories: 227,
-    protein: 15,
-    carbs: 41,
-    fat: 1
-  },
-]
 
 const supplements = [
   {
@@ -201,21 +134,6 @@ const macroGoals = [
     fat: 250
   },
 ]
-
-const microGoals = [
-  {
-    name: 'heart health',
-    vitaminA: 100,
-    vitaminB_12: 100,
-    vitaminC: 100,
-    vitaminD_3: 100,
-    vitaminK: 100,
-    potassium: 100,
-    sodium: 100,
-    magnesium: 100,
-    zinc: 100,
-  },
-];
 
 const exercises = [
   {
@@ -392,13 +310,6 @@ db
   .sync({ force: true })
   .then(() => {
     return Promise.all(
-      foodItems.map(foodItem => {
-        return FoodItem.create(foodItem);
-      })
-    );
-  })
-  .then(() => {
-    return Promise.all(
       supplements.map(supplement => {
         return Supplement.create(supplement);
       })
@@ -422,13 +333,6 @@ db
     return Promise.all(
       macroGoals.map(macroGoal => {
         return MacroGoal.create(macroGoal);
-      })
-    );
-  })
-  .then(() => {
-    return Promise.all(
-      microGoals.map(microGoal => {
-        return MicroGoal.create(microGoal);
       })
     );
   })

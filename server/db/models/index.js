@@ -6,6 +6,7 @@ const MacroGoal = require('./macroGoal')
 const MicroGoal = require('./microGoal')
 const Supplement = require('./supplement')
 const User = require('./user')
+const Recipe = require('./recipe')
 
 Exercise.belongsTo(User)
 User.hasMany(Exercise)
@@ -33,6 +34,7 @@ module.exports = {
   MacroGoal,
   MicroGoal,
   Supplement,
-  User
+  User,
+  Recipe
 }
 
