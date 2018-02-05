@@ -20,9 +20,11 @@ class RecipeNav extends Component {
   render() {
 
     const { activeIndex } = this.state
-    console.log('activeIndex', activeIndex)
-
-    const { breakfastRecipes, lunchRecipes, dinnerRecipes, snackRecipes } = this.props
+    const { recipes } = this.props
+    const breakfastRecipes = recipes.filter(recipe => recipe.meal === 'breakfast')
+    const lunchRecipes = recipes.filter(recipe => recipe.meal === 'lunch')
+    const dinnerRecipes = recipes.filter(recipe => recipe.meal === 'dinner')
+    const snackRecipes = recipes.filter(recipe => recipe.meal === 'snack')
 
     const panes = [
       // { menuItem: 'All', render: () => <Tab.Pane loading={false}><Recipes /></Tab.Pane> },
@@ -41,17 +43,8 @@ class RecipeNav extends Component {
 
 const mapState = state => {
   return {
-    breakfastRecipes: state.yummlySearch.breakfastMatches.matches,
-    lunchRecipes: state.yummlySearch.lunchMatches.matches,
-    dinnerRecipes: state.yummlySearch.dinnerMatches.matches,
-    snackRecipes: state.yummlySearch.snackMatches.matches
+    recipes: state.recipes
   }
-  // return {
-  //   breakfastRecipes: state.recipes.filter(recipe => recipe.meal === 'breakfast'),
-  //   lunchRecipes: state.recipes.filter(recipe => recipe.meal === 'lunch'),
-  //   dinnerRecipes: state.recipes.filter(recipe => recipe.meal === 'dinner'),
-  //   snackRecipes: state.recipes.filter(recipe => recipe.meal === 'snack'),
-  // }
 }
 const mapDispatch = dispatch => {
   return bindActionCreators({

@@ -25,7 +25,7 @@ class FoodPlanWrapper extends Component {
     const { visible } = this.state
 
     return (
-      <div>
+      <div id="foodPlanWrapper">
         <Button onClick={this.toggleVisibility}>Recipes</Button>
         <Sidebar.Pushable as={Segment}>
           <Sidebar animation='push' visible={visible}>

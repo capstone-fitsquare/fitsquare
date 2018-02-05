@@ -23,11 +23,11 @@ class Recipes extends Component {
 
     return (
       <div>
-        {recipes && recipes.map(recipe => {
+        {recipes.length && recipes.map(recipe => {
           return (
-            <div key={recipe.id}>
-              <div key={recipe.id}>{recipe.recipeName}</div>
-              <img src={recipe.smallImageUrls[0]} />
+            <div id={recipe.id} key={recipe.id}>
+              <h4>{recipe.recipeName}</h4>
+              <img id={`${recipe.id}-IMG`} src={recipe.smallImageUrls[0]} />
               <Button onClick={() => this.addRecipe(recipe)}>Add to plan</Button>
             </div>
           )
@@ -37,10 +37,8 @@ class Recipes extends Component {
   }
 }
 
-const mapState = (state, ownProps) => {
-  if (ownProps.recipes) return { recipes: ownProps.recipes}
-  else return { recipes: state.recipes }
-}
+const mapState = null
+
 const mapDispatch = dispatch => {
   return bindActionCreators({
     addFoodToGroceryList

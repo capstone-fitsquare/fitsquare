@@ -36,7 +36,7 @@ router.get('/test/search', (req, res, next) => {
 
 router.get('/test/details', (req, res, next) => {
   return axios
-    .get(`http://api.yummly.com/v1/api/recipe/French-Onion-Soup-2141595?_app_id=${appId}&_app_key=${appKey}`)
+    .get(`http://api.yummly.com/v1/api/recipe/Cheesy-Garlic-Bread-2283475?_app_id=${appId}&_app_key=${appKey}`)
     .then(res => res.data)
     .then(list => res.json(list))
     .catch(console.log);
