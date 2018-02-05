@@ -9,15 +9,15 @@ class Recipes extends Component {
 
   render() {
 
-    const recipes = this.props
+    const { recipes } = this.props
 
     return (
       <div>
         {recipes.length && recipes.map(recipe => {
           return (
-            <div>
-              <div key={recipe.id}>{recipe.recipeName}</div>
-              <img src={img.smallImageUrls[0]} />
+            <div key={recipe.id}>
+              <div key={recipe}>{recipe.recipeName}</div>
+              <img src={recipe.smallImageUrls[0]} />
             </div>
           )
         })}

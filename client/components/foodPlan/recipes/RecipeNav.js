@@ -10,7 +10,7 @@ class RecipeNav extends Component {
   constructor () {
     super()
     this.state = {
-      aciveIndex: 1
+      activeIndex: 0
     }
     this.handleTabChange = this.handleTabChange.bind(this)
   }
@@ -20,6 +20,7 @@ class RecipeNav extends Component {
   render() {
 
     const { activeIndex } = this.state
+    console.log('activeIndex', activeIndex)
 
     const { breakfastRecipes, lunchRecipes, dinnerRecipes, snackRecipes } = this.props
 

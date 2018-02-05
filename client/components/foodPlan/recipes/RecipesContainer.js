@@ -8,25 +8,6 @@ import Recipes from './Recipes'
 
 class RecipesContainer extends Component {
 
-  constructor () {
-    super()
-    this.state = {
-      breakfast: false,
-      lunch: false,
-      dinner: false,
-      snacks: false,
-      favorites: false
-    }
-    this.toggleRecipeMeal = this.toggleRecipeMeal.bind(this)
-  }
-
-  toggleRecipeMeal (currentMeal, nextMeal) {
-    this.setState({
-      [currentMeal]: false,
-      [nextMeal]: true
-    })
-  }
-
   render() {
 
     return (

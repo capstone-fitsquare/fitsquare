@@ -173,19 +173,19 @@ const stringifyQuery = (searchParameters, meal) => {
     maxTotalTimeInSeconds,
     calories, protein, carbs, fat } = searchParameters
 
-  let mealQuery = ''
+  let mealQuery = 'allowedCourse[]='
   switch (meal) {
     case 'breakfast':
-      mealQuery = 'course^course-Breakfast and Brunch'
+      mealQuery += 'course^course-Breakfast and Brunch'
       break;
     case 'lunch':
-      mealQuery = 'course^course-Lunch'
+      mealQuery += 'course^course-Lunch'
       break;
     case 'dinner':
-      mealQuery = 'course^course-Main Dishes'
+      mealQuery += 'course^course-Main Dishes'
       break;
     case 'snacks':
-      mealQuery = 'course^course-Snacks'
+      mealQuery += 'course^course-Snacks'
       break;
   }
 
