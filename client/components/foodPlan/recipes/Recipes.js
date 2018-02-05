@@ -4,13 +4,29 @@ import { connect } from 'react-redux'
 import { Button, Checkbox, Form, Input, Radio, Select, TextArea } from 'semantic-ui-react'
 import { withRouter, Link } from 'react-router-dom'
 import axios from 'axios'
-import { addFoodToGroceryList } from '../../../store'
+import { addFoodToGroceryList, fetchYummlyRecipeDetails } from '../../../store'
 
 class Recipes extends Component {
 
   constructor(){
     super()
     this.addRecipe = this.addRecipe.bind(this)
+  }
+
+
+  componentWillReceiveProps(nextProps){
+    const { fromDb } = this.props
+    let recipeId
+    if (fromDb) recipeId = 'yummlyId'
+    else recipeId = 'id'
+    if (this.props.recipes !== nextProps.recipes) {
+      const { fetchYummlyRecipeDetails, meal } = this.props
+      const { recipes } = nextProps
+      console.log('recipes', recipes)
+      Promise.all(recipes.map(recipe => {
+        fetchYummlyRecipeDetails(recipe[recipeId], meal)
+      }))
+    }
   }
 
   addRecipe(recipe) {
@@ -20,14 +36,15 @@ class Recipes extends Component {
   render() {
 
     const { recipes } = this.props
+    console.log('recipes', recipes)
 
     return (
       <div>
-        {recipes && recipes.map(recipe => {
+        {recipes.length && recipes.map(recipe => {
           return (
-            <div key={recipe.id}>
-              <div key={recipe.id}>{recipe.recipeName}</div>
-              <img src={recipe.smallImageUrls[0]} />
+            <div id={recipe.id} key={recipe.id}>
+              <h4>{recipe.recipeName}</h4>
+              <img id={`${recipe.id}-IMG`} src={recipe.smallImageUrls[0]} />
               <Button onClick={() => this.addRecipe(recipe)}>Add to plan</Button>
             </div>
           )
@@ -38,12 +55,12 @@ class Recipes extends Component {
 }
 
 const mapState = (state, ownProps) => {
-  if (ownProps.recipes) return { recipes: ownProps.recipes}
-  else return { recipes: state.recipes }
+  if (ownProps.recipes) return { recipes: ownProps.recipes, fromDb: false }
+  else return { recipes: state.recipes, fromDb: true }
 }
 const mapDispatch = dispatch => {
   return bindActionCreators({
-    addFoodToGroceryList
+    addFoodToGroceryList, fetchYummlyRecipeDetails
   }, dispatch)
 }
 

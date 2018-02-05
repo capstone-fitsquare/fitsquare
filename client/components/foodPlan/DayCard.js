@@ -106,7 +106,7 @@ class DayCard extends Component {
 
       </div>
     ) : (
-      <div style={square} onClick={this.toggleDetails}>
+      <div id={`dayN-${dayN}`} style={square} onClick={this.toggleDetails}>
 
       </div>
     )

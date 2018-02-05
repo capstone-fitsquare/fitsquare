@@ -14,6 +14,11 @@ export const GET_YUMMLY_LUNCH_MATCHES = 'GET_YUMMLY_LUNCH_MATCHES'
 export const GET_YUMMLY_DINNER_MATCHES = 'GET_YUMMLY_DINNER_MATCHES'
 export const GET_YUMMLY_SNACK_MATCHES = 'GET_YUMMLY_SNACK_MATCHES'
 
+export const GET_YUMMLY_BREAKFAST_DETAILS = 'GET_YUMMLY_BREAKFAST_DETAILS'
+export const GET_YUMMLY_LUNCH_DETAILS = 'GET_YUMMLY_LUNCH_DETAILS'
+export const GET_YUMMLY_DINNER_DETAILS = 'GET_YUMMLY_DINNER_DETAILS'
+export const GET_YUMMLY_SNACK_DETAILS = 'GET_YUMMLY_SNACK_DETAILS'
+
 /**
  * ACTION CREATORS
  */
@@ -24,6 +29,11 @@ export const getYummlyBreakfastMatches = breakfastMatches => ({type: GET_YUMMLY_
 export const getYummlyLunchMatches = lunchMatches => ({type: GET_YUMMLY_LUNCH_MATCHES, lunchMatches})
 export const getYummlyDinnerMatches = dinnerMatches => ({type: GET_YUMMLY_DINNER_MATCHES, dinnerMatches})
 export const getYummlySnackMatches = snackMatches => ({type: GET_YUMMLY_SNACK_MATCHES, snackMatches})
+
+export const getYummlyBreakfastDetails = breakfastDetails => ({type: GET_YUMMLY_BREAKFAST_DETAILS, breakfastDetails})
+export const getYummlyLunchDetails = lunchDetails => ({type: GET_YUMMLY_LUNCH_DETAILS, lunchDetails})
+export const getYummlyDinnerDetails = dinnerDetails => ({type: GET_YUMMLY_DINNER_DETAILS, dinnerDetails})
+export const getYummlySnackDetails = snackDetails => ({type: GET_YUMMLY_SNACK_MATCHES, snackDetails})
 
 /**
  * THUNK CREATORS
@@ -74,16 +84,35 @@ export const fetchYummlySearchMatches = (searchParameters, meal) => {
 }
 
 
-export const fetchYummlyRecipeDetails = (recipeId) =>
-  dispatch =>
+export const fetchYummlyRecipeDetails = (recipeId, meal) => {
+  console.log('hello!!')
+  return dispatch =>
     axios.get(`/api/yummly/recipe-details/${recipeId}`)
       .then(res => res.data)
       .then(details => {
         console.log('details: ', details)
-        const action = getYummlyRecipeDetails(details)
+        let action
+        switch (meal) {
+          case 'breakfast':
+            action = getYummlyBreakfastDetails(details)
+            break;
+          case 'lunch':
+            action = getYummlyLunchDetails(details)
+            break;
+          case 'dinner':
+            action = getYummlyDinnerDetails(details)
+            break;
+          case 'snack':
+            action = getYummlySnackDetails(details)
+            break;
+          default:
+            action = getYummlyRecipeDetails(details)
+            break;
+        }
         dispatch(action)
       })
       .catch(err => console.log(err))
+    }
 
 
 /**
@@ -96,7 +125,11 @@ const initialState = {
   breakfastMatches: {},
   lunchMatches: {},
   dinnerMatches: {},
-  snackMatches: {}
+  snackMatches: {},
+  breakfastDetails: [],
+  lunchDetails: [],
+  dinnerDetails: [],
+  snackDetails: []
 }
 
 export default function (state = initialState, action) {
@@ -131,6 +164,26 @@ export default function (state = initialState, action) {
       return {
         ...state,
         snackMatches: action.snackMatches }
+
+      case GET_YUMMLY_BREAKFAST_DETAILS:
+        return {
+          ...state,
+          breakfastDetails: [...state.breakfastDetails, action.breakfastDetails] }
+
+      case GET_YUMMLY_LUNCH_DETAILS:
+        return {
+          ...state,
+          lunchDetails: [...state.lunchDetails, action.lunchDetails] }
+
+      case GET_YUMMLY_DINNER_DETAILS:
+        return {
+          ...state,
+          dinnerDetails: [...state.dinnerDetails, action.dinnerDetails] }
+
+      case GET_YUMMLY_SNACK_DETAILS:
+        return {
+          ...state,
+          snackDetails: [...state.snackDetails, action.snackDetails] }
 
     default:
       return state

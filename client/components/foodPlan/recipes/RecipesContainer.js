@@ -26,10 +26,10 @@ class RecipeNav extends Component {
 
     const panes = [
       // { menuItem: 'All', render: () => <Tab.Pane loading={false}><Recipes /></Tab.Pane> },
-      { menuItem: 'Breakfast', render: () => <Tab.Pane><Recipes recipes={breakfastRecipes} /></Tab.Pane> },
-      { menuItem: 'Lunch', render: () => <Tab.Pane><Recipes recipes={lunchRecipes} /></Tab.Pane> },
-      { menuItem: 'Dinner', render: () => <Tab.Pane><Recipes recipes={dinnerRecipes} /></Tab.Pane> },
-      { menuItem: 'Snacks', render: () => <Tab.Pane><Recipes recipes={snackRecipes} /></Tab.Pane> },
+      { menuItem: 'Breakfast', render: () => <Tab.Pane><Recipes recipes={breakfastRecipes} meal="breakfast" /></Tab.Pane> },
+      { menuItem: 'Lunch', render: () => <Tab.Pane><Recipes recipes={lunchRecipes} meal="lunch" /></Tab.Pane> },
+      { menuItem: 'Dinner', render: () => <Tab.Pane><Recipes recipes={dinnerRecipes} meal="dinner" /></Tab.Pane> },
+      { menuItem: 'Snacks', render: () => <Tab.Pane><Recipes recipes={snackRecipes} meal="snacks" /></Tab.Pane> },
       // { menuItem: 'Favorites', render: () => <Tab.Pane><Recipes meal="breakfast" /></Tab.Pane> },
     ]
 
@@ -46,12 +46,6 @@ const mapState = state => {
     dinnerRecipes: state.yummlySearch.dinnerMatches.matches,
     snackRecipes: state.yummlySearch.snackMatches.matches
   }
-  // return {
-  //   breakfastRecipes: state.recipes.filter(recipe => recipe.meal === 'breakfast'),
-  //   lunchRecipes: state.recipes.filter(recipe => recipe.meal === 'lunch'),
-  //   dinnerRecipes: state.recipes.filter(recipe => recipe.meal === 'dinner'),
-  //   snackRecipes: state.recipes.filter(recipe => recipe.meal === 'snack'),
-  // }
 }
 const mapDispatch = dispatch => {
   return bindActionCreators({
