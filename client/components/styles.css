@@ -1,0 +1,14 @@
+.login-form {
+  margin-top: 100px;
+}
+button[type='submit'] {
+  margin-top: 25px !important;
+}
+
+.ui[class*='left icon'].input > input {
+  padding-left: 5px !important;
+}
+
+header {
+  margin-left: 5px;
+}

@@ -15,10 +15,20 @@ import {
   Animations,
   Checkbox,
   FoodPlanWrapper,
-  GroceryList
+  GroceryList,
+  UserAccountProfilePage,
+  Test,
 } from './components';
 
-import { me, fetchExercises, fetchGroceryLists, fetchListItems, fetchMacroGoals, fetchMicroGoals, fetchRecipes } from './store';
+import {
+  me,
+  fetchExercises,
+  fetchGroceryLists,
+  fetchListItems,
+  fetchMacroGoals,
+  fetchMicroGoals,
+  fetchRecipes,
+} from './store';
 import RecipesContainer from './components/foodPlan/recipes/RecipesContainer';
 
 /**
@@ -46,11 +56,13 @@ class Routes extends Component {
             <Route exact path="/recipes-box" component={RecipesContainer} />
             <Route exact path="/food-plan" component={FoodPlanWrapper} />
             <Route exact path="/" component={IntroSequence} />
+            <Route exact path="/test" component={Test} />
 
             {isLoggedIn && (
               <Switch>
                 {/* Routes placed here are only available after logging in */}
                 <Route path="/home" component={UserHome} />
+                <Route path="/profile-page" component={UserAccountProfilePage} />
               </Switch>
             )}
             {/* Displays our Login component as a fallback */}
@@ -82,7 +94,7 @@ const mapDispatch = dispatch => {
       dispatch(fetchListItems());
       dispatch(fetchMacroGoals());
       dispatch(fetchMicroGoals());
-      dispatch(fetchRecipes())
+      dispatch(fetchRecipes());
     },
   };
 };
