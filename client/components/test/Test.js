@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-//import axios from 'axios';
-import { Grid, Segment, Form, Input } from 'semantic-ui-react';
+import axios from 'axios';
+import { Grid, Segment, Form } from 'semantic-ui-react';
 import './test.css';
 
 class Test extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = { phonenumber: '', submittedphonenumber: '' };
 
     this.handleChange = this.handleChange.bind(this);
@@ -17,9 +17,13 @@ class Test extends Component {
   }
 
   handleSubmit() {
-    const { phonenumber } = this.state;
-    console.log(phonenumber);
-    this.setState({ submittedphonenumber: phonenumber });
+    axios
+      .post('/api/send', {
+        body: this.state.phonenumber,
+      })
+      .then(res => res.json())
+      .then(res => console.log(res))
+      .catch(error => console.log(error));
   }
 
   render() {
@@ -34,7 +38,7 @@ class Test extends Component {
               <Form.Group id="form-group" inline>
                 <label>Phone Number</label>
                 <Form.Input
-                  placeholder="(xxx)"
+                  placeholder="+12223334444"
                   phonenumber="phonenumber"
                   value={phonenumber}
                   onChange={this.handleChange}

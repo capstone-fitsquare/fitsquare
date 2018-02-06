@@ -65,6 +65,7 @@
     "sequelize": "^4.3.1",
     "socket.io": "^2.0.3",
     "style-loader": "^0.20.1",
+    "twilio": "^3.11.2",
     "ws-yummly": "^1.0.24"
   },
   "devDependencies": {
