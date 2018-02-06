@@ -15,14 +15,15 @@ const Types = {
 }
 
 const dayCardTarget = {
-	drop() {
-		return { name: 'Day Card' }
+	drop(props, monitor, component) {
+    return { name: 'Day Card' }
 	},
 }
 
 const collect = (connect, monitor) => {
   return {
-    connectDropTarget: connect.dropTarget()
+    connectDropTarget: connect.dropTarget(),
+    recipeId: monitor.getItem()
   }
 }
 

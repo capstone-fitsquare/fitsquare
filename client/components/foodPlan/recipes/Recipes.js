@@ -22,19 +22,21 @@ class Recipes extends Component {
 
     const { recipes } = this.props
 
-    if (recipes.length){
-      console.log('recipes', recipes)
-      console.log('recipeId', recipes[0].id)
-      console.log('recipeImg', recipes[0].smallImageUrls[0])
-    }
-
     return (
       <div>
         {recipes.length && recipes.map(recipe => {
           return (
             <div key={recipe.id}>
               <h4>{recipe.recipeName}</h4>
-              <RecipeImg id={recipe.id} src={recipe.smallImageUrls[0]} />
+              <RecipeImg
+                id={recipe.id}
+                src={recipe.smallImageUrls[0]}
+                meal={recipe.meal}
+                calories={recipe.calories}
+                protein={recipe.protein}
+                carbs={recipe.carbs}
+                fat={recipe.fat}
+              />
               <Button onClick={() => this.addRecipe(recipe)}>Add to plan</Button>
             </div>
           )
