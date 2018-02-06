@@ -15,7 +15,8 @@ import {
   Animations,
   Checkbox,
   FoodPlanWrapper,
-  GroceryList
+  GroceryList,
+  Container
 } from './components';
 
 import { me, fetchExercises, fetchGroceryLists, fetchListItems, fetchMacroGoals, fetchMicroGoals, fetchRecipes } from './store';
@@ -45,6 +46,7 @@ class Routes extends Component {
             <Route exact path="/checkbox" component={Checkbox} />
             <Route exact path="/recipes-box" component={RecipesContainer} />
             <Route exact path="/food-plan" component={FoodPlanWrapper} />
+            <Route exact path="/dnd-test" component={Container} />
             <Route exact path="/" component={IntroSequence} />
 
             {isLoggedIn && (

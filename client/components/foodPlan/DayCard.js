@@ -7,7 +7,24 @@ import MicroGoalCountdown from './MicroGoalCountdown';
 import Piechart from '../visualizations/PieChart'
 import { addFoodDayN, removeFoodDayN } from '../../store'
 import { Button, Icon } from 'semantic-ui-react'
+import { DropTarget } from 'react-dnd'
 
+
+const Types = {
+  ITEM: 'recipe_img'
+}
+
+const dayCardTarget = {
+	drop() {
+		return { name: 'Day Card' }
+	},
+}
+
+const collect = (connect, monitor) => {
+  return {
+    connectDropTarget: connect.dropTarget()
+  }
+}
 
 class DayCard extends Component {
 
@@ -33,103 +50,128 @@ class DayCard extends Component {
 
     const { breakfast, lunch, dinner, snack, dayN } = this.props
 
-    // const foods = foodsDayN.find(day => day.day === dayN)
+    const { canDrop, isOver, connectDropTarget } = this.props
+		const isActive = canDrop && isOver
 
-    return this.state.showDetails ?
-    (
-      <div style={container}>
+    let backgroundColor = 'lightgreen'
+		if (isActive) {
+			backgroundColor = 'darkgreen'
+		} else if (canDrop) {
+			backgroundColor = 'darkkhaki'
+		}
 
-        <div style={width}>
-          <div style={meal}>
-            <div style={breakfast}>
-              <p>Breakfast</p>
-              <Button icon size='mini' onClick={this.toggleDetails} circular={true} style={minus}>
-                <Icon name='window minimize' />
-              </Button>
-            </div>
-            <div>
-                {breakfast &&
-                  <div>
-                    <div>{breakfast.name}</div>
-                    <img src={breakfast.imgUrl} />
-                  </div>
-                }
-            </div>
-            <SearchButton meal="breakfast" dayN={dayN} />
-          </div>
+    // return this.state.showDetails ?
+    // connectDropTarget(
+    //   <div style={container}>
 
-          <div style={meal}>
-            <div>
-              <p>Lunch</p>
-            </div>
-            <div>
-                {lunch &&
-                  <div>
-                    <div>{lunch.name}</div>
-                    <img src={lunch.imgUrl} />
-                  </div>
-                }
-            </div>
-            <SearchButton meal="lunch" dayN={dayN} />
-          </div>
+    //     <div style={width}>
+    //       <div style={meal}>
+    //         <div style={breakfast}>
+    //           <p>Breakfast</p>
+    //           <Button icon size='mini' onClick={this.toggleDetails} circular={true} style={minus}>
+    //             <Icon name='window minimize' />
+    //           </Button>
+    //         </div>
+    //         <div>
+    //             {breakfast &&
+    //               <div>
+    //                 <div>{breakfast.name}</div>
+    //                 <img src={breakfast.imgUrl} />
+    //               </div>
+    //             }
+    //         </div>
+    //         <SearchButton meal="breakfast" dayN={dayN} />
+    //       </div>
 
-          <div style={meal}>
-            <div>
-              <p>Dinner</p>
-            </div>
-            <div>
-                {dinner &&
-                  <div>
-                    <div>{dinner.name}</div>
-                    <img src={dinner.imgUrl} />
-                  </div>
-                }
-            </div>
-            <SearchButton meal="dinner" dayN={dayN} />
-          </div>
+    //       <div style={meal}>
+    //         <div>
+    //           <p>Lunch</p>
+    //         </div>
+    //         <div>
+    //             {lunch &&
+    //               <div>
+    //                 <div>{lunch.name}</div>
+    //                 <img src={lunch.imgUrl} />
+    //               </div>
+    //             }
+    //         </div>
+    //         <SearchButton meal="lunch" dayN={dayN} />
+    //       </div>
 
-          <div style={meal}>
-            <div>
-              <p>Snacks</p>
-            </div>
-            <div>
-                {snack &&
-                  <div>
-                    <div>{snack.name}</div>
-                    <img src={snack.imgUrl} />
-                  </div>
-                }
-            </div>
-            <SearchButton meal="snacks" dayN={dayN} />
-          </div>
+    //       <div style={meal}>
+    //         <div>
+    //           <p>Dinner</p>
+    //         </div>
+    //         <div>
+    //             {dinner &&
+    //               <div>
+    //                 <div>{dinner.name}</div>
+    //                 <img src={dinner.imgUrl} />
+    //               </div>
+    //             }
+    //         </div>
+    //         <SearchButton meal="dinner" dayN={dayN} />
+    //       </div>
+
+    //       <div style={meal}>
+    //         <div>
+    //           <p>Snacks</p>
+    //         </div>
+    //         <div>
+    //             {snack &&
+    //               <div>
+    //                 <div>{snack.name}</div>
+    //                 <img src={snack.imgUrl} />
+    //               </div>
+    //             }
+    //         </div>
+    //         <SearchButton meal="snacks" dayN={dayN} />
+    //       </div>
+    //     </div>
+
+    //   </div>
+    // ) : connectDropTarget(
+    //   <div id={`dayN-${dayN}`} style={square} onClick={this.toggleDetails}>
+    //   {
+    //     isDragging ?
+    //     <div>'Release to drop'</div>
+    //     : <div>'Drag an img here'</div>
+    //   }
+    //   </div>
+
+      return connectDropTarget(
+        <div id={`dayN-${dayN}`} style={{...square, background: backgroundColor}} onClick={this.toggleDetails}>
+        {
+          isActive ?
+          <div>'Release to drop'</div>
+          : <div>'Drag an img here'</div>
+        }
         </div>
-
-      </div>
-    ) : (
-      <div id={`dayN-${dayN}`} style={square} onClick={this.toggleDetails}>
-
-      </div>
-    )
+      )
   }
 
 }
 
-const mapState = (state, ownProps) => {
-  // return {
-  //   foodsDayN: state.foodsDayN
-  // }
-  const { dayN } = ownProps
-  return {
-    breakfast: state.recipes.filter(recipe => recipe.meal === 'breakfast')[dayN],
-    lunch: state.recipes.filter(recipe => recipe.meal === 'lunch')[dayN],
-    dinner: state.recipes.filter(recipe => recipe.meal === 'dinner')[dayN],
-    snack: state.recipes.filter(recipe => recipe.meal === 'snack')[dayN]
-  }
-}
+// const mapState = (state, ownProps) => {
+//   // return {
+//   //   foodsDayN: state.foodsDayN
+//   // }
+//   const { dayN } = ownProps
+//   return {
+//     breakfast: state.recipes.filter(recipe => recipe.meal === 'breakfast')[dayN],
+//     lunch: state.recipes.filter(recipe => recipe.meal === 'lunch')[dayN],
+//     dinner: state.recipes.filter(recipe => recipe.meal === 'dinner')[dayN],
+//     snack: state.recipes.filter(recipe => recipe.meal === 'snack')[dayN]
+//   }
+// }
 
-const mapDispatch = null
+// const mapDispatch = null
 
-export default connect(mapState, mapDispatch)(DayCard)
+export default DropTarget(Types.ITEM, dayCardTarget, (connect, monitor) => ({
+	connectDropTarget: connect.dropTarget(),
+	isOver: monitor.isOver(),
+	canDrop: monitor.canDrop(),
+}))(DayCard)
 
 const styles = {
   container: {
@@ -166,3 +208,4 @@ const styles = {
 }
 
 const { container, meal, square, minus, breakfast, width } = styles
+

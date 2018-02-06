@@ -6,6 +6,11 @@ import { withRouter, Link } from 'react-router-dom'
 import AllDays from './AllDays'
 import RecipesContainer from './recipes/RecipesContainer'
 import { addFoodToGroceryList } from '../../store'
+import HTML5Backend from 'react-dnd-html5-backend'
+import { DragDropContext } from 'react-dnd'
+import { DragDropContextProvider } from 'react-dnd'
+import DayCard from './DayCard'
+import RecipeImg from './recipes/RecipeImg'
 
 
 class FoodPlanWrapper extends Component {
@@ -23,37 +28,29 @@ class FoodPlanWrapper extends Component {
   render() {
 
     const { visible } = this.state
+    const url = 'https://lh3.googleusercontent.com/qZIidhoLjHWPecBgMyp2JzRbLImOeRLverx7JKv_cniE3eFK0kR-75e7pUBSWQZ484RBocyJZe6b6bEqcLuSRQ=s90'
 
     return (
-      <div id="foodPlanWrapper">
-        <Button onClick={this.toggleVisibility}>Recipes</Button>
-        <Sidebar.Pushable as={Segment}>
-          <Sidebar animation='push' visible={visible}>
-            <RecipesContainer />
-          </Sidebar>
-          <Sidebar.Pusher>
-            <Segment basic>
-              <AllDays />
-            </Segment>
-          </Sidebar.Pusher>
-        </Sidebar.Pushable>
-      </div>
+      // <DragDropContextProvider backend={HTML5Backend}>
+        <div id="foodPlanWrapper">
+          <Button onClick={this.toggleVisibility}>Recipes</Button>
+          <Sidebar.Pushable as={Segment}>
+            <Sidebar animation="push" visible={visible}>
+              <RecipesContainer />
+            </Sidebar>
+            <Sidebar.Pusher>
+              <Segment basic>
+                <AllDays />
+              </Segment>
+            </Sidebar.Pusher>
+          </Sidebar.Pushable>
+        </div>
+      // </DragDropContextProvider>
     )
   }
 }
 
-const mapState = state => {
-  return {
-    groceryList: state.foodsGroceryList
-  }
-}
-const mapDispatch = dispatch => {
-  return bindActionCreators({
-
-  }, dispatch)
-}
-
-export default withRouter(connect(mapState, mapDispatch)(FoodPlanWrapper))
+export default DragDropContext(HTML5Backend)(FoodPlanWrapper)
 
 const styles = {
   container: {
@@ -71,7 +68,7 @@ const styles = {
     padding: '1em',
     margin: '1em',
     alignItems: 'center'
-  },
+  }
 }
 
 const { container, header, preferencesParent } = styles
