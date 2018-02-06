@@ -6,7 +6,7 @@
 export { default as Main } from './Main';
 export { default as UserHome } from './UserHome';
 export { Login, Signup } from './AuthForm';
-export { default as Animations } from './Animations'
+export { default as Animations } from './Animations';
 
 // intro folder
 export { default as IntroSequence } from './intro/IntroSequence';
@@ -18,6 +18,7 @@ export { default as AnalyzeBiometrics } from './intro/05_AnalyzeBiometrics';
 export { default as BiometricsReport } from './intro/06_BiometricsReport';
 export { default as GatherPreferences } from './intro/07_GatherPreferences';
 export { default as GenerateFoodPlan } from './intro/08_GenerateFoodPlan';
+export { default as UserAccountProfilePage } from './intro/UserAccountProfilePage';
 
 // newGoals folder
 export { default as NewGoals } from './newGoals/NewGoals';
