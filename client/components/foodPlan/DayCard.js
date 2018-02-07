@@ -74,7 +74,7 @@ class DayCard extends Component {
 
   render() {
 
-    const { breakfast, lunch, dinner, snacks, dayN } = this.props
+    const { breakfast, lunch, dinner, snacks, dayN, macroGoal } = this.props
 
     console.log('breakfast', breakfast)
 
@@ -105,7 +105,14 @@ class DayCard extends Component {
             <Button icon size='mini' onClick={this.toggleDetails} circular={true} style={minus}>
               <Icon name='window minimize' />
             </Button>
-            <MacrosProgress dayN={dayN} showDetails={this.state.showDetails} />
+            <MacrosProgress
+              showDetails={this.state.showDetails}
+              breakfast={breakfast}
+              lunch={lunch}
+              dinner={dinner}
+              snacks={snacks}
+              macroGoal={macroGoal}
+            />
           </div>
           <div style={{...meal, background: detailsBackground}}>
             <div style={breakfast}>
@@ -171,7 +178,14 @@ class DayCard extends Component {
       </div>
     ) : connectDropTarget(
       <div id={`dayN-${dayN}`} style={square} style={{...square, background: dayBackground}} onClick={this.toggleDetails}>
-        <MacrosProgress dayN={dayN} showDetails={this.state.showDetails} />
+        <MacrosProgress
+          showDetails={this.state.showDetails}
+          breakfast={breakfast}
+          lunch={lunch}
+          dinner={dinner}
+          snacks={snacks}
+          macroGoal={macroGoal}
+        />
       </div>
     )
   }
@@ -184,7 +198,8 @@ const mapState = (state, ownProps) => {
     breakfast: state.foodsDayN[dayN].breakfast,
     lunch: state.foodsDayN[dayN].lunch,
     dinner: state.foodsDayN[dayN].dinner,
-    snacks: state.foodsDayN[dayN].snacks
+    snacks: state.foodsDayN[dayN].snacks,
+    macroGoal: state.macroGoals[0]  // filter by user
   }
 }
 
