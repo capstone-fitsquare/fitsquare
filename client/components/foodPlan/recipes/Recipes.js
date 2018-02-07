@@ -21,7 +21,6 @@ class Recipes extends Component {
   render() {
 
     const { recipes } = this.props
-    recipes ? console.log('recipes[0]', recipes[0]) : console.log('waiting')
 
     return (
       <div>

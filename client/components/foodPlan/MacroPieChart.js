@@ -1,5 +1,7 @@
 import React from "react"
 import PieChart from "react-svg-piechart"
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux'
 
 
 const MacroPieChart = (props) => {
@@ -18,15 +20,21 @@ const MacroPieChart = (props) => {
       // If you need expand on hover (or touch) effect
       expandOnHover
       // If you need custom behavior when sector is hovered (or touched)
-      onSectorHover={(d, i, e) => {
-        if (d) {
-          console.log("Mouse enter - Index:", i, "Data:", d, "Event:", e)
-        } else {
-          console.log("Mouse leave - Index:", i, "Event:", e)
-        }
-      }}
+      // onSectorHover={(d, i, e) => {
+      //   if (d) {
+      //     console.log("Mouse enter - Index:", i, "Data:", d, "Event:", e)
+      //   } else {
+      //     console.log("Mouse leave - Index:", i, "Event:", e)
+      //   }
+      // }}
     />
   )
+}
+
+const mapState = state => {
+  return {
+
+  }
 }
 
 

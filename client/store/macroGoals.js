@@ -64,30 +64,30 @@ export const destroyMacroGoal = (id) =>
 /**
  * REDUCER
  */
-export default function (state = [], action) {
+export default function (state = {}, action) {
   switch (action.type) {
 
-    case GET_MACRO_GOALS:
-      return action.macroGoals
+    // case GET_MACRO_GOALS:
+    //   return action.macroGoals
 
     case CREATE_MACRO_GOAL:
-      return [...state, action.macroGoal]
+      return action.macroGoal
 
-    case EDIT_MACRO_GOAL: {
-      const itemToEdit = state.find(macroGoal => macroGoal.id === action.macroGoal.id);
-      const indexOfItemToEdit = state.indexOf(itemToEdit);
-      let newState = [...state];
-      newState.splice(indexOfItemToEdit, 1, action.macroGoal);
-      return newState;
-    }
+    // case EDIT_MACRO_GOAL: {
+    //   const itemToEdit = state.find(macroGoal => macroGoal.id === action.macroGoal.id);
+    //   const indexOfItemToEdit = state.indexOf(itemToEdit);
+    //   let newState = [...state];
+    //   newState.splice(indexOfItemToEdit, 1, action.macroGoal);
+    //   return newState;
+    // }
 
-    case DELETE_MACRO_GOAL: {
-      const itemToDelete = state.find(macroGoal => macroGoal.id === action.id);
-      const indexOfItemToDelete = state.indexOf(itemToDelete);
-      let newState = [...state];
-      newState.splice(indexOfItemToDelete, 1);
-      return newState;
-    }
+    // case DELETE_MACRO_GOAL: {
+    //   const itemToDelete = state.find(macroGoal => macroGoal.id === action.id);
+    //   const indexOfItemToDelete = state.indexOf(itemToDelete);
+    //   let newState = [...state];
+    //   newState.splice(indexOfItemToDelete, 1);
+    //   return newState;
+    // }
 
     default:
       return state

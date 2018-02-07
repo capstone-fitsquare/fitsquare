@@ -3,12 +3,13 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 import { Button } from 'semantic-ui-react'
 import {withRouter, Link} from 'react-router-dom'
+import { postMacroGoal } from '../../store'
 
 class BiometricsReport extends Component {
 
   render() {
 
-    const { calories, protein, carbs, fat } = this.props.introProfile
+    const { goalType, calories, protein, carbs, fat } = this.props.introProfile
 
     return (
       <div style={container}>
@@ -16,6 +17,9 @@ class BiometricsReport extends Component {
           <p>Biometrics Report</p>
         </div>
         <div style={reportContainer}>
+          <div style={caloriesStyle}>
+            <p>Goal: {goalType}</p>
+          </div>
           <div style={caloriesStyle}>
             <p>Calories: {calories}</p>
           </div>
@@ -34,7 +38,17 @@ class BiometricsReport extends Component {
             </div>
           </div>
         </div>
-        <Button onClick={() => this.props.transition('biometricsReport', 'gatherPreferences')} style={button}>Accept</Button>
+        <Button onClick={() => {
+            this.props.transition('biometricsReport', 'gatherPreferences')
+            this.props.postMacroGoal({
+              name: goalType,
+              calories,
+              protein,
+              carbs,
+              fat
+            })
+          }}
+          style={button}>Accept</Button>
       </div>
     )
   }
@@ -46,7 +60,11 @@ const mapState = state => {
   }
 }
 
-const mapDispatch = null
+const mapDispatch = dispatch => {
+  return bindActionCreators({
+    postMacroGoal
+  }, dispatch)
+}
 
 export default withRouter(connect(mapState, mapDispatch)(BiometricsReport))
 

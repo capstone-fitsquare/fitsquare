@@ -91,11 +91,6 @@ const mapDispatch = dispatch => {
   return {
     loadInitialData() {
       dispatch(me());
-      dispatch(fetchExercises());
-      dispatch(fetchGroceryLists());
-      dispatch(fetchListItems());
-      dispatch(fetchMacroGoals());
-      dispatch(fetchMicroGoals());
       dispatch(fetchRecipes());
     },
   };

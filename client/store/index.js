@@ -4,7 +4,7 @@ import thunkMiddleware from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import user from './user'
 import exercises from './exercises'
-import macroGoals from './macroGoals'
+import macroGoal from './macroGoals'
 import microGoals from './microGoals'
 import groceryLists from './groceryLists'
 import listItems from './listItems'
@@ -21,7 +21,7 @@ import recipes from './recipes'
 const reducer = combineReducers({
   user,
   exercises,
-  macroGoals,
+  macroGoal,
   microGoals,
   groceryLists,
   listItems,
