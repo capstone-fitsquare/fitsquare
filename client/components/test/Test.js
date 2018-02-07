@@ -19,7 +19,7 @@ class Test extends Component {
     this.setState({ phone: '', formSubmitted: true });
     return axios
       .post('/api/twilio', {
-        phonenumber: this.state.phone,
+        phone: this.state.phone,
       })
       .then(resp => resp.data)
       .catch(error => console.log(error));
