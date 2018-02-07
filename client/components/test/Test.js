@@ -1,50 +1,57 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Grid, Segment, Form } from 'semantic-ui-react';
+import { Grid, Segment, Form, Message } from 'semantic-ui-react';
+import Phone from 'react-phone-number-input';
+import 'react-phone-number-input/rrui.css';
+import 'react-phone-number-input/style.css';
 import './test.css';
 
 class Test extends Component {
   constructor(props) {
     super(props);
-    this.state = { phonenumber: '', submittedphonenumber: '' };
+    this.state = { phone: '', formSubmitted: false };
 
-    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleChange(event, { phonenumber, value }) {
-    this.setState({ [phonenumber]: value });
+    // this.isValid = this.isValid.bind(this);
   }
 
   handleSubmit() {
-    axios
-      .post('/api/send', {
-        body: this.state.phonenumber,
+    this.setState({ phone: '', formSubmitted: true });
+    return axios
+      .post('/api/twilio', {
+        phonenumber: this.state.phone,
       })
-      .then(res => res.json())
-      .then(res => console.log(res))
+      .then(resp => resp.data)
       .catch(error => console.log(error));
   }
 
+  // isValid() {}
+
   render() {
-    const { phonenumber } = this.state;
+    const { phone, formSubmitted } = this.state;
+
+    let message = null;
+
+    if (formSubmitted) {
+      message = <Message success header="Form Completed" content="Grocery list is on its way! " />;
+    }
 
     return (
       <Grid columns={1} stackable textAlign="center">
         <Grid.Column width={1} />
         <Grid.Column width={14}>
-          <Form onSubmit={this.handleSubmit}>
+          <Form success onSubmit={this.handleSubmit}>
             <Segment stacked>
-              <Form.Group id="form-group" inline>
-                <label>Phone Number</label>
-                <Form.Input
-                  placeholder="+12223334444"
-                  phonenumber="phonenumber"
-                  value={phonenumber}
-                  onChange={this.handleChange}
-                />
-              </Form.Group>
+              <label>Phone Number</label>
+              <Phone
+                placeholder="Enter +12223334444"
+                value={phone}
+                onChange={phone => {
+                  this.setState({ phone, formSubmitted: false });
+                }}
+              />
               <Form.Button id="form-group-button" content="Submit" />
+              {message}
             </Segment>
           </Form>
         </Grid.Column>

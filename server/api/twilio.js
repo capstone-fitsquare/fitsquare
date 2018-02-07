@@ -2,10 +2,10 @@ const router = require('express').Router();
 
 module.exports = router;
 
-router.post('/api/send', (req, res) => {
-  let SID = process.env.TWILIO_SID;
-  let TOKEN = process.env.TWILIO_TOKEN;
-  let SENDER = process.env.TWILIO_SENDER;
+router.post('/', (req, res) => {
+  let SID = 'ACc5b16ad0cefc3b514e69bc30636726e2';
+  let TOKEN = '3145fb41afe308f22b0b7c647e6a8e17';
+  let SENDER = '+18622256079';
 
   if (!SID || !TOKEN) {
     return res.json({ message: 'add TWILIO_SID and TWILIO_TOKEN to .env file.' });
@@ -13,19 +13,22 @@ router.post('/api/send', (req, res) => {
 
   let client = require('twilio')(SID, TOKEN);
 
-  client.sendMessage(
-    {
+  client.messages
+    .create({
       to: req.body.phonenumber,
       from: SENDER,
-      body: 'word to your mother.',
-    },
-    (err, responseData) => {
-      if (!err) {
-        res.json({
-          From: responseData.from,
-          Body: responseData.body,
-        });
-      }
-    }
-  );
+      body: 'This is the ship that made the Kessel Run in fourteen parsecs?',
+    })
+    .then(message => {
+      console.log(message.sid);
+
+      // Either just send an empty, successful response or some data (e.g. the `sid`)
+      res.status(200).send(message.sid);
+    })
+    .catch(err => {
+      console.log(err);
+
+      // In case of an error, let the client know as well.
+      res.status(500).send(err);
+    });
 });
