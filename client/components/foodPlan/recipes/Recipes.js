@@ -5,6 +5,7 @@ import { Button, Checkbox, Form, Input, Radio, Select, TextArea } from 'semantic
 import { withRouter, Link } from 'react-router-dom'
 import axios from 'axios'
 import { addFoodToGroceryList } from '../../../store'
+import RecipeImg from './RecipeImg'
 
 class Recipes extends Component {
 
@@ -23,15 +24,25 @@ class Recipes extends Component {
 
     return (
       <div>
-        {recipes.length && recipes.map(recipe => {
+        {recipes.length ? recipes.map(recipe => {
           return (
-            <div id={recipe.id} key={recipe.id}>
+            <div key={recipe.id}>
               <h4>{recipe.recipeName}</h4>
-              <img id={`${recipe.id}-IMG`} src={recipe.smallImageUrls[0]} />
+              <RecipeImg
+                id={recipe.id}
+                name={recipe.recipeName}
+                src={recipe.smallImageUrls[0]}
+                meal={recipe.meal}
+                calories={recipe.calories}
+                protein={recipe.protein}
+                carbs={recipe.carbs}
+                fat={recipe.fat}
+                ingredients={recipe.ingredients}
+              />
               <Button onClick={() => this.addRecipe(recipe)}>Add to plan</Button>
             </div>
           )
-        })}
+        }) : null }
       </div>
     )
   }

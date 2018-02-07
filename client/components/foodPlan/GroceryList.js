@@ -29,9 +29,9 @@ class GroceryList extends Component {
       <div>
         <h4>Grocery List</h4>
         <ul>
-          {groceryList.length && groceryList.map(ingredient =>
+          {groceryList.length ? groceryList.map(ingredient =>
             <li key={ingredient}>{ingredient}</li>
-          )}
+          ) : null }
         </ul>
       </div>
     )

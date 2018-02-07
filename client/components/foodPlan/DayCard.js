@@ -5,9 +5,52 @@ import SearchButton from './SearchButton'
 import MacroGoalCountdown from './MacroGoalCountdown';
 import MicroGoalCountdown from './MicroGoalCountdown';
 import Piechart from '../visualizations/PieChart'
-import { addFoodDayN, removeFoodDayN } from '../../store'
+import store, { addFoodToDayN, removeFoodFromDayN, addFoodToGroceryList } from '../../store'
 import { Button, Icon } from 'semantic-ui-react'
+import { DropTarget } from 'react-dnd'
+import MacrosProgress from './MacrosProgress'
 
+
+const Types = {
+  ITEM: 'recipe_img'
+}
+
+const dayCardTarget = {
+	drop(props, monitor) {
+    const recipe = monitor.getItem()
+    const dayN = props.dayN
+    const food = {
+      id: recipe.id,
+      name: recipe.name,
+      meal: recipe.meal,
+      img: recipe.src,
+      calories: recipe.calories,
+      protein: recipe.protein,
+      carbs: recipe.carbs,
+      fat: recipe.fat,
+      ingredients: recipe.ingredients
+    }
+    const meal = recipe.meal === 'snack' ? 'snacks' : recipe.meal
+    const ingredients = recipe.ingredients
+    console.log('food', food)
+    console.log('meal', meal)
+    console.log('typeof meal', typeof(meal))
+    console.log('ingredients', ingredients)
+    store.dispatch(addFoodToDayN(dayN, food, meal))
+    store.dispatch(addFoodToGroceryList(ingredients))
+    return { name: 'Day Card', dayN: props.dayN }
+	},
+}
+
+const collect = (connect, monitor) => {
+  return {
+    connectDropTarget: connect.dropTarget(),
+    isOver: monitor.isOver(),
+    canDrop: monitor.canDrop(),
+    draggedRecipe: monitor.getItem(),
+    didDrop: monitor.didDrop(),
+  }
+}
 
 class DayCard extends Component {
 
@@ -20,7 +63,7 @@ class DayCard extends Component {
   }
 
   componentWillMount() {
-    if (this.props.dayN === 0) this.setState({ showDetails: true })
+    // if (this.props.dayN === 0) this.setState({ showDetails: true })
   }
 
   toggleDetails() {
@@ -31,83 +74,104 @@ class DayCard extends Component {
 
   render() {
 
-    const { breakfast, lunch, dinner, snack, dayN } = this.props
+    const { breakfast, lunch, dinner, snacks, dayN } = this.props
 
-    // const foods = foodsDayN.find(day => day.day === dayN)
+    console.log('breakfast', breakfast)
+
+    const { canDrop, isOver, connectDropTarget, draggedRecipe, didDrop } = this.props
+
+		const isActive = canDrop && isOver
+
+    let dayBackground = 'lightgreen'
+		if (isActive) {
+			dayBackground = 'lightcyan'
+		} else if (canDrop) {
+			dayBackground = 'lightorange'
+    }
+
+    let detailsBackground = 'lightyellow'
+		if (isActive) {
+			detailsBackground = 'lightcyan'
+		} else if (canDrop) {
+			detailsBackground = 'lightorange'
+		}
 
     return this.state.showDetails ?
-    (
+    connectDropTarget(
       <div style={container}>
 
         <div style={width}>
-          <div style={meal}>
+          <div style={progress}>
+            <Button icon size='mini' onClick={this.toggleDetails} circular={true} style={minus}>
+              <Icon name='window minimize' />
+            </Button>
+            <MacrosProgress dayN={dayN} showDetails={this.state.showDetails} />
+          </div>
+          <div style={{...meal, background: detailsBackground}}>
             <div style={breakfast}>
               <p>Breakfast</p>
-              <Button icon size='mini' onClick={this.toggleDetails} circular={true} style={minus}>
-                <Icon name='window minimize' />
-              </Button>
             </div>
             <div>
-                {breakfast &&
-                  <div>
-                    <div>{breakfast.name}</div>
-                    <img src={breakfast.imgUrl} />
+                {breakfast.length ? breakfast.map(recipe =>
+                  <div key={recipe.id}>
+                    <div>{recipe.name}</div>
+                    <img src={recipe.img} />
                   </div>
-                }
+                ) : null}
             </div>
             <SearchButton meal="breakfast" dayN={dayN} />
           </div>
 
-          <div style={meal}>
+          <div style={{...meal, background: detailsBackground}}>
             <div>
               <p>Lunch</p>
             </div>
             <div>
-                {lunch &&
-                  <div>
-                    <div>{lunch.name}</div>
-                    <img src={lunch.imgUrl} />
+                {lunch.length ? lunch.map(recipe =>
+                  <div key={recipe.id}>
+                    <div>{recipe.name}</div>
+                    <img src={recipe.img} />
                   </div>
-                }
+                ) : null}
             </div>
             <SearchButton meal="lunch" dayN={dayN} />
           </div>
 
-          <div style={meal}>
+          <div style={{...meal, background: detailsBackground}}>
             <div>
               <p>Dinner</p>
             </div>
             <div>
-                {dinner &&
-                  <div>
-                    <div>{dinner.name}</div>
-                    <img src={dinner.imgUrl} />
+                {dinner.length ? dinner.map(recipe =>
+                  <div key={recipe.id}>
+                    <div>{recipe.name}</div>
+                    <img src={recipe.img} />
                   </div>
-                }
+                ) : null}
             </div>
             <SearchButton meal="dinner" dayN={dayN} />
           </div>
 
-          <div style={meal}>
+          <div style={{...meal, background: detailsBackground}}>
             <div>
               <p>Snacks</p>
             </div>
             <div>
-                {snack &&
-                  <div>
-                    <div>{snack.name}</div>
-                    <img src={snack.imgUrl} />
+                {snacks.length ? snacks.map(recipe =>
+                  <div key={recipe.id}>
+                    <div>{recipe.name}</div>
+                    <img src={recipe.img} />
                   </div>
-                }
+                ) : null}
             </div>
             <SearchButton meal="snacks" dayN={dayN} />
           </div>
         </div>
 
       </div>
-    ) : (
-      <div id={`dayN-${dayN}`} style={square} onClick={this.toggleDetails}>
-
+    ) : connectDropTarget(
+      <div id={`dayN-${dayN}`} style={square} style={{...square, background: dayBackground}} onClick={this.toggleDetails}>
+        <MacrosProgress dayN={dayN} showDetails={this.state.showDetails} />
       </div>
     )
   }
@@ -115,21 +179,22 @@ class DayCard extends Component {
 }
 
 const mapState = (state, ownProps) => {
-  // return {
-  //   foodsDayN: state.foodsDayN
-  // }
   const { dayN } = ownProps
   return {
-    breakfast: state.recipes.filter(recipe => recipe.meal === 'breakfast')[dayN],
-    lunch: state.recipes.filter(recipe => recipe.meal === 'lunch')[dayN],
-    dinner: state.recipes.filter(recipe => recipe.meal === 'dinner')[dayN],
-    snack: state.recipes.filter(recipe => recipe.meal === 'snack')[dayN]
+    breakfast: state.foodsDayN[dayN].breakfast,
+    lunch: state.foodsDayN[dayN].lunch,
+    dinner: state.foodsDayN[dayN].dinner,
+    snacks: state.foodsDayN[dayN].snacks
   }
 }
 
-const mapDispatch = null
+const mapDispatch = dispatch => {
+  return bindActionCreators({
+    addFoodToDayN
+  }, dispatch)
+}
 
-export default connect(mapState, mapDispatch)(DayCard)
+export default DropTarget(Types.ITEM, dayCardTarget, collect)(connect(mapState, mapDispatch)(DayCard))
 
 const styles = {
   container: {
@@ -162,7 +227,12 @@ const styles = {
   },
   width: {
     width: '400px'
+  },
+  progress: {
+    padding: '1em',
+    borderRadius: '3px',
+    background: 'lightcyan'
   }
 }
 
-const { container, meal, square, minus, breakfast, width } = styles
+const { container, meal, square, minus, breakfast, width, progress } = styles

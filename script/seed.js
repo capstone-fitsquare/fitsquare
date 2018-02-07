@@ -329,13 +329,13 @@ db
       })
     );
   })
-  .then(() => {
-    return Promise.all(
-      macroGoals.map(macroGoal => {
-        return MacroGoal.create(macroGoal);
-      })
-    );
-  })
+  // .then(() => {
+  //   return Promise.all(
+  //     macroGoals.map(macroGoal => {
+  //       return MacroGoal.create(macroGoal);
+  //     })
+  //   );
+  // })
   .then(() => {
     return Promise.all(
       exercises.map(exercise => {

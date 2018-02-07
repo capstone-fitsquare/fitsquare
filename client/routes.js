@@ -17,6 +17,7 @@ import {
   Checkbox,
   FoodPlanWrapper,
   GroceryList,
+  Container,
   UserAccountProfilePage,
   Test,
 } from './components';
@@ -57,6 +58,7 @@ class Routes extends Component {
             <Route exact path="/checkbox" component={Checkbox} />
             <Route exact path="/recipes-box" component={RecipesContainer} />
             <Route exact path="/food-plan" component={FoodPlanWrapper} />
+            <Route exact path="/dnd-test" component={Container} />
             <Route exact path="/" component={IntroSequence} />
             <Route exact path="/test" component={Test} />
 
@@ -91,12 +93,8 @@ const mapDispatch = dispatch => {
   return {
     loadInitialData() {
       dispatch(me());
-      dispatch(fetchExercises());
-      dispatch(fetchGroceryLists());
-      dispatch(fetchListItems());
-      dispatch(fetchMacroGoals());
-      dispatch(fetchMicroGoals());
       dispatch(fetchRecipes());
+      dispatch(fetchMacroGoals());
     },
   };
 };
