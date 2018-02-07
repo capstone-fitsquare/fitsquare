@@ -3,5 +3,6 @@
 }
 #form-group-button {
   position: relative;
-  top: 2px;
+  top: 0px;
+  margin-left: 5px;
 }
