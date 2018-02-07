@@ -1,5 +1,6 @@
 const LiveReloadPlugin = require('webpack-livereload-plugin');
 const isDev = process.env.NODE_ENV === 'development';
+const path = require('path');
 
 module.exports = {
   entry: './client/index.js',
@@ -18,7 +19,7 @@ module.exports = {
       {
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],
-        include: __dirname + '/client/components',
+        include: [__dirname + '/client/components', /node_modules/],
       },
     ],
   },
