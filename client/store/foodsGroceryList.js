@@ -28,7 +28,7 @@ export default function (state = [], action) {
       return action.foods
 
     case ADD_FOOD_TO_GROCERY_LIST:
-      return [...state, action.food]
+      return [...state, ...action.food]
 
     // case REMOVE_FOOD_FROM_GROCERY_LIST: {
     //   const itemToEdit = state.find(foodObj => foodObj.report.food.ndbno === action.foodId);

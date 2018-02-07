@@ -21,10 +21,11 @@ class Recipes extends Component {
   render() {
 
     const { recipes } = this.props
+    recipes ? console.log('recipes[0]', recipes[0]) : console.log('waiting')
 
     return (
       <div>
-        {recipes.length && recipes.map(recipe => {
+        {recipes.length ? recipes.map(recipe => {
           return (
             <div key={recipe.id}>
               <h4>{recipe.recipeName}</h4>
@@ -37,11 +38,12 @@ class Recipes extends Component {
                 protein={recipe.protein}
                 carbs={recipe.carbs}
                 fat={recipe.fat}
+                ingredients={recipe.ingredients}
               />
               <Button onClick={() => this.addRecipe(recipe)}>Add to plan</Button>
             </div>
           )
-        })}
+        }) : null }
       </div>
     )
   }

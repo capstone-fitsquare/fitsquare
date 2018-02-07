@@ -9,8 +9,7 @@ import { addFoodToGroceryList } from '../../store'
 import HTML5Backend from 'react-dnd-html5-backend'
 import { DragDropContext } from 'react-dnd'
 import { DragDropContextProvider } from 'react-dnd'
-import DayCard from './DayCard'
-import RecipeImg from './recipes/RecipeImg'
+import MacroPieChartContainer from './MacroPieChartContainer'
 
 
 class FoodPlanWrapper extends Component {
@@ -28,10 +27,8 @@ class FoodPlanWrapper extends Component {
   render() {
 
     const { visible } = this.state
-    const url = 'https://lh3.googleusercontent.com/qZIidhoLjHWPecBgMyp2JzRbLImOeRLverx7JKv_cniE3eFK0kR-75e7pUBSWQZ484RBocyJZe6b6bEqcLuSRQ=s90'
 
     return (
-      // <DragDropContextProvider backend={HTML5Backend}>
         <div id="foodPlanWrapper">
           <Button onClick={this.toggleVisibility}>Recipes</Button>
           <Sidebar.Pushable as={Segment}>
@@ -45,7 +42,6 @@ class FoodPlanWrapper extends Component {
             </Sidebar.Pusher>
           </Sidebar.Pushable>
         </div>
-      // </DragDropContextProvider>
     )
   }
 }

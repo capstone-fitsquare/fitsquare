@@ -15,7 +15,8 @@ const imgSource = {
       calories: props.calories,
       protein: props.protein,
       carbs: props.carbs,
-      fat: props.fat
+      fat: props.fat,
+      ingredients: props.ingredients
     }
     console.log('begin dragging ', props)
     return item

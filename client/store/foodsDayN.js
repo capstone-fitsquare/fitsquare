@@ -36,14 +36,7 @@ const generateDays = n => {
   return output
 }
 
-const initialState = generateDays(7)  // can change later
-initialState[0] = {
-  day: 0,
-  breakfast: [{name: 'eggs'}],
-  lunch: [{name: 'sandwich'}],
-  dinner: [{name: 'pasta'}],
-  snacks: [{name: 'cookies'}]
-}
+const initialState = generateDays(5)  // can change later
 
 export default function (state = initialState, action) {
   switch (action.type) {
@@ -52,6 +45,9 @@ export default function (state = initialState, action) {
       const newState = [...state]
       const { dayN, food, meal } = action
       const dayNFoods = newState[dayN] // object including breakfast, lunch, dinner, snacks [for particular day]
+      console.log('dayNFoods', dayNFoods)
+      console.log('meal', meal)
+      console.log('typeof meal', typeof(meal))
       dayNFoods[meal].push(food) // add new food to particular day's meal foods array
       return newState;
     }

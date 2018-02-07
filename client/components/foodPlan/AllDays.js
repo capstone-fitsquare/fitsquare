@@ -2,6 +2,7 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 import { DayCard, GroceryList } from './index'
+import MacroPieChartContainer from './MacroPieChartContainer';
 
 const AllDays = (props) => {
 
@@ -14,7 +15,7 @@ const AllDays = (props) => {
         )}
         </div>
         <div style={imgContainer}>
-          <img src="/images/pie-chart.png" style={img} />
+          <MacroPieChartContainer />
         </div>
       </div>
       <GroceryList />
