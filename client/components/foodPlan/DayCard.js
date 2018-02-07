@@ -15,7 +15,9 @@ const Types = {
 }
 
 const dayCardTarget = {
-	drop(props, monitor, component) {
+	drop(props, monitor) {
+    // const recipe = monitor.getItem()
+    // addFoodDayN(recipe, meal)
     return { name: 'Day Card' }
 	},
 }
@@ -23,7 +25,10 @@ const dayCardTarget = {
 const collect = (connect, monitor) => {
   return {
     connectDropTarget: connect.dropTarget(),
-    recipeId: monitor.getItem()
+    isOver: monitor.isOver(),
+    canDrop: monitor.canDrop(),
+    draggedRecipe: monitor.getItem(),
+    didDrop: monitor.didDrop(),
   }
 }
 
@@ -51,7 +56,12 @@ class DayCard extends Component {
 
     const { breakfast, lunch, dinner, snack, dayN } = this.props
 
-    const { canDrop, isOver, connectDropTarget } = this.props
+    const { canDrop, isOver, connectDropTarget, draggedRecipe, didDrop } = this.props
+
+    console.log('dropResult', dropResult)
+
+    console.log('didDrop', didDrop)
+
 		const isActive = canDrop && isOver
 
     let backgroundColor = 'lightgreen'
@@ -147,32 +157,37 @@ class DayCard extends Component {
           <div>'Release to drop'</div>
           : <div>'Drag an img here'</div>
         }
+        {
+          (draggedRecipe) ?
+          <div>{draggedRecipe.name}</div>
+          : null
+        }
         </div>
       )
   }
 
 }
 
-// const mapState = (state, ownProps) => {
-//   // return {
-//   //   foodsDayN: state.foodsDayN
-//   // }
-//   const { dayN } = ownProps
-//   return {
-//     breakfast: state.recipes.filter(recipe => recipe.meal === 'breakfast')[dayN],
-//     lunch: state.recipes.filter(recipe => recipe.meal === 'lunch')[dayN],
-//     dinner: state.recipes.filter(recipe => recipe.meal === 'dinner')[dayN],
-//     snack: state.recipes.filter(recipe => recipe.meal === 'snack')[dayN]
-//   }
-// }
+const mapState = (state, ownProps) => {
+  // return {
+  //   foodsDayN: state.foodsDayN
+  // }
+  const { dayN } = ownProps
+  return {
+    breakfast: state.recipes.filter(recipe => recipe.meal === 'breakfast')[dayN],
+    lunch: state.recipes.filter(recipe => recipe.meal === 'lunch')[dayN],
+    dinner: state.recipes.filter(recipe => recipe.meal === 'dinner')[dayN],
+    snack: state.recipes.filter(recipe => recipe.meal === 'snack')[dayN]
+  }
+}
 
-// const mapDispatch = null
+const mapDispatch = dispatch => {
+  return bindActionCreators({
+    addFoodDayN
+  }, dispatch)
+}
 
-export default DropTarget(Types.ITEM, dayCardTarget, (connect, monitor) => ({
-	connectDropTarget: connect.dropTarget(),
-	isOver: monitor.isOver(),
-	canDrop: monitor.canDrop(),
-}))(DayCard)
+export default DropTarget(Types.ITEM, dayCardTarget, collect)(DayCard)
 
 const styles = {
   container: {

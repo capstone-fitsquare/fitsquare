@@ -9,7 +9,9 @@ const imgSource = {
   beginDrag: function(props) {
     const item = {
       id: props.id,
+      name: props.name,
       src: props.src,
+      meal: props.meal,
       calories: props.calories,
       protein: props.protein,
       carbs: props.carbs,
@@ -19,9 +21,9 @@ const imgSource = {
     return item
   },
   endDrag(props, monitor, component) {
-    const item = monitor.getItem()
+    const recipe = monitor.getItem()
     const dropResult = monitor.getDropResult()
-    if (dropResult) console.log(`Dropped recipe ${item.id} into ${dropResult.name}!`)
+    if (dropResult) console.log(`Dropped recipe ${recipe.name} into ${dropResult.name}!`)
   }
 }
 
@@ -29,7 +31,7 @@ const collect = (connect, monitor) => {
   return {
     connectDragSource: connect.dragSource(),
     connectDragPreview: connect.dragPreview(),
-    isDragging: monitor.isDragging()
+    isDragging: monitor.isDragging(),
   }
 }
 

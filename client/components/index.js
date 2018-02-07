@@ -41,6 +41,3 @@ export { default as Test } from './test/Test';
 export { default as Arc } from './visualizations/Arc';
 export { default as LabeledArc } from './visualizations/LabeledArc';
 export { default as PieChart } from './visualizations/PieChart';
-
-//dnd
-export { default as Container } from './DnDTest/Container';

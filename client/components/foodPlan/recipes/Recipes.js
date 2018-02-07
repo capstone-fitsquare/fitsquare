@@ -30,6 +30,7 @@ class Recipes extends Component {
               <h4>{recipe.recipeName}</h4>
               <RecipeImg
                 id={recipe.id}
+                name={recipe.recipeName}
                 src={recipe.smallImageUrls[0]}
                 meal={recipe.meal}
                 calories={recipe.calories}
