@@ -15,7 +15,7 @@ router.post('/', (req, res) => {
 
   client.messages
     .create({
-      to: req.body.phonenumber,
+      to: req.body.phone,
       from: SENDER,
       body: 'This is the ship that made the Kessel Run in fourteen parsecs?',
     })
