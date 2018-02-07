@@ -6,3 +6,5 @@ secrets.js
 npm-debug.log
 yarn-error.log
 G-Cal_API.json
+client-secret.json
+server/auth/calendar.js

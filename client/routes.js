@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Route, Switch, Router } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import history from './history';
+import Calendar from './components/calendars'
 
 import {
   Main,
@@ -47,6 +48,7 @@ class Routes extends Component {
         <Main>
           <Switch>
             {/* Routes placed here are available to all visitors */}
+            <Route exact path="/cal" component={Calendar} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/new-goal" component={NewGoals} />
