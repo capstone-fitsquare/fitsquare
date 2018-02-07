@@ -20,6 +20,8 @@ fs.readFile('client_secret.json', function processClientSecrets(err, content) {
   // Authorize a client with the loaded credentials, then call the
   // Google Calendar API.
   authorize(JSON.parse(content), listEvents);
+  // console.log('authCreds: ',authCreds)
+  // authCreds()
 });
 
 /**
@@ -30,6 +32,7 @@ fs.readFile('client_secret.json', function processClientSecrets(err, content) {
  * @param {function} callback The callback to call with the authorized client.
  */
 function authorize(credentials, callback) {
+  console.log('credentials: ',credentials)
   var clientSecret = credentials.installed.client_secret;
   var clientId = credentials.installed.client_id;
   var redirectUrl = credentials.installed.redirect_uris[0];
