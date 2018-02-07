@@ -105,7 +105,7 @@ class DayCard extends Component {
             <Button icon size='mini' onClick={this.toggleDetails} circular={true} style={minus}>
               <Icon name='window minimize' />
             </Button>
-            <MacrosProgress dayN={dayN} />
+            <MacrosProgress dayN={dayN} showDetails={this.state.showDetails} />
           </div>
           <div style={{...meal, background: detailsBackground}}>
             <div style={breakfast}>
@@ -171,11 +171,7 @@ class DayCard extends Component {
       </div>
     ) : connectDropTarget(
       <div id={`dayN-${dayN}`} style={square} style={{...square, background: dayBackground}} onClick={this.toggleDetails}>
-      {
-        isActive ?
-        <div>'Release to drop'</div>
-        : <div>'Drag an img here'</div>
-      }
+        <MacrosProgress dayN={dayN} showDetails={this.state.showDetails} />
       </div>
     )
   }
