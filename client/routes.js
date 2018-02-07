@@ -92,6 +92,7 @@ const mapDispatch = dispatch => {
     loadInitialData() {
       dispatch(me());
       dispatch(fetchRecipes());
+      dispatch(fetchMacroGoals());
     },
   };
 };

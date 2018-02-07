@@ -30,7 +30,7 @@ const dayCardTarget = {
       fat: recipe.fat,
       ingredients: recipe.ingredients
     }
-    const meal = recipe.meal
+    const meal = recipe.meal === 'snack' ? 'snacks' : recipe.meal
     const ingredients = recipe.ingredients
     console.log('food', food)
     console.log('meal', meal)
@@ -74,7 +74,7 @@ class DayCard extends Component {
 
   render() {
 
-    const { breakfast, lunch, dinner, snack, dayN } = this.props
+    const { breakfast, lunch, dinner, snacks, dayN } = this.props
 
     console.log('breakfast', breakfast)
 
@@ -102,20 +102,20 @@ class DayCard extends Component {
 
         <div style={width}>
           <div style={progress}>
-            <MacrosProgress />
+            <Button icon size='mini' onClick={this.toggleDetails} circular={true} style={minus}>
+              <Icon name='window minimize' />
+            </Button>
+            <MacrosProgress dayN={dayN} />
           </div>
           <div style={{...meal, background: detailsBackground}}>
             <div style={breakfast}>
               <p>Breakfast</p>
-              <Button icon size='mini' onClick={this.toggleDetails} circular={true} style={minus}>
-                <Icon name='window minimize' />
-              </Button>
             </div>
             <div>
-                {breakfast.length ? breakfast.map(breakfast =>
-                  <div key={breakfast.id}>
-                    <div>{breakfast.name}</div>
-                    <img src={breakfast.img} />
+                {breakfast.length ? breakfast.map(recipe =>
+                  <div key={recipe.id}>
+                    <div>{recipe.name}</div>
+                    <img src={recipe.img} />
                   </div>
                 ) : null}
             </div>
@@ -127,12 +127,12 @@ class DayCard extends Component {
               <p>Lunch</p>
             </div>
             <div>
-                {lunch &&
-                  <div>
-                    <div>{lunch.name}</div>
-                    <img src={lunch.imgUrl} />
+                {lunch.length ? lunch.map(recipe =>
+                  <div key={recipe.id}>
+                    <div>{recipe.name}</div>
+                    <img src={recipe.img} />
                   </div>
-                }
+                ) : null}
             </div>
             <SearchButton meal="lunch" dayN={dayN} />
           </div>
@@ -142,12 +142,12 @@ class DayCard extends Component {
               <p>Dinner</p>
             </div>
             <div>
-                {dinner &&
-                  <div>
-                    <div>{dinner.name}</div>
-                    <img src={dinner.imgUrl} />
+                {dinner.length ? dinner.map(recipe =>
+                  <div key={recipe.id}>
+                    <div>{recipe.name}</div>
+                    <img src={recipe.img} />
                   </div>
-                }
+                ) : null}
             </div>
             <SearchButton meal="dinner" dayN={dayN} />
           </div>
@@ -157,12 +157,12 @@ class DayCard extends Component {
               <p>Snacks</p>
             </div>
             <div>
-                {snack &&
-                  <div>
-                    <div>{snack.name}</div>
-                    <img src={snack.imgUrl} />
+                {snacks.length ? snacks.map(recipe =>
+                  <div key={recipe.id}>
+                    <div>{recipe.name}</div>
+                    <img src={recipe.img} />
                   </div>
-                }
+                ) : null}
             </div>
             <SearchButton meal="snacks" dayN={dayN} />
           </div>
@@ -183,9 +183,6 @@ class DayCard extends Component {
 }
 
 const mapState = (state, ownProps) => {
-  // return {
-  //   foodsDayN: state.foodsDayN
-  // }
   const { dayN } = ownProps
   return {
     breakfast: state.foodsDayN[dayN].breakfast,
@@ -237,8 +234,6 @@ const styles = {
   },
   progress: {
     padding: '1em',
-    display: 'flex',
-    flexDirection: 'column',
     borderRadius: '3px',
     background: 'lightcyan'
   }

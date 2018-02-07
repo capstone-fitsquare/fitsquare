@@ -1,7 +1,5 @@
 import React from "react"
 import PieChart from "react-svg-piechart"
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux'
 
 
 const MacroPieChart = (props) => {
@@ -29,12 +27,6 @@ const MacroPieChart = (props) => {
       // }}
     />
   )
-}
-
-const mapState = state => {
-  return {
-
-  }
 }
 
 

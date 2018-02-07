@@ -64,14 +64,14 @@ export const destroyMacroGoal = (id) =>
 /**
  * REDUCER
  */
-export default function (state = {}, action) {
+export default function (state = [], action) {
   switch (action.type) {
 
-    // case GET_MACRO_GOALS:
-    //   return action.macroGoals
+    case GET_MACRO_GOALS:
+      return action.macroGoals
 
     case CREATE_MACRO_GOAL:
-      return action.macroGoal
+      return [...state.macroGoals, action.macroGoal]
 
     // case EDIT_MACRO_GOAL: {
     //   const itemToEdit = state.find(macroGoal => macroGoal.id === action.macroGoal.id);

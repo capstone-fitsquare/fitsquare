@@ -1,22 +1,28 @@
 import React from "react"
 import MacroPieChart from "./MacroPieChart"
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux'
 
 const MacroPieChartContainer = (props) => {
 
-  const macros = {
-    protein: 200,
-    carbs: 300,
-    fat: 80
-  }
+  const { macroGoal } = props
 
-  return (
+  return macroGoal ? (
     <div style = {{
       height: '200px',
       width: '200px'
     }}>
-      <MacroPieChart protein={macros.protein} carbs={macros.carbs} fat={macros.fat} />
+      <MacroPieChart protein={macroGoal.protein} carbs={macroGoal.carbs} fat={macroGoal.fat} />
     </div>
-  )
+  ) : null
 }
 
-export default MacroPieChartContainer
+const mapState = state => {
+  return {
+    macroGoal: state.macroGoals[0] // filter based on userId
+  }
+}
+
+const mapDispatch = null
+
+export default connect(mapState, mapDispatch)(MacroPieChartContainer)
