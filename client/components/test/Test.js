@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Grid, Segment, Form } from 'semantic-ui-react';
+import { Grid, Segment, Form, Message } from 'semantic-ui-react';
 import Phone from 'react-phone-number-input';
 import 'react-phone-number-input/rrui.css';
 import 'react-phone-number-input/style.css';
@@ -11,13 +11,8 @@ class Test extends Component {
     super(props);
     this.state = { phone: '', formSubmitted: false };
 
-    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     // this.isValid = this.isValid.bind(this);
-  }
-
-  handleChange(event) {
-    this.setState({ phone: event.target.value });
   }
 
   handleSubmit() {
@@ -33,7 +28,13 @@ class Test extends Component {
   // isValid() {}
 
   render() {
-    const { phone } = this.state;
+    const { phone, formSubmitted } = this.state;
+
+    let message = null;
+
+    if (formSubmitted) {
+      message = <Message success header="Form Completed" content="Grocery list is on its way! " />;
+    }
 
     return (
       <Grid columns={1} stackable textAlign="center">
@@ -42,13 +43,15 @@ class Test extends Component {
           <Form success onSubmit={this.handleSubmit}>
             <Segment stacked>
               <label>Phone Number</label>
-              <Phone placeholder="Enter +12223334444" value={phone} onChange={phone => this.setState({ phone })} />
-              {/* <Form.Group id="form-group" inline>
-                <Form.Input onChange={this.handleChange} value={phonenumber} placeholder="+12223334444" />
-              </Form.Group>*/}
+              <Phone
+                placeholder="Enter +12223334444"
+                value={phone}
+                onChange={phone => {
+                  this.setState({ phone, formSubmitted: false });
+                }}
+              />
               <Form.Button id="form-group-button" content="Submit" />
-              {/*              {message}
-*/}{' '}
+              {message}
             </Segment>
           </Form>
         </Grid.Column>
