@@ -131,28 +131,48 @@ class MacrosProgress extends Component {
       fat += recipe.fat
     })
 
+
+    const caloriesGoal = macroGoal ? macroGoal.calories : 2000
+    const proteinGoal = macroGoal ? macroGoal.protein : 200
+    const carbsGoal = macroGoal ? macroGoal.carbs : 300
+    const fatGoal = macroGoal ? macroGoal.fat : 80
+
+    const caloriesProgress = caloriesGoal ? Math.floor((calories / caloriesGoal) * 100) : 0
+    const proteinProgress = proteinGoal ? Math.floor((protein / proteinGoal) * 100) : 0
+    const carbsProgress = carbsGoal ? Math.floor((carbs / carbsGoal) * 100) : 0
+    const fatProgress = fatGoal ? Math.floor((fat / fatGoal) * 100) : 0
+
     return (showDetails) ? (
       <div>
-        <h2>Calories</h2>
-        {/* <div style={{display: 'flex', justifyContent: 'space-around'}}>
-          <div>Goal: {caloriesGoal}</div>
-          <div>Food: {calories}</div>
-          <div>Remaining: {caloriesGoal - calories}</div>
-        </div> */}
-        <Progress completed={calories} color='#A93BF7' />
-        <h3>Protein</h3>
-        <Progress completed={protein} color='#00FFD2' />
-        <h3>Carbs</h3>
-        <Progress completed={carbs} color='#FDF700' />
-        <h3>Fat</h3>
-        <Progress completed={fat} color='#FF9000' />
-      </div>
+        {macroGoal ?
+        <div>
+          <h2>Calories</h2>
+          <div style={{display: 'flex', justifyContent: 'space-around'}}>
+            <div>Goal: {caloriesGoal}</div>
+            <div>Food: {calories}</div>
+            <div>Remaining: {caloriesGoal - calories}</div>
+          </div>
+          <Progress completed={caloriesProgress} color='#A93BF7' />
+          <h3>Protein</h3>
+          <Progress completed={proteinProgress} color='#00FFD2' />
+          <h3>Carbs</h3>
+          <Progress completed={carbsProgress} color='#FDF700' />
+          <h3>Fat</h3>
+          <Progress completed={fatProgress} color='#FF9000' />
+        </div>
+        : null }
+        </div>
+
     ) : (
       <div>
-        <Progress completed={calories} color='#A93BF7' />
-        <Progress completed={protein} color='#00FFD2' />
-        <Progress completed={carbs} color='#FDF700' />
-        <Progress completed={fat} color='#FF9000' />
+        {macroGoal ?
+          <div>
+            <Progress completed={caloriesProgress} color='#A93BF7' />
+            <Progress completed={proteinProgress} color='#00FFD2' />
+            <Progress completed={carbsProgress} color='#FDF700' />
+            <Progress completed={fatProgress} color='#FF9000' />
+          </div>
+        : null}
       </div>
     )
   }

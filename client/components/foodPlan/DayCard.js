@@ -76,8 +76,6 @@ class DayCard extends Component {
 
     const { breakfast, lunch, dinner, snacks, dayN, macroGoal } = this.props
 
-    console.log('breakfast', breakfast)
-
     const { canDrop, isOver, connectDropTarget, draggedRecipe, didDrop } = this.props
 
 		const isActive = canDrop && isOver
