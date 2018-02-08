@@ -19,6 +19,7 @@ import {
   Container,
   UserAccountProfilePage,
   Test,
+  Home
 } from './components';
 
 import {
@@ -58,7 +59,7 @@ class Routes extends Component {
             <Route exact path="/recipes-box" component={RecipesContainer} />
             <Route exact path="/food-plan" component={FoodPlanWrapper} />
             <Route exact path="/dnd-test" component={Container} />
-            <Route exact path="/" component={IntroSequence} />
+            <Route exact path="/" component={Home} />
             <Route exact path="/test" component={Test} />
 
             {isLoggedIn && (
