@@ -4,7 +4,9 @@ import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import { Container, Menu } from 'semantic-ui-react';
 import { logout } from '../store';
+import Navbar from './Navbar'
 import './styles.css';
+import Home from './Home'
 
 /**
  * COMPONENT
@@ -16,35 +18,10 @@ const Main = props => {
   const { children, handleClick, isLoggedIn } = props;
 
   return (
-    <Container>
-      <header>
-        <h1>fitSquare</h1>
-      </header>
-      {isLoggedIn ? (
-        <Menu stackable>
-          {/* The navbar will show these links after you log in */}
-          <Menu.Item>
-            <Link to="/profile-page">Home</Link>
-          </Menu.Item>
-          <Menu.Item>
-            <a href="#" onClick={handleClick}>
-              Logout
-            </a>
-          </Menu.Item>
-        </Menu>
-      ) : (
-        <Menu stackable>
-          {/* The navbar will show these links before you log in */}
-          <Menu.Item>
-            <Link to="/login">Login</Link>
-          </Menu.Item>
-          <Menu.Item>
-            <Link to="/signup">Sign Up</Link>
-          </Menu.Item>
-        </Menu>
-      )}
+    <div>
+      <Navbar />
       {children}
-    </Container>
+    </div>
   );
 };
 

@@ -17,7 +17,7 @@ router.post('/', (req, res) => {
     .create({
       to: req.body.phone,
       from: SENDER,
-      body: 'This is the ship that made the Kessel Run in fourteen parsecs?',
+      body: req.body.text,
     })
     .then(message => {
       console.log(message.sid);
