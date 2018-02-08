@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { AllDays } from '../../components'
 import { postGroceryList, addFoodToGroceryList, removeFoodFromGroceryList } from '../../store'
 import axios from 'axios'
+import Twilio from './Twilio'
 
 class GroceryList extends Component {
 
@@ -11,30 +12,45 @@ class GroceryList extends Component {
     super()
     this.state = {
       showGroceryList: false,
+      showTextForm: false
     }
     this.toggleGroceryList = this.toggleGroceryList.bind(this)
+    this.toggleTextForm = this.toggleTextForm.bind(this)
   }
 
   toggleGroceryList (event) {
     this.setState({
-      showGroceryList: !this.state.showGroceryList
+      showGroceryList: !this.state.showGroceryList,
+    })
+  }
+
+  toggleTextForm (event) {
+    this.setState({
+      showTextForm: !this.state.showTextForm,
     })
   }
 
   render() {
 
     const groceryList = Array.from(new Set(this.props.groceryList))
+    const { showGroceryList, showTextForm } = this.state
 
-    return (
-      <div style={groceries}>
-        <h4>Grocery List</h4>
+    const cssClass = showGroceryList ? 'active' : ''
+
+    return groceryList.length ? (
+      <div id="grocery-list" style={groceries} className={cssClass}>
+        <div style={list}>Grocery List</div>
         <ul>
-          {groceryList.length ? groceryList.map(ingredient =>
+          {groceryList.map(ingredient =>
             <li key={ingredient}>{ingredient}</li>
-          ) : null }
+          )}
         </ul>
+        <button onClick={this.toggleTextForm}>Text Grocery List</button>
+        {showTextForm ?
+          <Twilio groceryList={groceryList} />
+        : null }
       </div>
-    )
+    ) : null
   }
 }
 
@@ -56,12 +72,17 @@ export default connect(mapState, mapDispatch)(GroceryList)
 const styles = {
   groceries: {
     boxShadow: '0px 2px 4px rgba(0,0,0,0.18)',
-    padding: '1em',
+    padding: '3em 4em 2em 4em',
     background: 'white',
-    position: 'absolute',
-    bottom: '0px',
-    right: '10px'
+    position: 'fixed',
+    bottom: '0',
+    right: '5vw',
+    zIndex: '6'
+  },
+  list: {
+    fontSize: '48px',
+    paddingBottom: '.8em'
   }
 }
 
-const { groceries } = styles
+const { groceries, list } = styles
