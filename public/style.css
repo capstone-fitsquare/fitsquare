@@ -58,7 +58,7 @@ form div {
 }
 
 .daycard {
-  transition: transform .2s
+  transition: transform 0.2s
 }
 
 .daycard:hover {
@@ -66,5 +66,5 @@ form div {
 }
 
 .daycard.shrink {
-  transform: scale(0.6)
+  transform: scale(0.7)
 }

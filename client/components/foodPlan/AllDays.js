@@ -71,6 +71,33 @@ class AllDays extends Component {
   render() {
 
     const { day0, day1, day2, day3, day4 } = this.state
+    const { foodsDayN } = this.props
+
+    let protein = 0, carbs = 0, fat = 0
+    foodsDayN.forEach(day => {
+      day.breakfast.forEach(food => {
+        protein += food.protein
+        carbs += food.carbs
+        fat += food.fat
+      })
+      day.lunch.forEach(food => {
+        protein += food.protein
+        carbs += food.carbs
+        fat += food.fat
+      })
+      day.dinner.forEach(food => {
+        protein += food.protein
+        carbs += food.carbs
+        fat += food.fat
+      })
+      day.snacks.forEach(food => {
+        protein += food.protein
+        carbs += food.carbs
+        fat += food.fat
+      })
+    })
+
+    const renderPieChart = (protein + carbs + fat) > 0
 
     return (
       <div style={container}>
@@ -81,15 +108,30 @@ class AllDays extends Component {
           <DayCard dayN={3} shrink={day3.shrink} toggleDayN={this.toggleDayN} />
           <DayCard dayN={4} shrink={day4.shrink} toggleDayN={this.toggleDayN} />
         </div>
-        <div style={pieChartContainer}>
-          <MacroPieChartContainer />
-        </div>
+        {renderPieChart ?
+          <div style={pieChartContainer}>
+            <MacroPieChartContainer protein={protein} carbs={carbs} fat={fat} />
+          </div>
+        : null}
+
       </div>
     )
   }
 }
 
-export default AllDays
+const mapState = state => {
+  return {
+    foodsDayN: state.foodsDayN
+  }
+}
+
+const mapDispatch = dispatch => {
+  return bindActionCreators({
+
+  }, dispatch)
+}
+
+export default connect(mapState, mapDispatch)(AllDays)
 
 const styles = {
   container: {
@@ -102,7 +144,7 @@ const styles = {
   },
   daysContainer: {
     display: 'flex',
-    alignItems: 'center',
+    // alignItems: 'center',
     position: 'fixed',
     left: '23vw',
     top: '10vh'

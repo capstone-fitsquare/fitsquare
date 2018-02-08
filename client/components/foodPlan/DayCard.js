@@ -126,11 +126,11 @@ class DayCard extends Component {
     const { shrink } = this.props
     const newClass = shrink ? 'shrink daycard' : 'daycard'
 
-    console.log('----------------')
-    console.log('dayN', dayN)
-    console.log('shrink', shrink)
-    console.log('newClass', newClass)
-    console.log('----------------')
+    // console.log('----------------')
+    // console.log('dayN', dayN)
+    // console.log('shrink', shrink)
+    // console.log('newClass', newClass)
+    // console.log('----------------')
 
     return this.state.showDetails ?
     connectDropTarget(

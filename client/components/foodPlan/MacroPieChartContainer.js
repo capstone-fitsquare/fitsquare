@@ -5,25 +5,27 @@ import { connect } from 'react-redux'
 
 const MacroPieChartContainer = (props) => {
 
-  const { macroGoal } = props
+  const { protein, carbs, fat } = props
 
-  return macroGoal ? (
+  return (
     <div style = {{
       height: '200px',
       width: '200px',
       margin: '2em 4em 2em 2em'
     }}>
-      <MacroPieChart protein={macroGoal.protein} carbs={macroGoal.carbs} fat={macroGoal.fat} />
+      <MacroPieChart protein={protein} carbs={carbs} fat={fat} />
     </div>
-  ) : null
+  )
 }
 
-const mapState = state => {
-  return {
-    macroGoal: state.macroGoals[0] // filter based on userId
-  }
-}
+// const mapState = state => {
+//   return {
+//     macroGoal: state.macroGoals[0] // filter based on userId
+//   }
+// }
 
-const mapDispatch = null
+// const mapDispatch = null
 
-export default connect(mapState, mapDispatch)(MacroPieChartContainer)
+// export default connect(mapState, mapDispatch)(MacroPieChartContainer)
+
+export default MacroPieChartContainer
