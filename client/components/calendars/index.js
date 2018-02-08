@@ -4,6 +4,7 @@ import Datetime from 'react-datetime';
 // import insertEventToCal from '../../../public/quickstart.html'
 // var insertEventToCal = require('../../../public/quickstart.html')
 import { Input, Button, Grid, Segment } from 'semantic-ui-react';
+import { connect } from 'react-redux'
 
 class Calendar extends Component {
   constructor() {
@@ -39,6 +40,7 @@ class Calendar extends Component {
   }
 
   handleSubmit(){
+    console.log("state: ", this.state)
     console.log("state: ", this.state)
     handleClientLoad()
     insertEventToCal(this.state)
@@ -88,4 +90,13 @@ class Calendar extends Component {
 }
 
 
-export default Calendar;
+const mapState = state => {
+  return {
+    foodsDayN: state.foodsDayN,
+    groceryList: state.foodsGroceryList
+  }
+}
+
+
+export default connect(mapState)(Calendar);
+
