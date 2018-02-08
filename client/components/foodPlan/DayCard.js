@@ -39,7 +39,6 @@ const dayCardTarget = {
     console.log('ingredients', ingredients)
     store.dispatch(addFoodToDayN(dayN, food, meal))
     store.dispatch(addFoodToGroceryList(ingredients))
-    return { name: 'Day Card', dayN: props.dayN }
 	},
 }
 

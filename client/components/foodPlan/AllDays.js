@@ -144,8 +144,7 @@ const styles = {
   },
   daysContainer: {
     display: 'flex',
-    // alignItems: 'center',
-    position: 'fixed',
+    position: 'relative',
     left: '23vw',
     top: '10vh'
   }

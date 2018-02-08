@@ -15,13 +15,18 @@ class Navbar extends Component {
 		};
 	}
 	render() {
-		const {cart, history, user, loggedIn,logout} = this.props
+		const { history, user, loggedIn, logout} = this.props
 		return (
-			<div style={container}>
-        <div style={colorbar}/>
-        <div style={{display: 'flex'}}>
-          <h1 style={{letterSpacing: '4px', padding: '1em 1em .7em 7vw'}}>     fitSquare</h1>
+      <div>
+			  <div style={colorbar}/>
+        <div style={navItemContainer}>
+          <h1 style={fitSquare}>     fitSquare</h1>
+          <h4 id="login-btn" style={button} onClick={() => history.push('/login')}>Log In / Sign up</h4>
         </div>
+      </div>
+    )
+  }
+}
 				{/* <Link to="/">
 					fitSquare
 				</Link>
@@ -46,11 +51,7 @@ class Navbar extends Component {
 			      </Modal.Description>
 			    </Modal.Content>
 			  </Modal> */}
-			</div>
-		);
-	}
 
-}
 
 export default withRouter(Navbar)
 
@@ -70,8 +71,27 @@ const styles = {
     boxShadow: '0 2px 4px rgba(0,0,0,0.18)',
     marginBottom: '1.5px'
     // borderBottom: '2px solid #74e0cc'
-	},
-
+  },
+  navItemContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    boxShadow: '0 2px 4px rgba(0,0,0,0.18)'
+  },
+  fitSquare: {
+    display: 'flex',
+    padding: '1em',
+    margin: '0 1em',
+    letterSpacing: '4px'
+  },
+  button: {
+    display: 'flex',
+    margin: '0 3em',
+    padding: '.7em 1.2em',
+    // background: '#fdf700',
+    borderRadius: '16px',
+    boxShadow: '0 2px 4px rgba(0,0,0,0.18)'
+  }
 }
-const { colorbar, container } = styles
+const { colorbar, navItemContainer, fitSquare, button } = styles
 

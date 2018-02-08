@@ -6,6 +6,7 @@ import { Container, Menu } from 'semantic-ui-react';
 import { logout } from '../store';
 import Navbar from './Navbar'
 import './styles.css';
+import Home from './Home'
 
 /**
  * COMPONENT
