@@ -89,3 +89,35 @@ form div {
 #piechart-container:hover {
   transform: scale(1.1)
 }
+
+#recipes-container {
+  position: fixed;
+  left: -18.8vw;
+  transition: all 0.2s;
+}
+
+#recipes-container.appear {
+  transform: translate(18.8vw, 0)
+}
+
+#recipes-tab {
+  transition: all 0.2s;
+  width: 60px;
+  height: 60px;
+  position: fixed;
+  left: 0vw;
+  top: 94.5px;
+  z-index: 6;
+}
+
+#recipes-tab.appear {
+  transform: translate(18.8vw, 0)
+}
+
+.recipe-img {
+  transition: all 0.2s
+}
+
+.recipe-img:hover {
+  transform: scale(1.1)
+}

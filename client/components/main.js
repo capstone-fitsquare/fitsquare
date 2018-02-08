@@ -18,14 +18,6 @@ const Main = props => {
 
   return (
     <div>
-      <div style ={{
-        position: 'fixed',
-        width: '100%',
-        height: '12px',
-        background: 'linear-gradient(to left, #90EE90 0%, #00ffd2 70%)'
-      }}
-      >
-      </div>
       <Navbar />
       {children}
     </div>

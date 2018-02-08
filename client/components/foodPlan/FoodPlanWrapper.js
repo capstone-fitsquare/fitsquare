@@ -29,20 +29,16 @@ class FoodPlanWrapper extends Component {
 
     const { visible } = this.state
 
+    const cssClass = visible ? 'appear' : ''
+
     return (
         <div id="foodPlanWrapper">
           <GroceryList />
-          <div id="recipe-bar" style={{
-            display: 'flex',
-          }}>
-            <RecipesContainer />
-            <img src='/images/recipe.png' onClick={this.toggleVisibility}
-              style={{
-                height: '60px',
-                width: '60px',
-                position: 'fixed',
-                left: '18.5vw'
-              }} />
+          <div id="recipe-bar">
+            <img id="recipes-tab" className={cssClass} src='/images/recipe.png' onClick={this.toggleVisibility} />
+            <div id="recipes-container" className={cssClass}>
+              <RecipesContainer />
+            </div>
           </div>
           <AllDays />
         </div>

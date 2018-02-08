@@ -40,8 +40,17 @@ class RecipeImg extends Component {
 
   componentDidMount() {
 		const img = new Image()
-		img.onload = () => this.props.connectDragPreview(img)
-    img.src = '/images/salad.png'
+    img.onload = () => this.props.connectDragPreview(img)
+    const images = [
+      '/images/foods/salad.png',
+      '/images/foods/sandwich.png',
+      '/images/foods/noodles.png',
+      '/images/foods/cereals.png',
+      '/images/foods/apple.png',
+    ]
+
+    const random = Math.floor(Math.random() * images.length) + 1
+    img.src = images[random]
   }
 
   render() {
@@ -51,9 +60,10 @@ class RecipeImg extends Component {
 
     const style = {
       borderRadius: '12px',
+      boxShadow: '0 2px 4px rgba(0,0,0,0.18)'
     }
 
-    return connectDragSource(<img style={{ ...style, border }} id={id} src={src} />)
+    return connectDragSource(<img className="recipe-img" style={{ ...style, border }} id={id} src={src} />)
   }
 }
 

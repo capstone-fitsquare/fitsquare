@@ -6,18 +6,7 @@ import { Input, Icon, Modal, Header, Dropdown,Label} from 'semantic-ui-react'
 
 import {Login} from './index'
 
-
-const trigger = (
-  <span>
-    <TiUserOutline size={30} style={{
-			color: "rgba(0,0,0,.4)",
-			marginLeft: "30px",
-			marginRight: "-10px",
-		}}/>
-  </span>
-)
-
-class NavBar extends Component {
+class Navbar extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -29,7 +18,10 @@ class NavBar extends Component {
 		const {cart, history, user, loggedIn,logout} = this.props
 		return (
 			<div style={container}>
-        <h1 style={{letterSpacing: '2px'}}>fitSquare</h1>
+        <div style={colorbar}/>
+        <div style={{display: 'flex'}}>
+          <h1 style={{letterSpacing: '4px', padding: '1em 1em .7em 7vw'}}>     fitSquare</h1>
+        </div>
 				{/* <Link to="/">
 					fitSquare
 				</Link>
@@ -60,62 +52,26 @@ class NavBar extends Component {
 
 }
 
+export default withRouter(Navbar)
+
 const styles = {
-	label: {
-		display: 'flex',
-		alignItems: 'center',
-		justifyContent: 'center',
-		color: "white",
-		background:"red",
-		fontSize: "10px",
-		width: '15px',
-		height: "15px",
-		borderRadius: "15px",
-		position: 'relative',
-		top: "-10px",
-		left: '-10px'
-	},
+  colorbar: {
+    position: 'fixed',
+    width: '100%',
+    height: '12px',
+    background: 'linear-gradient(to left, #90EE90 0%, #00ffd2 70%)',
+  },
 	container: {
-		background: 'white',
-		height: "55px",
-		display: 'flex',
-		alignItems: 'center',
-		borderBottom: "2px solid #ccc"
+    display: 'flex',
+    flexDirection: 'column',
+    // background: 'linear-gradient(to left, #90EE90 0%, #00ffd2 70%)',
+    background: 'white',
+    color: "#00fcce",
+    boxShadow: '0 2px 4px rgba(0,0,0,0.18)',
+    marginBottom: '1.5px'
+    // borderBottom: '2px solid #74e0cc'
 	},
-	cartContainer: {
-		display: 'flex',
-		alignItems: 'center'
-	},
-	loginText: {
-		color: "rgba(0,0,0,.4)",
-		fontSize: '16px',
-		marginLeft: "10px",
-		marginRight: "10px",
-	},
-	cartIcon: {
-		color: "rgba(0,0,0,.4)",
-		marginLeft: "10px"
-	},
-	emptyCart: {
-		color: "white",
-		marginLeft: "10px"
-	},
-	profileIcon: {
-		color: "rgba(0,0,0,.4)",
-		marginLeft: "30px",
-		marginRight: "30px",
-	},
-	logo: {
-		marginLeft: "30px",
-		marginRight: "30px",
-		height: "40px"
-	},
-	searchBar:{
-		paddingRight: '100px',
-		paddingLeft: '100px',
-		flex: 1,
-		justifyContent: 'center'
-	}
+
 }
-const {container, logo, profileIcon, searchBar, cartContainer, cartIcon, emptyCart} = styles
-export default withRouter(NavBar);
+const { colorbar, container } = styles
+

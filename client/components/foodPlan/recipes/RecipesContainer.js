@@ -32,6 +32,19 @@ class RecipeNav extends Component {
 
     this.setState({
       activeIndex: index
+    }, () => {
+      switch(this.state.activeIndex){
+        case 0:
+          index = 0
+          break
+        case 1:
+          index = 1
+          break
+        case 2:
+          index = 2
+        case 3:
+          index = 3
+      }
     })
   }
 
@@ -55,22 +68,29 @@ class RecipeNav extends Component {
 
     return (
       <div style={container}>
-        <div style={{ letterSpacing: '1px' }}>BREAKFAST</div>
-          <div>
-            <Recipes recipes={breakfastRecipes} />
-          </div>
-        <div style={{ letterSpacing: '1px' }}>LUNCH</div>
-          <div>
-            <Recipes recipes={lunchRecipes} />
-          </div>
-        <div style={{ letterSpacing: '1px' }}>DINNER</div>
-          <div>
-            <Recipes recipes={dinnerRecipes} />
-          </div>
-        <div style={{ letterSpacing: '1px' }}>SNACKS</div>
-          <div>
-            <Recipes recipes={snackRecipes} />
-          </div>
+        <div style={tabContainer}>
+          <div style={tab} onClick={() => this.handleMeal('breakfast')}>B</div>
+          <div style={tab} onClick={() => this.handleMeal('lunch')}>L</div>
+          <div style={tab} onClick={() => this.handleMeal('dinner')}>D</div>
+          <div style={tab} onClick={() => this.handleMeal('snacks')}>S</div>
+        </div>
+        <div>
+        {activeIndex === 0 ?
+          <Recipes recipes={breakfastRecipes} />
+        : null}
+
+        {activeIndex === 1 ?
+          <Recipes recipes={lunchRecipes} />
+        : null}
+
+        {activeIndex === 2 ?
+          <Recipes recipes={dinnerRecipes} />
+        : null}
+
+        {activeIndex === 3 ?
+          <Recipes recipes={snackRecipes} />
+        : null}
+        </div>
       </div>
     )
   }
@@ -91,17 +111,31 @@ export default withRouter(connect(mapState, mapDispatch)(RecipeNav))
 
 const styles = {
   container: {
-    position: 'fixed',
-    left: '0',
     width: '20vw',
-    height: '100%',
+    height: '100vh',
     background: '#c580f7',
-    color: '#e5d7ef',
-    padding: '2em',
+    color: '#eafffb',
+    textShadow: '(0,0,0,0.18)',
+    boxShadow: '0 2px 4px rgba(0,0,0,0.18)'
   },
-  tabStyle: {
+  tabContainer: {
     display: 'flex',
+    paddingLeft: '9.5px',
+    paddingRight: '20px',
+    paddingTop: '12px',
+    background: 'lightyellow'
+  },
+  tab: {
+    display: 'flex',
+    boxShadow: '0 2px 4px rgba(0,0,0,0.18)',
+    padding: '.5em',
+    height: '51px',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 'calc((20vw - .4vw) / 4 )',
+    background: 'lightgreen',
+    borderRadius: '12px 12px 0 0'
   }
 }
 
-const { container, tabStyle } = styles
+const { container, tabContainer, tab } = styles
