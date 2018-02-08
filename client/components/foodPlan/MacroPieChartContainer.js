@@ -14,7 +14,7 @@ const MacroPieChartContainer = (props) => {
 
   return (
     <div style = {container}>
-      <div id="piechartparent">
+      <div id="percentage-parent">
         <div style={proteinPercent}>{proteinPercentage}%</div>
         <div style={carbsPercent}>{carbsPercentage}%</div>
         <div style={fatPercent}>{fatPercentage}%</div>
@@ -63,7 +63,7 @@ const styles = {
     right: '55px',
     textAlign: 'center',
     color: '#e27c00',
-  }
+  },
 }
 
 const { container, proteinPercent, carbsPercent, fatPercent } = styles
