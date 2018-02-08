@@ -46,9 +46,8 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
 
   router.get('/', passport.authenticate('google', { scope: 'email' }));
 
-  router.get(
-    '/callback',
-    passport.authenticate('google', {
+  // prettier-ignore
+  router.get('/callback', passport.authenticate('google', {
       successRedirect: '/profile-page',
       failureRedirect: '/login',
     })

@@ -24,7 +24,7 @@ const Main = props => {
         <Menu stackable>
           {/* The navbar will show these links after you log in */}
           <Menu.Item>
-            <Link to="/home">Home</Link>
+            <Link to="/profile-page">Home</Link>
           </Menu.Item>
           <Menu.Item>
             <a href="#" onClick={handleClick}>

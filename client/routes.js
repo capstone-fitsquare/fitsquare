@@ -3,13 +3,12 @@ import { connect } from 'react-redux';
 import { Route, Switch, Router } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import history from './history';
-import Calendar from './components/calendars'
+import Calendar from './components/calendars';
 
 import {
   Main,
   Login,
   Signup,
-  UserHome,
   NewGoals,
   IntroSequence,
   AllDays,
@@ -65,7 +64,7 @@ class Routes extends Component {
             {isLoggedIn && (
               <Switch>
                 {/* Routes placed here are only available after logging in */}
-                <Route path="/home" component={UserHome} />
+                {/*<Route path="/home" component={UserHome} />*/}
                 <Route path="/profile-page" component={UserAccountProfilePage} />
               </Switch>
             )}
