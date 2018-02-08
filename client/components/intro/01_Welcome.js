@@ -10,52 +10,40 @@ class Welcome extends Component {
     const { history, transition } = this.props
 
     return (
-      <div style={container}>
-
-        <div style={fitsquare}>
-          <p>fitsquare</p>
+      <div>
+        <div style={welcome}>
+          <div>Welcome to fitSquare!</div>
+          <div>Click to get started</div>
         </div>
-
-        <div id="loginParent" style={loginContainer}>
-          <div style={login}>
-            <div onClick={() => history.push('/login')}>Log In</div>
-          </div>
-          <div style={login}>
-            <div onClick={() => transition('welcome', 'goal')}>Continue As Guest</div>
-          </div>
+        <div style={button}>
+          <div onClick={() => transition('welcome', 'goal')}>Go!</div>
         </div>
-
-
       </div>
     )
   }
 }
 
-export default withRouter(Welcome)
+export default Welcome
 
 const styles = {
-  container: {
-    display: 'flex',
-    flexDirection: 'column'
-  },
-  fitsquare: {
-    margin: '2em',
-    display: 'flex',
-    justifyContent: 'center'
-  },
-  loginContainer: {
+  welcomeContainer: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    margin: '2em'
+    boxShadow: '0 2px 4px rgba(0,0,0,0.18)',
+    textAlign: 'center',
+    margin: 'auto'
   },
-  login: {
+  welcome: {
     padding: '2em',
     margin: '2em',
-    border: '1px solid black',
-    borderRadius: '3px'
   },
-
+  button: {
+    padding: '2em',
+    margin: '2em',
+    boxShadow: '0 2px 4px rgba(0,0,0,0.18)',
+    borderRadius: '3px'
+  }
 }
 
-const { container, fitsquare, loginContainer, login } = styles
+const { welcomeContainer, welcome, button } = styles

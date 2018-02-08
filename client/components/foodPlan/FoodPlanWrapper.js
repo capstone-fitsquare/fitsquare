@@ -10,6 +10,7 @@ import HTML5Backend from 'react-dnd-html5-backend'
 import { DragDropContext } from 'react-dnd'
 import { DragDropContextProvider } from 'react-dnd'
 import MacroPieChartContainer from './MacroPieChartContainer'
+import GroceryList from './GroceryList'
 
 
 class FoodPlanWrapper extends Component {
@@ -28,19 +29,18 @@ class FoodPlanWrapper extends Component {
 
     const { visible } = this.state
 
+    const cssClass = visible ? 'appear' : ''
+
     return (
         <div id="foodPlanWrapper">
-          <Button onClick={this.toggleVisibility}>Recipes</Button>
-          <Sidebar.Pushable as={Segment}>
-            <Sidebar animation="push" visible={visible}>
+          <GroceryList />
+          <div id="recipe-bar">
+            <img id="recipes-tab" className={cssClass} src='/images/recipe.png' onClick={this.toggleVisibility} />
+            <div id="recipes-container" className={cssClass}>
               <RecipesContainer />
-            </Sidebar>
-            <Sidebar.Pusher>
-              <Segment basic>
-                <AllDays />
-              </Segment>
-            </Sidebar.Pusher>
-          </Sidebar.Pushable>
+            </div>
+          </div>
+          <AllDays />
         </div>
     )
   }
@@ -49,22 +49,12 @@ class FoodPlanWrapper extends Component {
 export default DragDropContext(HTML5Backend)(FoodPlanWrapper)
 
 const styles = {
-  container: {
-    display: 'flex',
-    flexDirection: 'column'
+  pushableDiv: {
+    height: '84vh',
   },
-  header: {
-    margin: '2em 8em 0em 8em',
-    display: 'flex',
-    justifyContent: 'center'
-  },
-  preferencesParent: {
-    display: 'flex',
-    flexDirection: 'column',
-    padding: '1em',
-    margin: '1em',
-    alignItems: 'center'
+  sidebar: {
+    width: '20vw'
   }
 }
 
-const { container, header, preferencesParent } = styles
+const { pushableDiv, sidebar } = styles

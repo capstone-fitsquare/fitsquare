@@ -26,7 +26,7 @@ class Recipes extends Component {
       <div>
         {recipes.length ? recipes.map(recipe => {
           return (
-            <div key={recipe.id}>
+            <div key={recipe.id} style={recipeContainer}>
               <h4>{recipe.recipeName}</h4>
               <RecipeImg
                 id={recipe.id}
@@ -39,7 +39,6 @@ class Recipes extends Component {
                 fat={recipe.fat}
                 ingredients={recipe.ingredients}
               />
-              <Button onClick={() => this.addRecipe(recipe)}>Add to plan</Button>
             </div>
           )
         }) : null }
@@ -59,22 +58,13 @@ const mapDispatch = dispatch => {
 export default connect(mapState, mapDispatch)(Recipes)
 
 const styles = {
-  container: {
-    display: 'flex',
-    flexDirection: 'column'
-  },
-  header: {
-    margin: '2em 8em 0em 8em',
-    display: 'flex',
-    justifyContent: 'center'
-  },
-  preferencesParent: {
+  recipeContainer: {
     display: 'flex',
     flexDirection: 'column',
+    alignItems: 'center',
     padding: '1em',
-    margin: '1em',
-    alignItems: 'center'
+    margin: '1em'
   },
 }
 
-const { container, header, preferencesParent } = styles
+const { recipeContainer } = styles
