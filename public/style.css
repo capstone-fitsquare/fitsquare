@@ -68,3 +68,16 @@ form div {
 .daycard.shrink {
   transform: scale(0.7)
 }
+
+#piechartparent {
+  transition: all 0.2s;
+  opacity: 0.2;
+  width: 200px;
+  height: 200px;
+  position: absolute;
+}
+
+#piechartparent:hover {
+  transform: scale(1.1);
+  opacity: 1;
+}

@@ -20,9 +20,9 @@ const MacroPieChart = (props) => {
   // ]
 
   const data = [
-    {key: "Protein", value: protein, color: "#00FFD2"},
-    {key: "Carbs", value: carbs, color: "#FDF700"},
     {key: "Fat", value: fat, color: "#FF9000"},
+    {key: "Carbs", value: carbs, color: "#FDF700"},
+    {key: "Protein", value: protein, color: "#00FFD2"},
   ]
 
   return (
@@ -31,6 +31,7 @@ const MacroPieChart = (props) => {
       animate={true}
       // rounded={true}
       lineWidth={25}
+      paddingAngle={2}
       // If you need expand on hover (or touch) effect
       // expandOnHover
       // If you need custom behavior when sector is hovered (or touched)
