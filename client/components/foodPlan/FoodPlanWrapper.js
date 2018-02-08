@@ -10,6 +10,7 @@ import HTML5Backend from 'react-dnd-html5-backend'
 import { DragDropContext } from 'react-dnd'
 import { DragDropContextProvider } from 'react-dnd'
 import MacroPieChartContainer from './MacroPieChartContainer'
+import GroceryList from './GroceryList'
 
 
 class FoodPlanWrapper extends Component {
@@ -30,9 +31,10 @@ class FoodPlanWrapper extends Component {
 
     return (
         <div id="foodPlanWrapper">
+          <GroceryList />
           <Button onClick={this.toggleVisibility}>Recipes</Button>
-          <Sidebar.Pushable as={Segment}>
-            <Sidebar animation="push" visible={visible}>
+          <Sidebar.Pushable as={Segment} style={pushableDiv}>
+            <Sidebar animation="overlay" visible={visible} style={sidebar}>
               <RecipesContainer />
             </Sidebar>
             <Sidebar.Pusher>
@@ -49,22 +51,12 @@ class FoodPlanWrapper extends Component {
 export default DragDropContext(HTML5Backend)(FoodPlanWrapper)
 
 const styles = {
-  container: {
-    display: 'flex',
-    flexDirection: 'column'
+  pushableDiv: {
+    height: '84vh',
   },
-  header: {
-    margin: '2em 8em 0em 8em',
-    display: 'flex',
-    justifyContent: 'center'
-  },
-  preferencesParent: {
-    display: 'flex',
-    flexDirection: 'column',
-    padding: '1em',
-    margin: '1em',
-    alignItems: 'center'
+  sidebar: {
+    width: '20vw'
   }
 }
 
-const { container, header, preferencesParent } = styles
+const { pushableDiv, sidebar } = styles

@@ -9,7 +9,8 @@ import store, { addFoodToDayN, removeFoodFromDayN, addFoodToGroceryList } from '
 import { Button, Icon } from 'semantic-ui-react'
 import { DropTarget } from 'react-dnd'
 import MacrosProgress from './MacrosProgress'
-
+import { Collapse } from 'react-collapse'
+import { presets } from 'react-motion'
 
 const Types = {
   ITEM: 'recipe_img'
@@ -57,8 +58,10 @@ class DayCard extends Component {
   constructor() {
     super()
     this.state = {
-      showDetails: false
+      showPreview: true,
+      showDetails: false,
     }
+    this.togglePreview = this.togglePreview.bind(this)
     this.toggleDetails = this.toggleDetails.bind(this)
   }
 
@@ -72,9 +75,35 @@ class DayCard extends Component {
     })
   }
 
+  togglePreview() {
+    this.setState({
+      showPreview: !this.state.showPreview
+    })
+  }
+
   render() {
 
     const { breakfast, lunch, dinner, snacks, dayN, macroGoal } = this.props
+
+    let weekday
+
+    switch(dayN){
+      case 0:
+        weekday = 'M'
+        break;
+      case 1:
+        weekday = 'T'
+        break;
+      case 2:
+        weekday = 'W'
+        break;
+      case 3:
+        weekday = "Th"
+        break;
+      case 4:
+        weekday = "F"
+        break;
+    }
 
     const { canDrop, isOver, connectDropTarget, draggedRecipe, didDrop } = this.props
 
@@ -96,13 +125,97 @@ class DayCard extends Component {
 
     return this.state.showDetails ?
     connectDropTarget(
-      <div style={container}>
+      <div>
+        <Collapse
+          isOpened={this.state.showDetails}
+          springConfig={presets.gentle}>
+          <div style={container}>
+            <div style={width}>
+              <div style={progress}>
+                <Button icon size='mini' onClick={this.toggleDetails} circular={true} style={minus}>
+                  <Icon name='window minimize' />
+                </Button>
+                <MacrosProgress
+                  showDetails={this.state.showDetails}
+                  breakfast={breakfast}
+                  lunch={lunch}
+                  dinner={dinner}
+                  snacks={snacks}
+                  macroGoal={macroGoal}
+                />
+              </div>
+              <div style={{...meal, background: detailsBackground}}>
+                <div style={breakfast}>
+                  <p>Breakfast</p>
+                </div>
+                <div>
+                    {breakfast.length ? breakfast.map(recipe =>
+                      <div key={recipe.id}>
+                        <div>{recipe.name}</div>
+                        <img src={recipe.img} />
+                      </div>
+                    ) : null}
+                </div>
+                <SearchButton meal="breakfast" dayN={dayN} />
+              </div>
 
-        <div style={width}>
-          <div style={progress}>
-            <Button icon size='mini' onClick={this.toggleDetails} circular={true} style={minus}>
-              <Icon name='window minimize' />
-            </Button>
+              <div style={{...meal, background: detailsBackground}}>
+                <div>
+                  <p>Lunch</p>
+                </div>
+                <div>
+                    {lunch.length ? lunch.map(recipe =>
+                      <div key={recipe.id}>
+                        <div>{recipe.name}</div>
+                        <img src={recipe.img} />
+                      </div>
+                    ) : null}
+                </div>
+                <SearchButton meal="lunch" dayN={dayN} />
+              </div>
+
+              <div style={{...meal, background: detailsBackground}}>
+                <div>
+                  <p>Dinner</p>
+                </div>
+                <div>
+                    {dinner.length ? dinner.map(recipe =>
+                      <div key={recipe.id}>
+                        <div>{recipe.name}</div>
+                        <img src={recipe.img} />
+                      </div>
+                    ) : null}
+                </div>
+                <SearchButton meal="dinner" dayN={dayN} />
+              </div>
+
+              <div style={{...meal, background: detailsBackground}}>
+                <div>
+                  <p>Snacks</p>
+                </div>
+                <div>
+                    {snacks.length ? snacks.map(recipe =>
+                      <div key={recipe.id}>
+                        <div>{recipe.name}</div>
+                        <img src={recipe.img} />
+                      </div>
+                    ) : null}
+                </div>
+                <SearchButton meal="snacks" dayN={dayN} />
+              </div>
+            </div>
+
+          </div>
+        </Collapse>
+      </div>
+
+    ) : connectDropTarget(
+      <div>
+        <Collapse
+          isOpened={this.state.showPreview}
+          springConfig={presets.gentle}>
+          <h4 style={{textAlign: 'center'}}>{weekday}</h4>
+          <div id={`dayN-${dayN}`} style={square} style={{...square, background: dayBackground}} onClick={this.toggleDetails}>
             <MacrosProgress
               showDetails={this.state.showDetails}
               breakfast={breakfast}
@@ -112,78 +225,7 @@ class DayCard extends Component {
               macroGoal={macroGoal}
             />
           </div>
-          <div style={{...meal, background: detailsBackground}}>
-            <div style={breakfast}>
-              <p>Breakfast</p>
-            </div>
-            <div>
-                {breakfast.length ? breakfast.map(recipe =>
-                  <div key={recipe.id}>
-                    <div>{recipe.name}</div>
-                    <img src={recipe.img} />
-                  </div>
-                ) : null}
-            </div>
-            <SearchButton meal="breakfast" dayN={dayN} />
-          </div>
-
-          <div style={{...meal, background: detailsBackground}}>
-            <div>
-              <p>Lunch</p>
-            </div>
-            <div>
-                {lunch.length ? lunch.map(recipe =>
-                  <div key={recipe.id}>
-                    <div>{recipe.name}</div>
-                    <img src={recipe.img} />
-                  </div>
-                ) : null}
-            </div>
-            <SearchButton meal="lunch" dayN={dayN} />
-          </div>
-
-          <div style={{...meal, background: detailsBackground}}>
-            <div>
-              <p>Dinner</p>
-            </div>
-            <div>
-                {dinner.length ? dinner.map(recipe =>
-                  <div key={recipe.id}>
-                    <div>{recipe.name}</div>
-                    <img src={recipe.img} />
-                  </div>
-                ) : null}
-            </div>
-            <SearchButton meal="dinner" dayN={dayN} />
-          </div>
-
-          <div style={{...meal, background: detailsBackground}}>
-            <div>
-              <p>Snacks</p>
-            </div>
-            <div>
-                {snacks.length ? snacks.map(recipe =>
-                  <div key={recipe.id}>
-                    <div>{recipe.name}</div>
-                    <img src={recipe.img} />
-                  </div>
-                ) : null}
-            </div>
-            <SearchButton meal="snacks" dayN={dayN} />
-          </div>
-        </div>
-
-      </div>
-    ) : connectDropTarget(
-      <div id={`dayN-${dayN}`} style={square} style={{...square, background: dayBackground}} onClick={this.toggleDetails}>
-        <MacrosProgress
-          showDetails={this.state.showDetails}
-          breakfast={breakfast}
-          lunch={lunch}
-          dinner={dinner}
-          snacks={snacks}
-          macroGoal={macroGoal}
-        />
+        </Collapse>
       </div>
     )
   }
@@ -228,7 +270,8 @@ const styles = {
     width: '100px',
     borderRadius: '3px',
     margin: '1em',
-    padding: '1em'
+    padding: '1em',
+    boxShadow: '0px 2px 4px rgba(0,0,0,0.18)'
   },
   minus: {
     marginLeft: '3em',

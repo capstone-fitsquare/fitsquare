@@ -39,7 +39,6 @@ class Recipes extends Component {
                 fat={recipe.fat}
                 ingredients={recipe.ingredients}
               />
-              <Button onClick={() => this.addRecipe(recipe)}>Add to plan</Button>
             </div>
           )
         }) : null }

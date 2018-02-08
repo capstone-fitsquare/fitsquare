@@ -7,18 +7,15 @@ import MacroPieChartContainer from './MacroPieChartContainer';
 const AllDays = (props) => {
 
   return (
-    <div>
-      <div style={container}>
-        <div style={daysContainer}>
-        {[...Array(5)].map( (x, i) =>
-          <DayCard key={i} dayN={i} />
-        )}
-        </div>
-        <div style={imgContainer}>
-          <MacroPieChartContainer />
-        </div>
+    <div style={container}>
+      <div style={daysContainer}>
+      {[...Array(5)].map( (x, i) =>
+        <DayCard className="day-card" key={i} dayN={i} />
+      )}
       </div>
-      <GroceryList />
+      <div style={pieChartContainer}>
+        <MacroPieChartContainer />
+      </div>
     </div>
   )
 }
@@ -28,22 +25,19 @@ export default AllDays
 const styles = {
   container: {
     display: 'flex',
-    // flexDirection: 'column',
-    margin: '3em'
+    flexDirection: 'column'
   },
-  imgContainer: {
+  pieChartContainer: {
     display: 'flex',
     justifyContent: 'flex-end'
-  },
-  img: {
-    width: '200px',
-    height: '200px'
   },
   daysContainer: {
     display: 'flex',
     alignItems: 'center',
-    margin: '3em'
+    position: 'fixed',
+    left: '23vw',
+    top: '10vh'
   }
 }
 
-const { container, imgContainer, img, daysContainer } = styles
+const { container, pieChartContainer, daysContainer } = styles

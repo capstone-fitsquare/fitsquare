@@ -10,7 +10,8 @@ const MacroPieChartContainer = (props) => {
   return macroGoal ? (
     <div style = {{
       height: '200px',
-      width: '200px'
+      width: '200px',
+      margin: '2em 4em 2em 2em'
     }}>
       <MacroPieChart protein={macroGoal.protein} carbs={macroGoal.carbs} fat={macroGoal.fat} />
     </div>

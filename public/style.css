@@ -57,64 +57,14 @@ form div {
   color: lightseagreen;
 }
 
-/*
- * react-circular-progressbar styles
- *
- * All of the styles in this file are optional and configurable!
- */
-
- .CircularProgressbar {
-  /*
-   * This fixes an issue where the CircularProgressbar svg has
-   * 0 width inside a "display: flex" container, and thus not visible.
-   *
-   * If you're not using "display: flex", you can remove this style.
-   */
-  width: 250px;
+.day-card {
+  transition: transform .2s
 }
 
-.CircularProgressbar .CircularProgressbar-path {
-  stroke: #3e98c7;
-  stroke-linecap: round;
-  transition: stroke-dashoffset 0.5s ease 0s;
+.day-card:hover {
+  transform: scale(1.1)
 }
 
-.CircularProgressbar .CircularProgressbar-trail {
-  stroke: #d6d6d6;
-}
-
-.CircularProgressbar .CircularProgressbar-text {
-  fill: #3e98c7;
-  font-size: 20px;
-  dominant-baseline: middle;
-  text-anchor: middle;
-}
-
-.CircularProgressbar .CircularProgressbar-background {
-  fill: #d6d6d6;
-}
-
-/*
- * Sample background styles. Use these with e.g.:
- *
- *   <CircularProgressbar
- *     className="CircularProgressbar-inverted"
- *     background
- *     percentage={50}
- *   />
- */
-.CircularProgressbar.CircularProgressbar-inverted .CircularProgressbar-background {
-  fill: #3e98c7;
-}
-
-.CircularProgressbar.CircularProgressbar-inverted .CircularProgressbar-text {
-  fill: #fff;
-}
-
-.CircularProgressbar.CircularProgressbar-inverted .CircularProgressbar-path {
-  stroke: #fff;
-}
-
-.CircularProgressbar.CircularProgressbar-inverted .CircularProgressbar-trail {
-  stroke: transparent;
+.days-card.shrink {
+  transform: scale(0.6)
 }

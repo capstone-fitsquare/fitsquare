@@ -26,7 +26,7 @@ class GroceryList extends Component {
     const groceryList = Array.from(new Set(this.props.groceryList))
 
     return (
-      <div>
+      <div style={groceries}>
         <h4>Grocery List</h4>
         <ul>
           {groceryList.length ? groceryList.map(ingredient =>
@@ -52,3 +52,16 @@ const mapDispatch = dispatch => {
 }
 
 export default connect(mapState, mapDispatch)(GroceryList)
+
+const styles = {
+  groceries: {
+    boxShadow: '0px 2px 4px rgba(0,0,0,0.18)',
+    padding: '1em',
+    background: 'white',
+    position: 'absolute',
+    bottom: '0px',
+    right: '10px'
+  }
+}
+
+const { groceries } = styles
