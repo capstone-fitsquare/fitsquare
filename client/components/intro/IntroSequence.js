@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
+import ReactDom from 'react-dom'
 import {withRouter, Link} from 'react-router-dom'
 import Welcome from './01_Welcome'
 import Goal from './02_Goal'
@@ -10,6 +11,7 @@ import AnalyzeBiometrics from './05_AnalyzeBiometrics'
 import BiometricsReport from './06_BiometricsReport'
 import GatherPreferences from './07_GatherPreferences'
 import GenerateFoodPlan from './08_GenerateFoodPlan'
+import Popup from 'react-popup'
 
 class IntroSequence extends Component {
 
@@ -38,10 +40,9 @@ class IntroSequence extends Component {
   render() {
 
     const { welcome, goal, gatherBiometrics, activityLevel, analyzeBiometrics, biometricsReport, gatherPreferences, generateFoodPlan } = this.state
-    console.log('seq state', this.state)
-    console.log('seq introProfile', this.props.introProfile)
+
     return (
-      <div style={container}>
+      <div>
         {welcome &&
           <Welcome transition={this.transition} />
         }
@@ -86,9 +87,6 @@ const styles = {
     display: 'flex',
     flexDirection: 'column'
   },
-  hr: {
-    width: '90%',
-  }
 }
 
-const { container, hr } = styles
+const { container, popup } = styles

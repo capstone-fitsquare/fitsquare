@@ -57,64 +57,75 @@ form div {
   color: lightseagreen;
 }
 
-/*
- * react-circular-progressbar styles
- *
- * All of the styles in this file are optional and configurable!
- */
-
- .CircularProgressbar {
-  /*
-   * This fixes an issue where the CircularProgressbar svg has
-   * 0 width inside a "display: flex" container, and thus not visible.
-   *
-   * If you're not using "display: flex", you can remove this style.
-   */
-  width: 250px;
+.daycard {
+  transition: transform 0.2s
 }
 
-.CircularProgressbar .CircularProgressbar-path {
-  stroke: #3e98c7;
-  stroke-linecap: round;
-  transition: stroke-dashoffset 0.5s ease 0s;
+.daycard:hover {
+  transform: scale(1.1)
 }
 
-.CircularProgressbar .CircularProgressbar-trail {
-  stroke: #d6d6d6;
+.daycard.shrink {
+  transform: scale(0.7)
 }
 
-.CircularProgressbar .CircularProgressbar-text {
-  fill: #3e98c7;
-  font-size: 20px;
-  dominant-baseline: middle;
-  text-anchor: middle;
+#percentage-parent {
+  transition: all 0.2s;
+  opacity: 0.2;
+  width: 200px;
+  height: 200px;
+  position: absolute;
 }
 
-.CircularProgressbar .CircularProgressbar-background {
-  fill: #d6d6d6;
+#percentage-parent:hover {
+  transform: scale(1.1);
+  opacity: 1;
 }
 
-/*
- * Sample background styles. Use these with e.g.:
- *
- *   <CircularProgressbar
- *     className="CircularProgressbar-inverted"
- *     background
- *     percentage={50}
- *   />
- */
-.CircularProgressbar.CircularProgressbar-inverted .CircularProgressbar-background {
-  fill: #3e98c7;
+#piechart-container {
+  transition: all 0.2s
 }
 
-.CircularProgressbar.CircularProgressbar-inverted .CircularProgressbar-text {
-  fill: #fff;
+#piechart-container:hover {
+  transform: scale(1.1)
 }
 
-.CircularProgressbar.CircularProgressbar-inverted .CircularProgressbar-path {
-  stroke: #fff;
+#recipes-container {
+  position: fixed;
+  left: -18.8vw;
+  transition: all 0.2s;
 }
 
-.CircularProgressbar.CircularProgressbar-inverted .CircularProgressbar-trail {
-  stroke: transparent;
+#recipes-container.appear {
+  transform: translate(18.8vw, 0)
+}
+
+#recipes-tab {
+  transition: all 0.2s;
+  width: 60px;
+  height: 60px;
+  position: fixed;
+  left: 0vw;
+  top: 94.5px;
+  z-index: 6;
+}
+
+#recipes-tab.appear {
+  transform: translate(18.8vw, 0)
+}
+
+.recipe-img {
+  transition: all 0.2s
+}
+
+.recipe-img:hover {
+  transform: scale(1.1)
+}
+
+#grocery-list {
+  transition: all 0.2s
+}
+
+#grocery-list.active {
+  transform: translate(0, 410px)
 }
