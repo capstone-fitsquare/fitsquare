@@ -22,35 +22,6 @@ const Main = props => {
       <Navbar />
       {children}
     </div>
-    // <Container>
-    //   <header>
-    //     <h1>fitSquare</h1>
-    //   </header>
-    //   {isLoggedIn ? (
-    //     <Menu stackable>
-    //       {/* The navbar will show these links after you log in */}
-    //       <Menu.Item>
-    //         <Link to="/home">Home</Link>
-    //       </Menu.Item>
-    //       <Menu.Item>
-    //         <a href="#" onClick={handleClick}>
-    //           Logout
-    //         </a>
-    //       </Menu.Item>
-    //     </Menu>
-    //   ) : (
-    //     <Menu stackable>
-    //       {/* The navbar will show these links before you log in */}
-    //       <Menu.Item>
-    //         <Link to="/login">Login</Link>
-    //       </Menu.Item>
-    //       <Menu.Item>
-    //         <Link to="/signup">Sign Up</Link>
-    //       </Menu.Item>
-    //     </Menu>
-      // )}
-      // {children}
-    // </Container>
   );
 };
 
