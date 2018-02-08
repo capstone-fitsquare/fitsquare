@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import { Container, Menu } from 'semantic-ui-react';
 import { logout } from '../store';
+import Navbar from './Navbar'
 import './styles.css';
 
 /**
@@ -16,35 +17,47 @@ const Main = props => {
   const { children, handleClick, isLoggedIn } = props;
 
   return (
-    <Container>
-      <header>
-        <h1>fitSquare</h1>
-      </header>
-      {isLoggedIn ? (
-        <Menu stackable>
-          {/* The navbar will show these links after you log in */}
-          <Menu.Item>
-            <Link to="/home">Home</Link>
-          </Menu.Item>
-          <Menu.Item>
-            <a href="#" onClick={handleClick}>
-              Logout
-            </a>
-          </Menu.Item>
-        </Menu>
-      ) : (
-        <Menu stackable>
-          {/* The navbar will show these links before you log in */}
-          <Menu.Item>
-            <Link to="/login">Login</Link>
-          </Menu.Item>
-          <Menu.Item>
-            <Link to="/signup">Sign Up</Link>
-          </Menu.Item>
-        </Menu>
-      )}
+    <div>
+      <div style ={{
+        position: 'fixed',
+        width: '100%',
+        height: '12px',
+        background: 'linear-gradient(to left, #90EE90 0%, #00ffd2 70%)'
+      }}
+      >
+      </div>
+      <Navbar />
       {children}
-    </Container>
+    </div>
+    // <Container>
+    //   <header>
+    //     <h1>fitSquare</h1>
+    //   </header>
+    //   {isLoggedIn ? (
+    //     <Menu stackable>
+    //       {/* The navbar will show these links after you log in */}
+    //       <Menu.Item>
+    //         <Link to="/home">Home</Link>
+    //       </Menu.Item>
+    //       <Menu.Item>
+    //         <a href="#" onClick={handleClick}>
+    //           Logout
+    //         </a>
+    //       </Menu.Item>
+    //     </Menu>
+    //   ) : (
+    //     <Menu stackable>
+    //       {/* The navbar will show these links before you log in */}
+    //       <Menu.Item>
+    //         <Link to="/login">Login</Link>
+    //       </Menu.Item>
+    //       <Menu.Item>
+    //         <Link to="/signup">Sign Up</Link>
+    //       </Menu.Item>
+    //     </Menu>
+      // )}
+      // {children}
+    // </Container>
   );
 };
 

@@ -41,8 +41,7 @@ class RecipeImg extends Component {
   componentDidMount() {
 		const img = new Image()
 		img.onload = () => this.props.connectDragPreview(img)
-    img.src = this.props.src
-    img.style = { borderRadius: '50%' }
+    img.src = '/images/salad.png'
   }
 
   render() {
@@ -50,7 +49,11 @@ class RecipeImg extends Component {
 
     const border = isDragging ? '2px solid black' : '0'
 
-    return connectDragSource(<img style={{ border }} id={id} src={src} />)
+    const style = {
+      borderRadius: '12px',
+    }
+
+    return connectDragSource(<img style={{ ...style, border }} id={id} src={src} />)
   }
 }
 

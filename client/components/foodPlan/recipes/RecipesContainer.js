@@ -12,10 +12,28 @@ class RecipeNav extends Component {
     this.state = {
       activeIndex: 0
     }
-    this.handleTabChange = this.handleTabChange.bind(this)
+    this.handleMeal = this.handleMeal.bind(this)
   }
 
-  handleTabChange = (e, { activeIndex }) => this.setState({ activeIndex })
+  handleMeal(meal) {
+    let index
+    switch(meal){
+      case 'breakfast':
+        index = 0
+        break
+      case 'lunch':
+        index = 1
+        break
+      case 'dinner':
+        index = 2
+      case 'snacks':
+        index = 3
+    }
+
+    this.setState({
+      activeIndex: index
+    })
+  }
 
   render() {
 
@@ -28,15 +46,32 @@ class RecipeNav extends Component {
 
     const panes = [
       // { menuItem: 'All', render: () => <Tab.Pane loading={false}><Recipes /></Tab.Pane> },
-      { menuItem: 'Breakfast', render: () => <Tab.Pane><Recipes recipes={breakfastRecipes} /></Tab.Pane> },
-      { menuItem: 'Lunch', render: () => <Tab.Pane><Recipes recipes={lunchRecipes} /></Tab.Pane> },
-      { menuItem: 'Dinner', render: () => <Tab.Pane><Recipes recipes={dinnerRecipes} /></Tab.Pane> },
-      { menuItem: 'Snacks', render: () => <Tab.Pane><Recipes recipes={snackRecipes} /></Tab.Pane> },
+      // { menuItem: 'Breakfast', render: () => <Tab.Pane><Recipes recipes={breakfastRecipes} /></Tab.Pane> },
+      // { menuItem: 'Lunch', render: () => <Tab.Pane><Recipes recipes={lunchRecipes} /></Tab.Pane> },
+      // { menuItem: 'Dinner', render: () => <Tab.Pane><Recipes recipes={dinnerRecipes} /></Tab.Pane> },
+      // { menuItem: 'Snacks', render: () => <Tab.Pane><Recipes recipes={snackRecipes} /></Tab.Pane> },
       // { menuItem: 'Favorites', render: () => <Tab.Pane><Recipes meal="breakfast" /></Tab.Pane> },
     ]
 
     return (
-      <Tab panes={panes} activeIndex={activeIndex} onTabChange={this.handleTabChange} />
+      <div style={container}>
+        <div style={{ letterSpacing: '1px' }}>BREAKFAST</div>
+          <div>
+            <Recipes recipes={breakfastRecipes} />
+          </div>
+        <div style={{ letterSpacing: '1px' }}>LUNCH</div>
+          <div>
+            <Recipes recipes={lunchRecipes} />
+          </div>
+        <div style={{ letterSpacing: '1px' }}>DINNER</div>
+          <div>
+            <Recipes recipes={dinnerRecipes} />
+          </div>
+        <div style={{ letterSpacing: '1px' }}>SNACKS</div>
+          <div>
+            <Recipes recipes={snackRecipes} />
+          </div>
+      </div>
     )
   }
 }
@@ -56,7 +91,13 @@ export default withRouter(connect(mapState, mapDispatch)(RecipeNav))
 
 const styles = {
   container: {
-    display: 'flex',
+    position: 'fixed',
+    left: '0',
+    width: '20vw',
+    height: '100%',
+    background: '#c580f7',
+    color: '#e5d7ef',
+    padding: '2em',
   },
   tabStyle: {
     display: 'flex',

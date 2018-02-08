@@ -32,17 +32,19 @@ class FoodPlanWrapper extends Component {
     return (
         <div id="foodPlanWrapper">
           <GroceryList />
-          <Button onClick={this.toggleVisibility}>Recipes</Button>
-          <Sidebar.Pushable as={Segment} style={pushableDiv}>
-            <Sidebar animation="overlay" visible={visible} style={sidebar}>
-              <RecipesContainer />
-            </Sidebar>
-            <Sidebar.Pusher>
-              <Segment basic>
-                <AllDays />
-              </Segment>
-            </Sidebar.Pusher>
-          </Sidebar.Pushable>
+          <div id="recipe-bar" style={{
+            display: 'flex',
+          }}>
+            <RecipesContainer />
+            <img src='/images/recipe.png' onClick={this.toggleVisibility}
+              style={{
+                height: '60px',
+                width: '60px',
+                position: 'fixed',
+                left: '18.5vw'
+              }} />
+          </div>
+          <AllDays />
         </div>
     )
   }
