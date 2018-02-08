@@ -121,7 +121,16 @@ class DayCard extends Component {
 			detailsBackground = 'lightcyan'
 		} else if (canDrop) {
 			detailsBackground = 'lightorange'
-		}
+    }
+
+    const { shrink } = this.props
+    const newClass = shrink ? 'shrink daycard' : 'daycard'
+
+    console.log('----------------')
+    console.log('dayN', dayN)
+    console.log('shrink', shrink)
+    console.log('newClass', newClass)
+    console.log('----------------')
 
     return this.state.showDetails ?
     connectDropTarget(
@@ -132,7 +141,11 @@ class DayCard extends Component {
           <div style={container}>
             <div style={width}>
               <div style={progress}>
-                <Button icon size='mini' onClick={this.toggleDetails} circular={true} style={minus}>
+                <Button icon size='mini' circular={true} style={minus}
+                  onClick={() => {
+                    this.toggleDetails()
+                    this.props.toggleDayN(`day${dayN}`)
+                  }}>
                   <Icon name='window minimize' />
                 </Button>
                 <MacrosProgress
@@ -210,12 +223,16 @@ class DayCard extends Component {
       </div>
 
     ) : connectDropTarget(
-      <div>
+      <div className={newClass}>
         <Collapse
           isOpened={this.state.showPreview}
           springConfig={presets.gentle}>
           <h4 style={{textAlign: 'center'}}>{weekday}</h4>
-          <div id={`dayN-${dayN}`} style={square} style={{...square, background: dayBackground}} onClick={this.toggleDetails}>
+          <div style={square} style={{...square, background: dayBackground}}
+            onClick={() => {
+              this.toggleDetails()
+              this.props.toggleDayN(`day${dayN}`)
+            }}>
             <MacrosProgress
               showDetails={this.state.showDetails}
               breakfast={breakfast}

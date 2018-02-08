@@ -57,14 +57,14 @@ form div {
   color: lightseagreen;
 }
 
-.day-card {
+.daycard {
   transition: transform .2s
 }
 
-.day-card:hover {
+.daycard:hover {
   transform: scale(1.1)
 }
 
-.days-card.shrink {
+.daycard.shrink {
   transform: scale(0.6)
 }
