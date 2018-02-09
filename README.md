@@ -1,7 +1,10 @@
 # FitSquare!
-
-## Description
+     ---
      
+## Description
+    
+     ---
+
 A fitness planning app that generates a recommended 5-day food plan based on daily macronutrient goals.
 
 This is our final \o/ capstone project in senior phase which encomposes the following technologies, API's and packages; 
@@ -22,8 +25,6 @@ This is our final \o/ capstone project in senior phase which encomposes the foll
   * [Semantic UI React framework](https://react.semantic-ui.com/introduction)  
     
     ## Setup
-    
-     ---
      
      You may want to poke around to see how we got things cooking. Feel free!
      If so, this is how you get things started:
@@ -36,9 +37,10 @@ This is our final \o/ capstone project in senior phase which encomposes the foll
      
      *Checkout package.json and under scripts you should see a host of commands which cover webpack integration as well as testing! 
      ```
-    ---
     
-  ### The Fit-Square development team consists of:
-  [Amanda Hussey](https://github.com/amandahussey)
-  [Will Shaw](https://github.com/wrcs505)
-  [Antonio Pavicevac-Ortiz](https://github.com/antonioOrtiz)
+    ### The Fit-Square development team consists of:
+    [Amanda Hussey](https://github.com/amandahussey)
+    
+    [Will Shaw](https://github.com/wrcs505)
+    
+    [Antonio Pavicevac-Ortiz](https://github.com/antonioOrtiz)
