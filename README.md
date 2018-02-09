@@ -1,9 +1,7 @@
 # FitSquare!
-     ---
      
 ## Description
     
-     ---
 
 A fitness planning app that generates a recommended 5-day food plan based on daily macronutrient goals.
 
