@@ -8,6 +8,7 @@ import Navbar from './Navbar';
 import './styles.css';
 import Home from './Home';
 
+
 /**
  * COMPONENT
  *  The Main component is our 'picture frame' - it displays the navbar and anything
