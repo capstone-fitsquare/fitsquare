@@ -131,6 +131,7 @@ form div {
 }
 
 /*!
+   Default styling for calendar input:
  * https://github.com/YouCanBookMe/react-datetime
  */
 
@@ -140,7 +141,7 @@ form div {
 .rdtPicker {
   display: none;
   position: absolute;
-  width: 250px;
+  width: 100%;
   padding: 4px;
   margin-top: 1px;
   z-index: 99999 !important;
@@ -345,6 +346,7 @@ td.rdtYear:hover {
   font-size: 1.2em;
   margin-top: 37px;
 }
+/*____________________*/
 
 /*Custom styles for Datetime div
 .Datetime-input {
@@ -352,4 +354,29 @@ td.rdtYear:hover {
   vertical-align: middle;
 }
 */
+
+/*Custom styles for meal-schedule-form*/
+.meal-schedule-form h3 {
+  text-align: center;
+}
+
+/* .meal-selector {
+  width: 100%;
+  padding: 20px;
+} */
+
+.meal-date-col {
+  /* position: absolute; */
+  text-align: center;
+  /* width: 100%; */
+
+}
+
+.meal-submit-btn {
+ /* box-sizing: inherit; */
+ width: 100%;
+}
+
+
+
 
