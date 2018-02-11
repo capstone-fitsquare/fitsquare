@@ -59,7 +59,7 @@ class AnalyzeBiometrics extends Component {
 
     setTimeout(() => {
       // this.props.history.push('/biometrics-report')
-      this.props.transition('analyzeBiometrics', 'biometricsReport')
+      this.props.transition('biometricsReportText', 'analyzeBiometricsText', 'analyzeBiometrics')
       console.log('go to bio report')
     }, 1000);
   }

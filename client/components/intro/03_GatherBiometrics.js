@@ -60,7 +60,7 @@ class GatherBiometrics extends Component {
     addAge(+age)
     addGender(gender)
     // history.push('/activity-level')
-    transition('gatherBiometrics', 'activityLevel')
+    transition('activityLevelText', 'gatherBiometricsText', 'gatherBiometrics')
   }
 
   render() {

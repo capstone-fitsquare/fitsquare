@@ -39,7 +39,7 @@ class BiometricsReport extends Component {
           </div>
         </div>
         <Button onClick={() => {
-            this.props.transition('biometricsReport', 'gatherPreferences')
+            this.props.transition('gatherPreferences', 'biometricsReportText', 'biometricsReport')
             this.props.postMacroGoal({
               name: goalType,
               calories,

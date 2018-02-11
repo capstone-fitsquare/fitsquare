@@ -51,7 +51,7 @@ class ActivityLevel extends Component {
     e.preventDefault()
     addActivityLevel(this.state.activityLevel)
     // history.push('/analyze-biometrics')
-    transition('activityLevel', 'analyzeBiometrics')
+    transition('analyzeBiometricsText', 'activityLevelText', 'activityLevel')
   }
 
   render() {
