@@ -8,7 +8,7 @@ This is our final \o/ capstone project in senior phase which encomposes the foll
   
   * [Boilermaker](https://github.com/FullstackAcademy/boilermaker)
   * [React](https://reactjs.org/)
-  * [Redux](https://redux.js.org/), 
+  * [Redux](https://redux.js.org/)
   * [React Drag & Drop](http://react-dnd.github.io/react-dnd//)
   * [React Motion](https://github.com/chenglou/react-motion)
   * [Node](https://nodejs.org/en/)
@@ -22,8 +22,6 @@ This is our final \o/ capstone project in senior phase which encomposes the foll
   * [Semantic UI React framework](https://react.semantic-ui.com/introduction)  
     
     ## Setup
-    
-     ---
      
      You may want to poke around to see how we got things cooking. Feel free!
      If so, this is how you get things started:
@@ -36,10 +34,10 @@ This is our final \o/ capstone project in senior phase which encomposes the foll
      
      *Checkout package.json and under scripts you should see a host of commands which cover webpack integration as well as testing! 
      ```
-     
-    ---
     
-  ### The Beanie-boop development team consists of;
-  [Amanda Hussey](https://github.com/amandahussey)
-  [Will Shaw](https://github.com/wrcs505)
-  [Antonio Pavicevac-Ortiz](https://github.com/antonioOrtiz), 
+    ### The Fit-Square development team consists of:
+    [Amanda Hussey](https://github.com/amandahussey)
+    
+    [Will Shaw](https://github.com/wrcs505)
+    
+    [Antonio Pavicevac-Ortiz](https://github.com/antonioOrtiz)
