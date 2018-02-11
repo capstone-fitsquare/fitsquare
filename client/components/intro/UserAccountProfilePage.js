@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Grid, Segment, Header, Image, Card, Icon, Button, Divider, Radio, Form } from 'semantic-ui-react';
+import Calendar from '../calendars';
 
 import './UserAccountProfilePage.css';
 
@@ -7,7 +8,7 @@ export default function UserAccountProfilePage() {
   return (
     <Grid columns={2} stackable>
       <Grid.Column width={1} />
-      <Grid.Column width={7}>
+      <Grid.Column width={3}>
         <Segment>
           <Header as="h1">Profile</Header>
           <Image className="centered" src="/images/daniel.jpg" size="medium" circular />
@@ -26,7 +27,7 @@ export default function UserAccountProfilePage() {
           </Card>
         </Segment>
       </Grid.Column>
-      <Grid.Column width={7}>
+      <Grid.Column width={2}>
         <Segment className="fill-content">
           <Header as="h2">Settings</Header>
           <Button positive fluid>
@@ -39,6 +40,12 @@ export default function UserAccountProfilePage() {
           <Divider />
           <Header as="h4">Customize text notifications</Header>
           <RadioExampleRadioGroup />
+        </Segment>
+      </Grid.Column>
+      <Grid.Column width={9}>
+        <Segment className="fill-content">
+        <Header as="h1">Schedule a Meal</Header>
+          <Calendar />
         </Segment>
       </Grid.Column>
       <Grid.Column width={1} />

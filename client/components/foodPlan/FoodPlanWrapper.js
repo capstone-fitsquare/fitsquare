@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 import { Sidebar, Segment, Button, Menu, Image, Icon, Header } from 'semantic-ui-react'
-import { withRouter, Link } from 'react-router-dom'
+import { withRouter, NavLink } from 'react-router-dom'
 import AllDays from './AllDays'
 import RecipesContainer from './recipes/RecipesContainer'
 import { addFoodToGroceryList } from '../../store'
@@ -33,6 +33,7 @@ class FoodPlanWrapper extends Component {
     const cssClass = visible ? 'appear' : ''
 
     return (
+      <div>
         <div id="foodPlanWrapper">
           <Navbar />
           <GroceryList />
@@ -44,6 +45,8 @@ class FoodPlanWrapper extends Component {
           </div>
           <AllDays />
         </div>
+        <NavLink to="/cal">Schedule my Meals</NavLink>
+      </div>
     )
   }
 }

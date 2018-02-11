@@ -222,7 +222,7 @@
       });
     }
 
-    handleClientLoad()
+    // handleClientLoad()
     // onreadystatechange="if (this.readyState === 'complete') this.onload()"
 
 
