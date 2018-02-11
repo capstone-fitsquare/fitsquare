@@ -20,6 +20,20 @@ const MacroPieChartContainer = (props) => {
         <div style={fatPercent}>{fatPercentage}%</div>
       </div>
       <MacroPieChart protein={protein} carbs={carbs} fat={fat} />
+      <div id="key" style={key}>
+        <div style={macro}>
+          <div style={proteinStyle} />
+          <div>Protein</div>
+        </div>
+        <div style={macro}>
+          <div style={carbsStyle} />
+          <div>Carbs</div>
+        </div>
+        <div style={macro}>
+          <div style={fatStyle} />
+          <div>Fat</div>
+        </div>
+      </div>
     </div>
   )
 }
@@ -64,6 +78,34 @@ const styles = {
     textAlign: 'center',
     color: '#e27c00',
   },
+  key: {
+    position: 'absolute',
+    top: '50vh',
+    right: '8vw',
+  },
+  macro: {
+    display: 'flex',
+    alignItems: 'center',
+    width: '70px'
+  },
+  proteinStyle: {
+    width: '8px',
+    height: '8px',
+    background: '#00ffd2',
+    marginRight: '1em'
+  },
+  carbsStyle: {
+    width: '8px',
+    height: '8px',
+    background: '#fdf700',
+    marginRight: '1em'
+  },
+  fatStyle: {
+    width: '8px',
+    height: '8px',
+    background: '#ff9000',
+    marginRight: '1em'
+  }
 }
 
-const { container, proteinPercent, carbsPercent, fatPercent } = styles
+const { container, proteinPercent, carbsPercent, fatPercent, key, macro, proteinStyle, carbsStyle, fatStyle } = styles

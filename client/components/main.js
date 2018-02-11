@@ -20,7 +20,7 @@ const Main = props => {
 
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       {children}
     </div>
   );

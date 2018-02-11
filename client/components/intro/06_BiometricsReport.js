@@ -13,33 +13,27 @@ class BiometricsReport extends Component {
 
     return (
       <div style={container}>
-        <div style={header}>
-          <p>Biometrics Report</p>
-        </div>
         <div style={reportContainer}>
-          <div style={caloriesStyle}>
-            <p>Goal: {goalType}</p>
-          </div>
           <div style={caloriesStyle}>
             <p>Calories: {calories}</p>
           </div>
           <div style={macrosContainer}>
-            <div style={macros}>
+            <div style={proteinStyle}>
               <label>Protein</label>
               <p>{protein}g</p>
             </div>
-            <div style={macros}>
+            <div style={carbsStyle}>
               <label>Carbs</label>
               <p>{carbs}g</p>
             </div>
-            <div style={macros}>
+            <div style={fatStyle}>
               <label>Fat</label>
               <p>{fat}g</p>
             </div>
           </div>
         </div>
         <Button onClick={() => {
-            this.props.transition('biometricsReport', 'gatherPreferences')
+            this.props.transition('cuisinesText', 'cuisines', 'biometricsReportText', 'biometricsReport')
             this.props.postMacroGoal({
               name: goalType,
               calories,
@@ -87,24 +81,56 @@ const styles = {
     flexDirection: 'column',
     alignItems: 'center',
     padding: '1em',
-    margin: '1em'
+    margin: '1em 6em',
   },
   caloriesStyle: {
     padding: '1em 2em',
-    background: 'lightyellow',
-    border: '1px solid black',
-    borderRadius: '3px',
+    background: '#e3bcff',
+    border: '8px solid #a93bf7',
+    borderRadius: '30px',
+    fontSize: '24px',
   },
-  macros: {
+  proteinStyle: {
     display: 'flex',
-    flexDirection: 'column',
     alignItems: 'center',
-    padding: '2em 2.5em',
-    margin: '3em',
-    background: 'lavender',
-    border: '1px solid black',
-    borderRadius: '3px',
-    width: '60px'
+    justifyContent: 'center',
+    border: '8px solid #00ffd2',
+    borderRadius: '50%',
+    margin: '2em',
+    height: '200px',
+    width: '200px',
+    fontSize: '24px',
+    background: '#a3ffee',
+    cursor: 'pointer',
+    flexDirection: 'column'
+  },
+  fatStyle: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    border: '8px solid #ff9000',
+    borderRadius: '50%',
+    margin: '2em',
+    height: '200px',
+    width: '200px',
+    fontSize: '24px',
+    background: '#ffd6a5',
+    cursor: 'pointer',
+    flexDirection: 'column'
+  },
+  carbsStyle: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    border: '8px solid #efe700',
+    borderRadius: '50%',
+    margin: '2em',
+    height: '200px',
+    width: '200px',
+    fontSize: '24px',
+    background: '#fffcad',
+    cursor: 'pointer',
+    flexDirection: 'column'
   },
   macrosContainer: {
     display: 'flex',
@@ -114,4 +140,4 @@ const styles = {
   }
 }
 
-const { container, header, reportContainer, caloriesStyle, macros, macrosContainer, button } = styles
+const { container, header, reportContainer, caloriesStyle, proteinStyle, carbsStyle, fatStyle, macrosContainer, button } = styles

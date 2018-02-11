@@ -38,7 +38,7 @@ class GroceryList extends Component {
     const cssClass = showGroceryList ? 'active' : ''
 
     return groceryList.length ? (
-      <div id="grocery-list" style={groceries} className={cssClass}>
+      <div id="grocery-list" style={groceries} className={cssClass} onClick={this.toggleGroceryList}>
         <div style={list}>Grocery List</div>
         <ul>
           {groceryList.map(ingredient =>
@@ -74,10 +74,6 @@ const styles = {
     boxShadow: '0px 2px 4px rgba(0,0,0,0.18)',
     padding: '3em 4em 2em 4em',
     background: 'white',
-    position: 'fixed',
-    bottom: '0',
-    right: '5vw',
-    zIndex: '6'
   },
   list: {
     fontSize: '48px',

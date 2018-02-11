@@ -29,12 +29,13 @@ form div {
   display: inline-block;
 }
 
-#goalsParent > div {
+#goals-parent > div {
   transition: all .5s;
+  background-color: #a8ffef;
 }
 
-#goalsParent > div:hover {
-  background: lightgreen;
+#goals-parent > div:hover {
+  background-color: #e4bfff;
 }
 
 #loginParent > div {
@@ -123,9 +124,95 @@ form div {
 }
 
 #grocery-list {
-  transition: all 0.2s
+  transition: all 0.2s;
+  position: fixed;
+  bottom: 0;
+  right: 5vw;
+  top: 85vh;
+  z-index: 6;
+  height: 50vh;
 }
 
 #grocery-list.active {
-  transform: translate(0, 410px)
+  transform: translate(0, -50vh)
+}
+
+.talk-bubble {
+	margin: 40px;
+  display: inline-block;
+  position: relative;
+  top: -110px;
+	width: auto;
+	height: auto;
+	background-color: #a8ffef;
+}
+
+.border {
+  border: 8px solid #00efc3;
+}
+.round {
+  border-radius: 30px;
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
+}
+
+.tri-right.border.left-in:before {
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+  left: -40px;
+	right: auto;
+  top: 10px;
+	bottom: auto;
+	border: 20px solid;
+	border-color: #00efc3 #00efc3 transparent transparent;
+}
+.tri-right.left-in:after {
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+  left: -20px;
+	right: auto;
+  top: 18px;
+	bottom: auto;
+	border: 12px solid;
+	border-color: #a8ffef #a8ffef transparent transparent;
+}
+
+.talktext {
+  padding: 1em;
+	text-align: left;
+  line-height: 1.5em;
+}
+.talktext h3 {
+  /* remove webkit p margins */
+  -webkit-margin-before: 0em;
+  -webkit-margin-after: 0em;
+}
+
+.Typist .Cursor {
+  opacity: 1;
+  animation: blink 1s linear infinite;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+      opacity: 0;
+  }
+  100% {
+      opacity: 1;
+  }
+}
+
+#macro-goal-overview div {
+  margin: 0
+}
+
+#key div {
+  margin: 0
 }

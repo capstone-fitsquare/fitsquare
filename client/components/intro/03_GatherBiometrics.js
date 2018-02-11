@@ -60,7 +60,7 @@ class GatherBiometrics extends Component {
     addAge(+age)
     addGender(gender)
     // history.push('/activity-level')
-    transition('gatherBiometrics', 'activityLevel')
+    transition('activityLevelText', 'activityLevel', 'gatherBiometricsText', 'gatherBiometrics')
   }
 
   render() {
@@ -69,14 +69,12 @@ class GatherBiometrics extends Component {
 
     return (
       <div style={container}>
-        <div style={header}>
-          <p>...Gathering Biometrics...</p>
-        </div>
         <Form onSubmit={this.handleSubmit} style={biometricsParent}>
+          <div style={formCard}>
           <Form.Group inline>
             <label>Height</label>
-            <Form.Field control={Input} name="heightFeet" value={this.state.heightFeet} placeholder='ft' onChange={this.handleInput} />
-            <Form.Field control={Input} name="heightInches" value={this.state.heightInches} placeholder='in' onChange={this.handleInput} />
+            <Form.Field style={{width: '60px'}} control={Input} name="heightFeet" value={this.state.heightFeet} placeholder='ft' onChange={this.handleInput} />
+            <Form.Field style={{width: '60px'}} control={Input} name="heightInches" value={this.state.heightInches} placeholder='in' onChange={this.handleInput} />
           </Form.Group>
           <Form.Field control={Input} name="weight" value={this.state.weight} label='Weight' placeholder='lbs' onChange={this.handleInput} />
           <Form.Field control={Input} name="age" value={this.state.age} label='Age' placeholder='yrs' onChange={this.handleInput} />
@@ -85,7 +83,8 @@ class GatherBiometrics extends Component {
             <Form.Field control={Radio} name="gender" label='M' value='male' checked={this.state.gender === 'male'} onChange={this.handleOption} />
             <Form.Field control={Radio} name="gender" label='F' value='female' checked={this.state.gender === 'female'} onChange={this.handleOption} />
           </Form.Group>
-          <Form.Field control={Button}>Submit</Form.Field>
+        </div>
+        <button style={button} type='submit'>Go!</button>
         </Form>
       </div>
     )
@@ -104,7 +103,7 @@ export default withRouter(connect(mapState, mapDispatch)(GatherBiometrics))
 const styles = {
   container: {
     display: 'flex',
-    flexDirection: 'column'
+    justifyContent: 'center'
   },
   header: {
     margin: '2em 8em 0em 8em',
@@ -113,11 +112,31 @@ const styles = {
   },
   biometricsParent: {
     display: 'flex',
-    flexDirection: 'column',
     padding: '1em',
     margin: '1em',
-    alignItems: 'center'
+    alignItems: 'flex-end'
   },
+  formCard: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    background: '#e0b5ff',
+    padding: '3em',
+    borderRadius: '30px',
+    border: '8px solid #a93bf7'
+  },
+  button: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    border: '4px solid #666',
+    borderRadius: '50%',
+    margin: '2em',
+    height: '48px',
+    width: '48px',
+    background: 'lightyellow',
+    cursor: 'pointer'
+  }
 }
 
-const { container, header, biometricsParent } = styles
+const { container, header, biometricsParent, formCard, button } = styles

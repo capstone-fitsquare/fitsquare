@@ -278,7 +278,7 @@ const stringifyQuery = (searchParameters, meal) => {
   }
 
   params.push(mealQuery)
-  params.push('requirePictures=true&maxResult=2&nutrition.ENERC_KCAL.min=1&nutrition.PROCNT.min=1&nutrition.CHOCDF.min=1&nutrition.FAT.min=1')
+  params.push('requirePictures=true&maxResult=20&nutrition.ENERC_KCAL.min=1&nutrition.PROCNT.min=1&nutrition.CHOCDF.min=1&nutrition.FAT.min=1')
 
   if (q) params.push(`q=${q.split(' ').join('+')}`)
   if (allowedAllergy.length) allowedAllergy.forEach(allergy => params.push(`allowedAllergy[]=${generateSearchValue('allergies', allergy)}`))
