@@ -15,19 +15,19 @@ class Goal extends Component {
       <div id="goals-parent" style={container}>
         <div style={goal} onClick={() => {
             addGoalType('Lose fat')
-            transition('gatherBiometricsText', 'welcomeText', 'goal')
+            transition('gatherBiometricsText', 'gatherBiometrics', 'welcomeText', 'goal')
           }}
         >Lose fat</div>
 
         <div style={goal} onClick={() => {
             addGoalType('Build muscle')
-            transition('gatherBiometricsText', 'welcomeText', 'goal')
+            transition('gatherBiometricsText', 'gatherBiometrics', 'welcomeText', 'goal')
           }}
         >Build muscle</div>
 
         <div style={goal} onClick={() => {
             addGoalType('Maintain')
-            transition('gatherBiometricsText', 'welcomeText', 'goal')
+            transition('gatherBiometricsText', 'gatherBiometrics', 'welcomeText', 'goal')
           }}
         >Maintain</div>
 

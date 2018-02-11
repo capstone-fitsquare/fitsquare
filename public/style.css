@@ -124,11 +124,17 @@ form div {
 }
 
 #grocery-list {
-  transition: all 0.2s
+  transition: all 0.2s;
+  position: fixed;
+  bottom: 0;
+  right: 5vw;
+  top: 85vh;
+  z-index: 6;
+  height: 50vh;
 }
 
 #grocery-list.active {
-  transform: translate(0, 410px)
+  transform: translate(0, -50vh)
 }
 
 .talk-bubble {
@@ -201,4 +207,12 @@ form div {
   100% {
       opacity: 1;
   }
+}
+
+#macro-goal-overview div {
+  margin: 0
+}
+
+#key div {
+  margin: 0
 }

@@ -44,7 +44,7 @@ class Diets extends Component {
     addDiets({...this.state})
     const stringArr = stateToStringArr(diets, {...this.state})
     stringArr.forEach(diet => searchByDiet(diet))
-    transition('allergiesText', 'dietsText', 'diets')
+    transition('allergiesText', 'allergies', 'dietsText', 'diets')
   }
 
   render() {
@@ -53,9 +53,6 @@ class Diets extends Component {
 
     return (
       <Form onSubmit={this.handleSubmit} style={container}>
-        <div style={header}>
-          <h4>Special diet restrictions?</h4>
-        </div>
         <div style={prefContainer}>
           <div style={preferences}>
             {diets.map(item =>

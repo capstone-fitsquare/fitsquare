@@ -51,7 +51,7 @@ class ActivityLevel extends Component {
     e.preventDefault()
     addActivityLevel(this.state.activityLevel)
     // history.push('/analyze-biometrics')
-    transition('analyzeBiometricsText', 'activityLevelText', 'activityLevel')
+    transition('analyzeBiometricsText', 'analyzeBiometrics', 'activityLevelText', 'activityLevel')
   }
 
   render() {
@@ -60,9 +60,6 @@ class ActivityLevel extends Component {
 
     return (
       <div style={container}>
-        <div style={header}>
-          <p>Indicate your level of activity...</p>
-        </div>
         <Form onSubmit={this.handleSubmit} style={formContainer}>
           <Form.Field fluid control={Select} name="activityLevel" value={this.state.activityLevel} options={options} placeholder='Activity level' onChange={this.handleOption} />
           <Form.Field style={button} control={Button}>Submit</Form.Field>

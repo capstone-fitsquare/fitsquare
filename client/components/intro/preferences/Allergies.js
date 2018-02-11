@@ -55,7 +55,7 @@ class Allergies extends Component {
 
     const stringArr = stateToStringArr(allergies, {...this.state})
     stringArr.forEach(allergy => searchByAllergy(allergy))
-    transition('generateFoodPlanText', 'allergiesText', 'allergies')
+    transition('generateFoodPlanText', null, 'allergiesText', 'allergies')
   }
 
   render() {
@@ -64,9 +64,6 @@ class Allergies extends Component {
 
     return (
       <Form onSubmit={this.handleSubmit} style={container}>
-        <div style={header}>
-          <h4>Food allergies?</h4>
-        </div>
         <div style={prefContainer}>
           <div style={preferences}>
             {allergies.map(item =>

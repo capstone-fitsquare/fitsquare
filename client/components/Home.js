@@ -44,11 +44,12 @@ class Home extends Component {
     this.showComponent = this.showComponent.bind(this)
   }
 
-  transition(nextText, currentText, currentComp) {
+  transition(nextText, nextComp, currentText, currentComp) {
     this.setState({
       [currentText]: false,
       [currentComp]: false,
-      [nextText]: true
+      [nextText]: true,
+      [nextComp]: true
     })
   }
 
@@ -77,7 +78,7 @@ class Home extends Component {
                 <div style={message} className="talktext">
                   {this.state.welcomeText ?
                     <Typist
-                      avgTypingSpeed={70}
+                      avgTypingSpeed={120}
                       startDelay={2000}
                       onTypingDone={() => this.showComponent('goal')}
                     >
@@ -88,79 +89,82 @@ class Home extends Component {
                   : null }
 
                   {this.state.gatherBiometricsText ?
-                    <Typist
-                      avgTypingSpeed={40}
-                      startDelay={500}
-                      onTypingDone={() => this.showComponent('gatherBiometrics')}
-                    >
-                      Please enter the information below...
-                    </Typist>
+                    // <Typist
+                    //   avgTypingSpeed={120}
+                    //   startDelay={500}
+                    //   onTypingDone={() => this.showComponent('gatherBiometrics')}
+                    // >
+                      <p>Please enter the information below...</p>
+                    // </Typist>
                   : null}
 
                   {this.state.activityLevelText ?
-                    <Typist
-                      avgTypingSpeed={40}
-                      startDelay={500}
-                      onTypingDone={() => this.showComponent('activityLevel')}
-                    >
-                      How would you describe your level of activity?
-                    </Typist>
+                    // <Typist
+                    //   avgTypingSpeed={120}
+                    //   startDelay={500}
+                    //   onTypingDone={() => this.showComponent('activityLevel')}
+                    // >
+                      <p>Please indicate your activity level below.</p>
+                    // </Typist>
                   : null}
 
                   {this.state.analyzeBiometricsText ?
                     <Typist
-                      avgTypingSpeed={40}
+                      avgTypingSpeed={120}
                       startDelay={500}
-                      onTypingDone={() => this.showComponent('analyzeBiometrics')}
+                      // onTypingDone={() => this.showComponent('analyzeBiometrics')}
+                      onTypingDone={() => console.log('done')}
                     >
-                      ...calculating your daily macronutrient needs...
-                      <Typist.Backspace count={calculating.length}/>
+                      ...
+                      <Typist.Backspace count={3}/>
+                      ...
+                      <Typist.Backspace count={3}/>
                     </Typist>
                   : null}
 
                   {this.state.biometricsReportText ?
-                    <Typist
-                      avgTypingSpeed={40}
-                      startDelay={500}
-                      onTypingDone={() => this.showComponent('biometricsReport')}
-                    >
-                      Here is your daily macronutrient report
-                    </Typist>
+                    // <Typist
+                    //   avgTypingSpeed={120}
+                    //   startDelay={500}
+                    //   onTypingDone={() => this.showComponent('biometricsReport')}
+                    // >
+                      <p>Here is your daily macronutrient report</p>
+                    // </Typist>
                   : null}
 
                   {this.state.cuisinesText ?
-                    <Typist
-                      avgTypingSpeed={40}
-                      startDelay={500}
-                      onTypingDone={() => this.showComponent('cuisines')}
-                    >
-                      Favorite type of food?
-                    </Typist>
+                    // <Typist
+                    //   avgTypingSpeed={120}
+                    //   startDelay={500}
+                    //   onTypingDone={() => this.showComponent('cuisines')}
+                    // >
+                      <p>Favorite type of food?</p>
+                    // </Typist>
                   : null}
 
                   {this.state.dietsText ?
-                    <Typist
-                      avgTypingSpeed={40}
-                      startDelay={500}
-                      onTypingDone={() => this.showComponent('diets')}
-                    >
-                      Special diet?
-                    </Typist>
+                    // <Typist
+                    //   avgTypingSpeed={120}
+                    //   startDelay={500}
+                    //   onTypingDone={() => this.showComponent('diets')}
+                    // >
+                      <p>Special diet?</p>
+                    // </Typist>
                   : null}
 
                   {this.state.allergiesText ?
-                    <Typist
-                      avgTypingSpeed={40}
-                      startDelay={500}
-                      onTypingDone={() => this.showComponent('allergies')}
-                    >
-                      Any allergies?
-                    </Typist>
+                    // <Typist
+                    //   avgTypingSpeed={120}
+                    //   startDelay={500}
+                    //   onTypingDone={() => this.showComponent('allergies')}
+                    // >
+                      <p>Any allergies?</p>
+                    // </Typist>
                   : null}
 
                   {this.state.generateFoodPlanText ?
                     <Typist
-                      avgTypingSpeed={40}
+                      avgTypingSpeed={120}
                       startDelay={500}
                       onTypingDone={() => this.props.history.push('/food-plan')}
                     >

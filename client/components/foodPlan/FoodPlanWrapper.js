@@ -11,6 +11,7 @@ import { DragDropContext } from 'react-dnd'
 import { DragDropContextProvider } from 'react-dnd'
 import MacroPieChartContainer from './MacroPieChartContainer'
 import GroceryList from './GroceryList'
+import Navbar from '../Navbar'
 
 
 class FoodPlanWrapper extends Component {
@@ -33,6 +34,7 @@ class FoodPlanWrapper extends Component {
 
     return (
         <div id="foodPlanWrapper">
+          <Navbar />
           <GroceryList />
           <div id="recipe-bar">
             <img id="recipes-tab" className={cssClass} src='/images/recipe.png' onClick={this.toggleVisibility} />

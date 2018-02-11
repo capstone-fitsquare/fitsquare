@@ -60,7 +60,7 @@ class Cuisines extends Component {
     addCuisines({...this.state})
     const stringArr = stateToStringArr(cuisines, {...this.state})
     stringArr.forEach(cuisine => searchByCuisine(cuisine))
-    transition('dietsText', 'cuisinesText', 'cuisines')
+    transition('dietsText', 'diets', 'cuisinesText', 'cuisines')
   }
 
   render() {
@@ -69,13 +69,10 @@ class Cuisines extends Component {
 
     return (
       <Form onSubmit={this.handleSubmit} style={container}>
-        <div style={header}>
-          <h4>Preferred cuisines?</h4>
-        </div>
         <div style={prefContainer}>
           <div style={preferences}>
             {cuisines.map(allergy =>
-              <Checkbox key={allergy.name} label={allergy.label} name={allergy.name} checked={this.state[name]} onChange={this.handleChecked} />
+              <Checkbox style={checkboxStyle} key={allergy.name} label={allergy.label} name={allergy.name} checked={this.state[name]} onChange={this.handleChecked} />
             )}
           </div>
         </div>
@@ -115,10 +112,10 @@ const styles = {
   preferences: {
     display: 'flex',
     flexDirection: 'column'
-  }
+  },
 }
 
-const { container, header, prefContainer, preferences } = styles
+const { container, header, prefContainer, preferences, checkboxStyle } = styles
 
 const stateToStringArr = (arr, state) => {
   const names = Object.keys(state).filter(item => state[item])

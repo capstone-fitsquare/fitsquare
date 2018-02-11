@@ -9,16 +9,6 @@ const MacroPieChart = (props) => {
   const carbs = Math.ceil(props.carbs)
   const fat = Math.ceil(props.fat)
 
-  console.log('protein', protein)
-  console.log('carbs', carbs)
-  console.log('fat', fat)
-
-  // const data = [
-  //   {title: "Protein", value: protein, color: "#00FFD2"},
-  //   {title: "Carbs", value: carbs, color: "#FDF700"},
-  //   {title: "Fat", value: fat, color: "#FF9000"},
-  // ]
-
   const data = [
     {key: "Fat", value: fat, color: "#FF9000"},
     {key: "Carbs", value: carbs, color: "#FDF700"},
