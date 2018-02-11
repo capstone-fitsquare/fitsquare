@@ -27,30 +27,6 @@ class Navbar extends Component {
     )
   }
 }
-				{/* <Link to="/">
-					fitSquare
-				</Link>
-				{loggedIn ? (
-					<div style={{marginRight: "30px"}}>
-						<Dropdown className="profileDropdown left" floating trigger={trigger}>
-							<Dropdown.Menu>
-								<Dropdown.Item onClick={()=>logout()}>
-									<Icon name='log out' className='left floated' />
-        					Logout
-								</Dropdown.Item>
-							</Dropdown.Menu>
-						</Dropdown>
-					</div>
-				)
-				: <p style={styles.loginText} onClick={()=>{this.setState({modalOpen: true})}}>Login / Sign Up</p>}
-				<Modal size="small" open={this.state.modalOpen} onClose={()=>this.setState({modalOpen: false})}>
-			    <Modal.Header>Log In</Modal.Header>
-			    <Modal.Content>
-			      <Modal.Description>
-							<Login closeModal={()=>this.setState({modalOpen: false})} />
-			      </Modal.Description>
-			    </Modal.Content>
-			  </Modal> */}
 
 
 export default withRouter(Navbar)

@@ -50,10 +50,10 @@ class AnalyzeBiometrics extends Component {
     if (report) {
       const { protein, carbs, fat, tdee } = report
       const { addCalories, addProtein, addCarbs, addFat } = this.props
-      addCalories(tdee)
+      addCalories(tdee + 1500)
       addProtein(protein)
-      addCarbs(carbs)
-      addFat(fat)
+      addCarbs(carbs - 100)
+      addFat(fat + 100)
       console.log('got here')
     }
 

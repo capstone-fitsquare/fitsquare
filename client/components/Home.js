@@ -1,19 +1,106 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import Navbar from './Navbar'
-import IntroSequence from "./intro/IntroSequence"
+import IntroSequence from './intro/IntroSequence'
+import {Login} from './index'
+import Popup from './Popup'
+import Typist from 'react-typist'
+import Goal from './intro/02_Goal'
+import GatherBiometrics from './intro/03_GatherBiometrics'
+import ActivityLevel from './intro/04_ActivityLevel'
+import AnalyzeBiometrics from './intro/05_AnalyzeBiometrics'
+import BiometricsReport from './intro/06_BiometricsReport'
+import GatherPreferences from './intro/07_GatherPreferences'
+import GenerateFoodPlan from './intro/08_GenerateFoodPlan'
 
 class Home extends Component {
 
-  render() {
+  constructor() {
+    super()
+    this.state = {
+      // for text
+      welcomeText: true,
+      gatherBiometricsText: false,
+      // for comp
+      goal: false,
+      gatherBiometrics: false,
+      activityLevel: false,
+      analyzeBiometrics: false,
+      biometricsReport: false,
+      gatherPreferences: false,
+      generateFoodPlan: false,
+    }
+    this.transition = this.transition.bind(this)
+    this.showComponent = this.showComponent.bind(this)
+  }
 
-    return (
-    <div style={popup}>
-      <IntroSequence />
-    </div>
+  transition(nextText, currentText, currentComp) {
+    this.setState({
+      [currentText]: false,
+      [currentComp]: false,
+      [nextText]: true
+    })
+  }
+
+  showComponent(comp) {
+    this.setState({
+      [comp]: true,
+    })
+  }
+
+	render() {
+
+    const welcome = 'Welcome to fitSquare!'
+    const currentGoal = 'What is your current fitness goal?'
+    console.log('this.state', this.state)
+		return (
+      <div>
+        <div style={container}>
+          <div>
+            {/* <div style={colorbar}/>
+            <h1 style={fitSquare}>fitSquare</h1> */}
+            <div style={guyContainer}>
+              <img style={guy} src='/images/fitSquare-guy.png' />
+              <div className="talk-bubble tri-right border round left-in">
+                <div style={message} className="talktext">
+                  {this.state.welcomeText ?
+                    <Typist
+                      avgTypingSpeed={40}
+                      startDelay={2000}
+                      onTypingDone={() => this.showComponent('goal')}
+                    >
+                      Welcome to fitSquare!
+                      <Typist.Backspace count={welcome.length} delay={1000}/>
+                      What is your current fitness goal?
+                    </Typist>
+                  : null }
+
+                  {this.state.gatherBiometricsText ?
+                    <Typist
+                      avgTypingSpeed={40}
+                      startDelay={2000}
+                      onTypingDone={() => this.showComponent('gatherBiometrics')}
+                    >
+                      Please enter the information below...
+                    </Typist>
+                  : null}
+                </div>
+              </div>
+            </div>
+            <div>
+              {this.state.goal ?
+                <Goal transition={this.transition} />
+              : null}
+               {this.state.gatherBiometrics ?
+                <GatherBiometrics transition={this.transition} />
+              : null}
+
+            </div>
+          </div>
+        </div>
+      </div>
     )
   }
 }
+
 
 export default Home
 
@@ -24,20 +111,10 @@ const styles = {
     height: '12px',
     background: 'linear-gradient(to left, #90EE90 0%, #00ffd2 70%)',
   },
-	container: {
-    display: 'flex',
-    flexDirection: 'column',
-    // background: 'linear-gradient(to left, #90EE90 0%, #00ffd2 70%)',
-    background: 'white',
-    color: "#00fcce",
-    boxShadow: '0 2px 4px rgba(0,0,0,0.18)',
-    marginBottom: '1.5px'
-    // borderBottom: '2px solid #74e0cc'
-  },
-  navItemContainer: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between'
+  container: {
+    background: '#c4ffc4',
+    height: '100vh',
+    width: '100vw',
   },
   fitSquare: {
     display: 'flex',
@@ -53,16 +130,20 @@ const styles = {
     borderRadius: '16px',
     boxShadow: '0 2px 4px rgba(0,0,0,0.18)'
   },
-  popup: {
-    display: 'flex',
-    boxShadow: 'rgba(0, 0, 0, 0.180392) 0px 2px 4px',
-    textAlign: 'center',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '400px',
-    margin: 'auto',
-    marginTop: '4em',
+  guyContainer: {
+    padding: '4em',
+    position: 'relative',
+    top: '10vh',
+    left: '23vw'
+  },
+  guy: {
+    height: '200px',
+    width: '200px'
+  },
+  message: {
+    fontSize: '24px',
+    margin: 0
   }
 }
-const { colorbar, navItemContainer, fitSquare, button, popup } = styles
+const { colorbar, container, fitSquare, button, guyContainer, guy, message } = styles
 

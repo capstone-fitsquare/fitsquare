@@ -18,8 +18,7 @@ class IntroSequence extends Component {
   constructor() {
     super()
     this.state = {
-      welcome: true,
-      goal: false,
+      goal: true,
       gatherBiometrics: false,
       activityLevel: false,
       analyzeBiometrics: false,
@@ -43,9 +42,6 @@ class IntroSequence extends Component {
 
     return (
       <div>
-        {welcome &&
-          <Welcome transition={this.transition} />
-        }
         {goal &&
           <Goal transition={this.transition} />
         }
