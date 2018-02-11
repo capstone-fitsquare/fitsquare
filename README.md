@@ -1,8 +1,7 @@
-# FitSquare!
-     
-## Description
-    
+#fitSquare!
 
+  ---
+##Description
 A fitness planning app that generates a recommended 5-day food plan based on daily macronutrient goals.
 
 This is our final \o/ capstone project in senior phase which encomposes the following technologies, API's and packages; 
