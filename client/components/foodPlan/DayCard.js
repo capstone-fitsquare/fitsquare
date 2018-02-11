@@ -140,7 +140,7 @@ class DayCard extends Component {
           <div style={container}>
             <div style={width}>
               <div style={progress}>
-                <Button icon size='mini' circular={true} style={minus}
+                <Button style={button} icon size='mini' circular={true} style={minus}
                   onClick={() => {
                     this.toggleDetails()
                     this.props.toggleDayN(`day${dayN}`)
@@ -158,7 +158,7 @@ class DayCard extends Component {
               </div>
               <div style={{...meal, background: detailsBackground}}>
                 <div style={breakfast}>
-                  <p>Breakfast</p>
+                  <h3>Breakfast</h3>
                 </div>
                 <div>
                     {breakfast.length ? breakfast.map(recipe =>
@@ -168,12 +168,12 @@ class DayCard extends Component {
                       </div>
                     ) : null}
                 </div>
-                <SearchButton meal="breakfast" dayN={dayN} />
+                {/* <SearchButton meal="breakfast" dayN={dayN} /> */}
               </div>
 
               <div style={{...meal, background: detailsBackground}}>
                 <div>
-                  <p>Lunch</p>
+                  <h3>Lunch</h3>
                 </div>
                 <div>
                     {lunch.length ? lunch.map(recipe =>
@@ -183,12 +183,12 @@ class DayCard extends Component {
                       </div>
                     ) : null}
                 </div>
-                <SearchButton meal="lunch" dayN={dayN} />
+                {/* <SearchButton meal="lunch" dayN={dayN} /> */}
               </div>
 
               <div style={{...meal, background: detailsBackground}}>
                 <div>
-                  <p>Dinner</p>
+                  <h3>Dinner</h3>
                 </div>
                 <div>
                     {dinner.length ? dinner.map(recipe =>
@@ -198,12 +198,12 @@ class DayCard extends Component {
                       </div>
                     ) : null}
                 </div>
-                <SearchButton meal="dinner" dayN={dayN} />
+                {/* <SearchButton meal="dinner" dayN={dayN} /> */}
               </div>
 
               <div style={{...meal, background: detailsBackground}}>
                 <div>
-                  <p>Snacks</p>
+                  <h3>Snacks</h3>
                 </div>
                 <div>
                     {snacks.length ? snacks.map(recipe =>
@@ -213,7 +213,7 @@ class DayCard extends Component {
                       </div>
                     ) : null}
                 </div>
-                <SearchButton meal="snacks" dayN={dayN} />
+                {/* <SearchButton meal="snacks" dayN={dayN} /> */}
               </div>
             </div>
 
@@ -298,13 +298,19 @@ const styles = {
     justifyContent: 'space-between'
   },
   width: {
-    width: '400px'
+    width: '400px',
+    borderRadius: '0 0 30px 30px'
   },
   progress: {
     padding: '1em',
-    borderRadius: '3px',
-    background: 'lightcyan'
+    background: 'lightcyan',
+    borderRadius: '30px 30px 0 0'
+  },
+  button: {
+    position: 'relative',
+    left: '330px',
+    top: '10px'
   }
 }
 
-const { container, meal, square, minus, breakfast, width, progress } = styles
+const { container, meal, square, minus, breakfast, width, progress, button } = styles

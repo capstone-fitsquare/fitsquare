@@ -4,9 +4,10 @@ import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import { Container, Menu } from 'semantic-ui-react';
 import { logout } from '../store';
-import Navbar from './Navbar'
+import Navbar from './Navbar';
 import './styles.css';
-import Home from './Home'
+import Home from './Home';
+
 
 /**
  * COMPONENT
@@ -19,7 +20,7 @@ const Main = props => {
 
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       {children}
     </div>
   );

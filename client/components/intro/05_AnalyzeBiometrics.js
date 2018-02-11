@@ -50,28 +50,22 @@ class AnalyzeBiometrics extends Component {
     if (report) {
       const { protein, carbs, fat, tdee } = report
       const { addCalories, addProtein, addCarbs, addFat } = this.props
-      addCalories(tdee)
+      addCalories(tdee + 1500)
       addProtein(protein)
-      addCarbs(carbs)
-      addFat(fat)
+      addCarbs(carbs - 100)
+      addFat(fat + 100)
       console.log('got here')
     }
 
     setTimeout(() => {
       // this.props.history.push('/biometrics-report')
-      this.props.transition('analyzeBiometrics', 'biometricsReport')
+      this.props.transition('biometricsReportText', 'biometricsReport', 'analyzeBiometricsText', 'analyzeBiometrics')
       console.log('go to bio report')
     }, 1000);
   }
 
   render() {
-    return (
-      <div style={container}>
-        <div style={header}>
-          <p>...Analyzing Biometrics...</p>
-        </div>
-      </div>
-    )
+    return null
   }
 }
 

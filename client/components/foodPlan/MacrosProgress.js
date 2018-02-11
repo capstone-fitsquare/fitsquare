@@ -5,95 +5,6 @@ import { connect } from 'react-redux'
 
 class MacrosProgress extends Component {
 
-  constructor(){
-    super()
-    // this.state = {
-    //   calories: 0,
-    //   protein: 0,
-    //   carbs: 0,
-    //   fat: 0,
-    //   caloriesGoal: 2000,
-    //   proteinGoal: 200,
-    //   carbsGoal: 300,
-    //   fatGoal: 80,
-    //   caloriesProgress: 0,
-    //   proteinProgress: 0,
-    //   carbsProgress: 0,
-    //   fatProgress: 0
-    // }
-  }
-
-  // componentWillReceiveProps(nextProps){
-  //   console.log('this.props', this.props)
-  //   console.log('nextProps', nextProps)
-  //   if (this.props.breakfast !== nextProps.foodsDayN){
-  //     console.log('recieved different food!')
-  //     const { foodsDayN, dayN } = nextProps
-
-  //     const breakfast = foodsDayN[dayN].breakfast
-  //     const lunch = foodsDayN[dayN].lunch
-  //     const dinner = foodsDayN[dayN].dinner
-  //     const snacks = foodsDayN[dayN].snacks
-
-  //     let calories = 0, protein = 0, carbs = 0, fat = 0
-
-  //     breakfast.forEach(food => {
-  //       calories += food.calories
-  //       protein += food.protein
-  //       carbs += food.carbs
-  //       fat += food.fat
-  //     })
-
-  //     lunch.forEach(food => {
-  //       calories += food.calories
-  //       protein += food.protein
-  //       carbs += food.carbs
-  //       fat += food.fat
-  //     })
-
-  //     dinner.forEach(food => {
-  //       calories += food.calories
-  //       protein += food.protein
-  //       carbs += food.carbs
-  //       fat += food.fat
-  //     })
-
-  //     snacks.forEach(food => {
-  //       calories += food.calories
-  //       protein += food.protein
-  //       carbs += food.carbs
-  //       fat += food.fat
-  //     })
-
-  //     this.setState({
-  //       calories,
-  //       protein,
-  //       carbs,
-  //       fat
-  //     })
-  //   }
-
-  //   if (this.props.macroGoal !== nextProps.macroGoal){
-  //     console.log('received macroGoal!')
-  //     this.setState({
-  //       caloriesGoal: nextProps.macroGoal.calories,
-  //       proteinGoal: nextProps.macroGoal.protein,
-  //       carbsGoal: nextProps.macroGoal.carbs,
-  //       fatGoal: nextProps.macroGoal.fat
-  //     })
-
-  //     const { calories, protein, carbs, fat, caloriesGoal, proteinGoal, carbsGoal, fatGoal } = this.state
-
-  //     this.setState({
-  //       caloriesProgress: Math.floor((calories / caloriesGoal) * 100),
-  //       proteinProgress: Math.floor((protein / proteinGoal) * 100),
-  //       carbsProgress: Math.floor((carbs / carbsGoal) * 100),
-  //       fatProgress: Math.floor((fat / fatGoal) * 100),
-  //     })
-  //   } // end second if
-
-  // }
-
 
   render () {
 
@@ -142,23 +53,43 @@ class MacrosProgress extends Component {
     const carbsProgress = carbsGoal ? Math.floor((carbs / carbsGoal) * 100) : 0
     const fatProgress = fatGoal ? Math.floor((fat / fatGoal) * 100) : 0
 
+    calories = Math.ceil(calories)
+    protein = Math.ceil(protein)
+    carbs = Math.ceil(carbs)
+    fat = Math.ceil(fat)
+
     return (showDetails) ? (
       <div>
         {macroGoal ?
-        <div>
-          <h2>Calories</h2>
-          <div style={{display: 'flex', justifyContent: 'space-around'}}>
+        <div id="macro-goal-overview">
+          <h3>Calories</h3>
+          <Progress completed={caloriesProgress} color='#A93BF7' />
+          <div style={{display: 'flex', justifyContent: 'space-around', color: 'lightslategray'}}>
             <div>Goal: {caloriesGoal}</div>
             <div>Food: {calories}</div>
             <div>Remaining: {caloriesGoal - calories}</div>
           </div>
-          <Progress completed={caloriesProgress} color='#A93BF7' />
           <h3>Protein</h3>
           <Progress completed={proteinProgress} color='#00FFD2' />
+         <div style={{display: 'flex', justifyContent: 'space-around', color: 'lightslategray'}}>
+            <div>Goal: {proteinGoal}g</div>
+            <div>Food: {protein}g</div>
+            <div>Remaining: {proteinGoal - protein}g</div>
+          </div>
           <h3>Carbs</h3>
           <Progress completed={carbsProgress} color='#FDF700' />
+         <div style={{display: 'flex', justifyContent: 'space-around', color: 'lightslategray'}}>
+            <div>Goal: {carbsGoal}g</div>
+            <div>Food: {carbs}g</div>
+            <div>Remaining: {carbsGoal - carbs}g</div>
+          </div>
           <h3>Fat</h3>
           <Progress completed={fatProgress} color='#FF9000' />
+         <div style={{display: 'flex', justifyContent: 'space-around', color: 'lightslategray'}}>
+            <div>Goal: {fatGoal}g</div>
+            <div>Food: {fat}g</div>
+            <div>Remaining: {fatGoal - fat}g</div>
+          </div>
         </div>
         : null }
         </div>
@@ -177,21 +108,5 @@ class MacrosProgress extends Component {
     )
   }
 }
-
-// const mapState = (state, ownProps) => {
-//   const { dayN } = ownProps
-//   return {
-//     foodsDayN: state.foodsDayN,
-//     macroGoal: state.macroGoals[0]  // filter by user
-//   }
-// }
-
-// const mapDispatch = dispatch => {
-//   return bindActionCreators({
-
-//   }, dispatch)
-// }
-
-// export default connect(mapState, mapDispatch)(MacrosProgress)
 
 export default MacrosProgress

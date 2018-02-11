@@ -40,11 +40,11 @@ class Diets extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const { addDiets, searchByDiet, togglePreference } = this.props
+    const { addDiets, searchByDiet, transition } = this.props
     addDiets({...this.state})
     const stringArr = stateToStringArr(diets, {...this.state})
     stringArr.forEach(diet => searchByDiet(diet))
-    togglePreference('diets', 'cuisines')
+    transition('allergiesText', 'allergies', 'dietsText', 'diets')
   }
 
   render() {
@@ -53,9 +53,6 @@ class Diets extends Component {
 
     return (
       <Form onSubmit={this.handleSubmit} style={container}>
-        <div style={header}>
-          <h4>Special diet restrictions?</h4>
-        </div>
         <div style={prefContainer}>
           <div style={preferences}>
             {diets.map(item =>

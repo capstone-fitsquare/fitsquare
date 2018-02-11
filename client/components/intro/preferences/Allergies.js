@@ -49,13 +49,13 @@ class Allergies extends Component {
   handleSubmit(event) {
     event.preventDefault();
     const state = {...this.state}
-    const { addAllergies, searchByAllergy, togglePreference } = this.props
+    const { addAllergies, searchByAllergy, transition } = this.props
 
     addAllergies({...this.state})
 
     const stringArr = stateToStringArr(allergies, {...this.state})
     stringArr.forEach(allergy => searchByAllergy(allergy))
-    togglePreference('allergies', 'diets')
+    transition('generateFoodPlanText', null, 'allergiesText', 'allergies')
   }
 
   render() {
@@ -64,9 +64,6 @@ class Allergies extends Component {
 
     return (
       <Form onSubmit={this.handleSubmit} style={container}>
-        <div style={header}>
-          <h4>Food allergies?</h4>
-        </div>
         <div style={prefContainer}>
           <div style={preferences}>
             {allergies.map(item =>
