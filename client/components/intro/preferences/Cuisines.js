@@ -56,11 +56,11 @@ class Cuisines extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const { addCuisines, searchByCuisine, togglePreference } = this.props
+    const { addCuisines, searchByCuisine, transition } = this.props
     addCuisines({...this.state})
     const stringArr = stateToStringArr(cuisines, {...this.state})
     stringArr.forEach(cuisine => searchByCuisine(cuisine))
-    togglePreference('cuisines', 'generatePlan')
+    transition('dietsText', 'cuisinesText', 'cuisines')
   }
 
   render() {

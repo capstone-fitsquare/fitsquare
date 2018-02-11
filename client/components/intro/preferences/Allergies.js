@@ -49,13 +49,13 @@ class Allergies extends Component {
   handleSubmit(event) {
     event.preventDefault();
     const state = {...this.state}
-    const { addAllergies, searchByAllergy, togglePreference } = this.props
+    const { addAllergies, searchByAllergy, transition } = this.props
 
     addAllergies({...this.state})
 
     const stringArr = stateToStringArr(allergies, {...this.state})
     stringArr.forEach(allergy => searchByAllergy(allergy))
-    togglePreference('allergies', 'diets')
+    transition('generateFoodPlanText', 'allergiesText', 'allergies')
   }
 
   render() {

@@ -40,11 +40,11 @@ class Diets extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const { addDiets, searchByDiet, togglePreference } = this.props
+    const { addDiets, searchByDiet, transition } = this.props
     addDiets({...this.state})
     const stringArr = stateToStringArr(diets, {...this.state})
     stringArr.forEach(diet => searchByDiet(diet))
-    togglePreference('diets', 'cuisines')
+    transition('allergiesText', 'dietsText', 'diets')
   }
 
   render() {

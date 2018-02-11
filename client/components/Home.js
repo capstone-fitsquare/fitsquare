@@ -8,8 +8,11 @@ import GatherBiometrics from './intro/03_GatherBiometrics'
 import ActivityLevel from './intro/04_ActivityLevel'
 import AnalyzeBiometrics from './intro/05_AnalyzeBiometrics'
 import BiometricsReport from './intro/06_BiometricsReport'
-import GatherPreferences from './intro/07_GatherPreferences'
+import Diets from './intro/preferences/Diets'
+import Allergies from './intro/preferences/Allergies'
+import Cuisines from './intro/preferences/Cuisines'
 import GenerateFoodPlan from './intro/08_GenerateFoodPlan'
+import { withRouter, Link } from 'react-router-dom';
 
 class Home extends Component {
 
@@ -22,7 +25,9 @@ class Home extends Component {
       activityLevelText: false,
       analyzeBiometricsText: false,
       biometricsReportText: false,
-      gatherPreferencesText: false,
+      dietsText: false,
+      allergiesText: false,
+      cuisinesText: false,
       generateFoodPlanText: false,
       // for comp
       goal: false,
@@ -30,7 +35,9 @@ class Home extends Component {
       activityLevel: false,
       analyzeBiometrics: false,
       biometricsReport: false,
-      gatherPreferences: false,
+      diets: false,
+      allergies: false,
+      cuisines: false,
       generateFoodPlan: false,
     }
     this.transition = this.transition.bind(this)
@@ -121,6 +128,46 @@ class Home extends Component {
                     </Typist>
                   : null}
 
+                  {this.state.cuisinesText ?
+                    <Typist
+                      avgTypingSpeed={40}
+                      startDelay={500}
+                      onTypingDone={() => this.showComponent('cuisines')}
+                    >
+                      Favorite type of food?
+                    </Typist>
+                  : null}
+
+                  {this.state.dietsText ?
+                    <Typist
+                      avgTypingSpeed={40}
+                      startDelay={500}
+                      onTypingDone={() => this.showComponent('diets')}
+                    >
+                      Special diet?
+                    </Typist>
+                  : null}
+
+                  {this.state.allergiesText ?
+                    <Typist
+                      avgTypingSpeed={40}
+                      startDelay={500}
+                      onTypingDone={() => this.showComponent('allergies')}
+                    >
+                      Any allergies?
+                    </Typist>
+                  : null}
+
+                  {this.state.generateFoodPlanText ?
+                    <Typist
+                      avgTypingSpeed={40}
+                      startDelay={500}
+                      onTypingDone={() => this.props.history.push('/food-plan')}
+                    >
+                      Get ready to start planning your food!!!!
+                    </Typist>
+                  : null}
+
                 </div>
               </div>
             </div>
@@ -140,6 +187,15 @@ class Home extends Component {
                 {this.state.biometricsReport ?
                 <BiometricsReport transition={this.transition} />
                 : null}
+                {this.state.cuisines ?
+                <Cuisines transition={this.transition} />
+                : null}
+                {this.state.diets ?
+                <Diets transition={this.transition} />
+                : null}
+                {this.state.allergies ?
+                <Allergies transition={this.transition} />
+                : null}
 
             </div>
           </div>
@@ -150,7 +206,7 @@ class Home extends Component {
 }
 
 
-export default Home
+export default withRouter(Home)
 
 const styles = {
   colorbar: {
